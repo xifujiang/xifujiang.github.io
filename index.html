@@ -192,94 +192,6 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-04 python爬虫笔记" class="article-card article-type-post" itemprop="blogPost">
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/posts/undefined/">No title</a>
-    </h3>
-  
-
-
-
-
-     <div class="post-meta">
-        <time class="post-time" title="2019-04-29 20:05:20" datetime="2019-04-29T12:05:20.134Z" itemprop="datePublished">2019-04-29</time>
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <hr>
-<p>date:2019-03-28 14:34</p>
-<h2 id="title-04-python爬虫笔记"><a href="#title-04-python爬虫笔记" class="headerlink" title="title:04 python爬虫笔记"></a>title:04 python爬虫笔记</h2><h3 id="爬虫如何抓取网页数据"><a href="#爬虫如何抓取网页数据" class="headerlink" title="爬虫如何抓取网页数据"></a>爬虫如何抓取网页数据</h3><p>网页三大特征：<br>1、网页都有自己的唯一的URL（统一资源定位符）来进行定位。<br>2、网页都使用HTML(超文本标记语言)来描述页面信息。<br>3、网页都使用HTTP/HTTPS(超文本传输协议)协议来传输HTML数据。</p>
-<p>爬虫的设计思路<br>1、首先确定需要爬取的网页URL地址。<br>2、通过HTTP/HTTP协议协议来获取对应的HTML页面。<br>3、提取HTML页面里有用的数据：<br>    a.如果是需要的数据，就保存起来。<br>    b.如果是页面里的其他URL，那就继续执行第二步。</p>
-<p>#为什么选择Python做爬虫？<br>PHP：是世界上最好的语言，但他天生不是干爬虫的，对多线程，异步支持不够好。爬虫是工具性程序，对速度和效率的要求比较高。<br>Java爬虫生态圈很完善，是Python爬虫最大的对手。但是Java语言本身很笨重，代码量很大。爬虫经常需要修改部分采集代码，所以Java不合适。<br>C/C++运行效率和性能几乎最强，但是学习成本很高。代码成型比较慢。能用C/C++做爬虫，只能说是能力的表现，但不是正确的选择。<br>Python语法优美、代码简介、开发效率高、支持的模块多，相关HTTP请求模块<br>还有强大的爬虫Scrapy，以及成熟高效的scrapy-redis分布式策略。<br>而且，调用其他接口也非常方便（胶水语言）</p>
-<h3 id="如何抓取HTML页面："><a href="#如何抓取HTML页面：" class="headerlink" title="如何抓取HTML页面："></a>如何抓取HTML页面：</h3><pre><code>HTTP请求的处理，urllib、urllib2、requests
-处理后的请求可以模拟浏览器发送请求，获取服务器响应的文件
-</code></pre><p>#解析服务器响应的内容<br>    re、xpath、BeautifulSoup4（bs4）、jsonpath、pyquery等<br>    使用某种描述性一样来给我们需要提取的数据定义一个匹配规则<br>    符合这个规则的数据就会被匹配</p>
-<p>#如何采集动态HTML、验证码的处理<br>    通过动态页面采集，Selenium+PhantomJS(无界面)：模拟真实浏览器加载js、ajax等非静态的数据。<br>    Tesseract：机器学习库，机器图像识别系统，可以处理简单的验证码，复杂的验证码可以通过手动输入/专门的打码平台。<br>    sccrapy框架：（Scrapy，Pyspider）<br>        搞定制性高性能（异步网络框架 twisterd），所以数据下载速度非常快，提供了数据存储、数据下载、提取规则等组件。<br>    分布式策略：scrapy-redis，在Scrapy的基础上添加了一套以Redis数据库为核心的一套组件。让Scrapy框架支持分布式的功能。主要在Redis里做请求指纹去重、请求分配、数据临时存储。</p>
-<h3 id="爬虫–反爬虫–反反爬虫-之间的斗争："><a href="#爬虫–反爬虫–反反爬虫-之间的斗争：" class="headerlink" title="爬虫–反爬虫–反反爬虫 之间的斗争："></a>爬虫–反爬虫–反反爬虫 之间的斗争：</h3><pre><code>其实怕重做到最后，最头疼的不是复杂的页面，也是灰色的数据，而是网站另一边的反爬虫人员。
-User-Agent、代理、验证码、动态数据加载、加密数据。
-数据价值、是否值的去费劲做反爬虫。
-1. 机器成本 + 人力成本 &gt; 数据价值，就不反了，一般做到封IP就结束了。
-2、面子的战争......
-爬虫和反爬虫之间的斗争，最后一定是爬虫获胜。
-为什么？只要是真实用户可以浏览的网页数据，爬虫就一定能爬下来！
-</code></pre><p>#根据使用场景 分为 ：通用爬虫  聚焦爬虫<br>1通用爬虫：搜索引擎用的爬虫系统。<br>1、目标：就是尽可能吧互联网上所有的网页下载下来，放到本地服务器里形成备份；<br>    再对这些网页做相关处理（提取关键字、去掉广告），最后提供一个用户检索接口。<br>2、抓取流程：<br>    a） 首选选取一部分已有的URL，把这些URL放到待爬取队列。<br>    b） 从队列里取出这些URL，然后解析DNS得到主机IP，然后去这个IP对应的服务器里下载HTML页面，保存到搜索引擎的本地服务器。之后把这个爬过的URL放入已爬取队列。<br>    c）分析这些网页内容，找出网页里其他的URL链接，继续执行第二步，直到爬取条件结束。<br>3、搜索引擎如何获取一个新网站的URL:<br>    A).主动向搜索引擎提交网址,<br>    B).向其他网站里设置网站的外链。<br>    C).搜索引擎会和DNS服务商进行合作，可以快速收录新的网站。<br>    <code>DNS：就是把域名解析成IP的一种技术。</code><br>4、通用爬虫并不是万物皆可爬，它也需要遵守规则：<br>Robots协议：协议会指明通用爬虫可以爬取网页的权限。<br>Robots.txt 只是一个建议。并不是所有爬虫都遵守，一般只有大型的搜索引擎爬虫才会遵守。咱们个人写的爬虫，就不用管了。<br>5、通用爬虫工作流程：爬取网页 - 存储数据 - 内容处理 - 提供检索/排名服务<br>6、搜索引擎排名：<br>    ·PageRank值：根据网站的流量（点击量/浏览量/人气）统计，流量越高，网站越值钱，排名越靠前。<br>    ·竞价排名：谁给钱多，谁排名就高。<br>7、通用爬虫的缺点：<br>    1、只能提供和文本相关的内容（HTML、Word、PDF）等等，但是不能提供多媒体（音乐、图片、视频）和二进制文件（程序、脚本）等。<br>    2、提供的结果千篇一律，不能针对不同背景领域的人提供不同的搜索结果。<br>    3、不能理解人类语义上的检索。</p>
-<p>2聚焦爬虫：爬虫程序员写的针对某种内容爬虫。<br>面向主题爬虫、面向需求爬虫：会针对某种特定的内容去爬取信息，而且会保证信息和需求息息相关。</p>
-<p>http的端口号：80；<br>https的端口是：443；</p>
-<p>Python自带的模块：/usr/lib/python2.7/urllib2.py</p>
-<p>Python的第三方模块： /usr/local/lib/python2.7/site-packages</p>
-<p>urllib2 默认的 User-Agent：Python-urllib/2.7</p>
-<p>User-Agent: 是爬虫和反爬虫斗争的第一步，养成好习惯，发送请求带User-Agent</p>
-<p>response 是服务器响应的类文件，除了支持文件操作的方法外，还支持以下常用的方法：</p>
-<p><em>返回 HTTP的响应码，成功返回200，4服务器页面出错，5服务器问题</em></p>
-<p>print response.getcode()</p>
-<p><em>返回 返回实际数据的实际URL，防止重定向问题</em><br>print response.geturl()</p>
-<p><em>返回 服务器响应的HTTP报头</em><br>print response.info()</p>
-<h3 id="User-Agent-历史："><a href="#User-Agent-历史：" class="headerlink" title="User-Agent 历史："></a>User-Agent 历史：</h3><ul>
-<li>Mosaic 世界上第一个浏览器：美国国家计算机应用中心</li>
-<li>Netscape 网景：Netscape（支持框架），慢慢开始流行….(第一款支持框架的浏览器)</li>
-<li>Microsoft 微软：Internet Explorer（也支持框架）</li>
-<li>第一次浏览器大战：网景公司失败..消失</li>
-<li>Mozilla 基金组织：Firefox 火狐 - （Gecko内核）(第一款浏览器内核)</li>
-<li>User-Agent 决定用户的浏览器，为了获取更好的HTML页面效果。</li>
-<li>IE开了个好头，大家都开就给自己披着了个 Mozilla 的外皮</li>
-<li>Microsoft公司：IE（Trident）</li>
-<li>Opera公司：Opera（Presto）</li>
-<li>Mozilla基金会：Firefox（Gecko）</li>
-<li>Linux组织：KHTML （like Gecko）</li>
-<li>Apple公司：Webkit（like KHTML）</li>
-<li>Google公司：Chrome（like webkit）</li>
-<li>其他浏览器都是IE/Chrome内核</li>
-</ul>
-<h2 id="Scrapy架构图（绿线是数据流向）："><a href="#Scrapy架构图（绿线是数据流向）：" class="headerlink" title="Scrapy架构图（绿线是数据流向）："></a>Scrapy架构图（绿线是数据流向）：</h2><p>ScrapyEngine（引擎）：负责通讯，信号、数据传递</p>
-<h3 id="制作Scrapy爬虫-四步骤："><a href="#制作Scrapy爬虫-四步骤：" class="headerlink" title="制作Scrapy爬虫 四步骤："></a>制作Scrapy爬虫 四步骤：</h3><ul>
-<li>新建项目（scrapy startproject xxx）:新建一个新的爬虫项目</li>
-<li>明确目标（编写items.py）：明确你想要爬取的目标</li>
-<li>制作爬虫（spiders/xxspider.py）：制作爬虫开始爬取网页</li>
-<li>存储内容（pipelines.py）：设计管道存储爬取内容</li>
-</ul>
-<p>创建爬虫项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#创建普通项目</span><br><span class="line">scrapy startproject 项目名</span><br><span class="line">#创建模板</span><br><span class="line">scrapy startproject 项目名  网站名</span><br></pre></td></tr></table></figure></p>
-
-    
-        <div class="post-more-div">
-            <a href="/posts/undefined/" class="post-more waves-button">
-                阅读全文 »
-            </a>
-        </div>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-03 python入门笔记" class="article-card article-type-post" itemprop="blogPost">
 
     
@@ -487,6 +399,92 @@ User-Agent、代理、验证码、动态数据加载、加密数据。
                 </div>
                 <div class="image-caption"></div>
             </figure>
+    
+        <div class="post-more-div">
+            <a href="/posts/undefined/" class="post-more waves-button">
+                阅读全文 »
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-04 python爬虫笔记" class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/undefined/">04 python爬虫笔记</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2019-03-28 14:34:00" datetime="2019-03-28T06:34:00.000Z" itemprop="datePublished">2019-03-28</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h3 id="爬虫如何抓取网页数据"><a href="#爬虫如何抓取网页数据" class="headerlink" title="爬虫如何抓取网页数据"></a>爬虫如何抓取网页数据</h3><p>网页三大特征：<br>1、网页都有自己的唯一的URL（统一资源定位符）来进行定位。<br>2、网页都使用HTML(超文本标记语言)来描述页面信息。<br>3、网页都使用HTTP/HTTPS(超文本传输协议)协议来传输HTML数据。</p>
+<p>爬虫的设计思路<br>1、首先确定需要爬取的网页URL地址。<br>2、通过HTTP/HTTP协议协议来获取对应的HTML页面。<br>3、提取HTML页面里有用的数据：<br>    a.如果是需要的数据，就保存起来。<br>    b.如果是页面里的其他URL，那就继续执行第二步。</p>
+<p>#为什么选择Python做爬虫？<br>PHP：是世界上最好的语言，但他天生不是干爬虫的，对多线程，异步支持不够好。爬虫是工具性程序，对速度和效率的要求比较高。<br>Java爬虫生态圈很完善，是Python爬虫最大的对手。但是Java语言本身很笨重，代码量很大。爬虫经常需要修改部分采集代码，所以Java不合适。<br>C/C++运行效率和性能几乎最强，但是学习成本很高。代码成型比较慢。能用C/C++做爬虫，只能说是能力的表现，但不是正确的选择。<br>Python语法优美、代码简介、开发效率高、支持的模块多，相关HTTP请求模块<br>还有强大的爬虫Scrapy，以及成熟高效的scrapy-redis分布式策略。<br>而且，调用其他接口也非常方便（胶水语言）</p>
+<h3 id="如何抓取HTML页面："><a href="#如何抓取HTML页面：" class="headerlink" title="如何抓取HTML页面："></a>如何抓取HTML页面：</h3><pre><code>HTTP请求的处理，urllib、urllib2、requests
+处理后的请求可以模拟浏览器发送请求，获取服务器响应的文件
+</code></pre><p>#解析服务器响应的内容<br>    re、xpath、BeautifulSoup4（bs4）、jsonpath、pyquery等<br>    使用某种描述性一样来给我们需要提取的数据定义一个匹配规则<br>    符合这个规则的数据就会被匹配</p>
+<p>#如何采集动态HTML、验证码的处理<br>    通过动态页面采集，Selenium+PhantomJS(无界面)：模拟真实浏览器加载js、ajax等非静态的数据。<br>    Tesseract：机器学习库，机器图像识别系统，可以处理简单的验证码，复杂的验证码可以通过手动输入/专门的打码平台。<br>    sccrapy框架：（Scrapy，Pyspider）<br>        搞定制性高性能（异步网络框架 twisterd），所以数据下载速度非常快，提供了数据存储、数据下载、提取规则等组件。<br>    分布式策略：scrapy-redis，在Scrapy的基础上添加了一套以Redis数据库为核心的一套组件。让Scrapy框架支持分布式的功能。主要在Redis里做请求指纹去重、请求分配、数据临时存储。</p>
+<h3 id="爬虫–反爬虫–反反爬虫-之间的斗争："><a href="#爬虫–反爬虫–反反爬虫-之间的斗争：" class="headerlink" title="爬虫–反爬虫–反反爬虫 之间的斗争："></a>爬虫–反爬虫–反反爬虫 之间的斗争：</h3><pre><code>其实怕重做到最后，最头疼的不是复杂的页面，也是灰色的数据，而是网站另一边的反爬虫人员。
+User-Agent、代理、验证码、动态数据加载、加密数据。
+数据价值、是否值的去费劲做反爬虫。
+1. 机器成本 + 人力成本 &gt; 数据价值，就不反了，一般做到封IP就结束了。
+2、面子的战争......
+爬虫和反爬虫之间的斗争，最后一定是爬虫获胜。
+为什么？只要是真实用户可以浏览的网页数据，爬虫就一定能爬下来！
+</code></pre><p>#根据使用场景 分为 ：通用爬虫  聚焦爬虫<br>1通用爬虫：搜索引擎用的爬虫系统。<br>1、目标：就是尽可能吧互联网上所有的网页下载下来，放到本地服务器里形成备份；<br>    再对这些网页做相关处理（提取关键字、去掉广告），最后提供一个用户检索接口。<br>2、抓取流程：<br>    a） 首选选取一部分已有的URL，把这些URL放到待爬取队列。<br>    b） 从队列里取出这些URL，然后解析DNS得到主机IP，然后去这个IP对应的服务器里下载HTML页面，保存到搜索引擎的本地服务器。之后把这个爬过的URL放入已爬取队列。<br>    c）分析这些网页内容，找出网页里其他的URL链接，继续执行第二步，直到爬取条件结束。<br>3、搜索引擎如何获取一个新网站的URL:<br>    A).主动向搜索引擎提交网址,<br>    B).向其他网站里设置网站的外链。<br>    C).搜索引擎会和DNS服务商进行合作，可以快速收录新的网站。<br>    <code>DNS：就是把域名解析成IP的一种技术。</code><br>4、通用爬虫并不是万物皆可爬，它也需要遵守规则：<br>Robots协议：协议会指明通用爬虫可以爬取网页的权限。<br>Robots.txt 只是一个建议。并不是所有爬虫都遵守，一般只有大型的搜索引擎爬虫才会遵守。咱们个人写的爬虫，就不用管了。<br>5、通用爬虫工作流程：爬取网页 - 存储数据 - 内容处理 - 提供检索/排名服务<br>6、搜索引擎排名：<br>    ·PageRank值：根据网站的流量（点击量/浏览量/人气）统计，流量越高，网站越值钱，排名越靠前。<br>    ·竞价排名：谁给钱多，谁排名就高。<br>7、通用爬虫的缺点：<br>    1、只能提供和文本相关的内容（HTML、Word、PDF）等等，但是不能提供多媒体（音乐、图片、视频）和二进制文件（程序、脚本）等。<br>    2、提供的结果千篇一律，不能针对不同背景领域的人提供不同的搜索结果。<br>    3、不能理解人类语义上的检索。</p>
+<p>2聚焦爬虫：爬虫程序员写的针对某种内容爬虫。<br>面向主题爬虫、面向需求爬虫：会针对某种特定的内容去爬取信息，而且会保证信息和需求息息相关。</p>
+<p>http的端口号：80；<br>https的端口是：443；</p>
+<p>Python自带的模块：/usr/lib/python2.7/urllib2.py</p>
+<p>Python的第三方模块： /usr/local/lib/python2.7/site-packages</p>
+<p>urllib2 默认的 User-Agent：Python-urllib/2.7</p>
+<p>User-Agent: 是爬虫和反爬虫斗争的第一步，养成好习惯，发送请求带User-Agent</p>
+<p>response 是服务器响应的类文件，除了支持文件操作的方法外，还支持以下常用的方法：</p>
+<p><em>返回 HTTP的响应码，成功返回200，4服务器页面出错，5服务器问题</em></p>
+<p>print response.getcode()</p>
+<p><em>返回 返回实际数据的实际URL，防止重定向问题</em><br>print response.geturl()</p>
+<p><em>返回 服务器响应的HTTP报头</em><br>print response.info()</p>
+<h3 id="User-Agent-历史："><a href="#User-Agent-历史：" class="headerlink" title="User-Agent 历史："></a>User-Agent 历史：</h3><ul>
+<li>Mosaic 世界上第一个浏览器：美国国家计算机应用中心</li>
+<li>Netscape 网景：Netscape（支持框架），慢慢开始流行….(第一款支持框架的浏览器)</li>
+<li>Microsoft 微软：Internet Explorer（也支持框架）</li>
+<li>第一次浏览器大战：网景公司失败..消失</li>
+<li>Mozilla 基金组织：Firefox 火狐 - （Gecko内核）(第一款浏览器内核)</li>
+<li>User-Agent 决定用户的浏览器，为了获取更好的HTML页面效果。</li>
+<li>IE开了个好头，大家都开就给自己披着了个 Mozilla 的外皮</li>
+<li>Microsoft公司：IE（Trident）</li>
+<li>Opera公司：Opera（Presto）</li>
+<li>Mozilla基金会：Firefox（Gecko）</li>
+<li>Linux组织：KHTML （like Gecko）</li>
+<li>Apple公司：Webkit（like KHTML）</li>
+<li>Google公司：Chrome（like webkit）</li>
+<li>其他浏览器都是IE/Chrome内核</li>
+</ul>
+<h2 id="Scrapy架构图（绿线是数据流向）："><a href="#Scrapy架构图（绿线是数据流向）：" class="headerlink" title="Scrapy架构图（绿线是数据流向）："></a>Scrapy架构图（绿线是数据流向）：</h2><p>ScrapyEngine（引擎）：负责通讯，信号、数据传递</p>
+<h3 id="制作Scrapy爬虫-四步骤："><a href="#制作Scrapy爬虫-四步骤：" class="headerlink" title="制作Scrapy爬虫 四步骤："></a>制作Scrapy爬虫 四步骤：</h3><ul>
+<li>新建项目（scrapy startproject xxx）:新建一个新的爬虫项目</li>
+<li>明确目标（编写items.py）：明确你想要爬取的目标</li>
+<li>制作爬虫（spiders/xxspider.py）：制作爬虫开始爬取网页</li>
+<li>存储内容（pipelines.py）：设计管道存储爬取内容</li>
+</ul>
+<p>创建爬虫项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#创建普通项目</span><br><span class="line">scrapy startproject 项目名</span><br><span class="line">#创建模板</span><br><span class="line">scrapy startproject 项目名  网站名</span><br></pre></td></tr></table></figure></p>
+
     
         <div class="post-more-div">
             <a href="/posts/undefined/" class="post-more waves-button">
