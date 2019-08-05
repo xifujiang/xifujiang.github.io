@@ -1,1 +1,19 @@
-{"social":{"weibo":"http://weibo.com/1956184117","github":"https://github.com/raytaylorlin","rss":"/atom.xml"},"extern":{"raytaylorism主题作者的技术博客":"http://raytaylorlin.com/","Github地址（测试友情链接）":"https://github.com/raytaylorlin"}}
+{"social":{"weibo":"http://weibo.com/1956184117","github":"https://github.com/raytaylorlin","rss":"/atom.xml"},"extern":{"raytaylorism主题作者的技术博客":"http://raytaylorlin.com/","Github地址（测试友情链接）":"https://github.com/raytaylorlin"}}<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>

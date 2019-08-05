@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>python笔记 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="一、基本语法1、ipython命令技能实现python命令，也能实现部分linux命令。2、python2不能识别文件里的中文，如果硬要识别，在头文件中加上 -- coding:utf-8 -- （python官方推荐这种方式）3、输入一个数 1high = input(&quot;请输入一个数&quot;)">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python笔记">
+<meta property="og:url" content="https://xifujiang.github.io/posts/c00b24b1/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="一、基本语法1、ipython命令技能实现python命令，也能实现部分linux命令。2、python2不能识别文件里的中文，如果硬要识别，在头文件中加上 -- coding:utf-8 -- （python官方推荐这种方式）3、输入一个数 1high = input(&quot;请输入一个数&quot;)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-05T06:13:14.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python笔记">
+<meta name="twitter:description" content="一、基本语法1、ipython命令技能实现python命令，也能实现部分linux命令。2、python2不能识别文件里的中文，如果硬要识别，在头文件中加上 -- coding:utf-8 -- （python官方推荐这种方式）3、输入一个数 1high = input(&quot;请输入一个数&quot;)">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、基本语法"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、基本语法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、生成器、迭代器、装饰器、闭包"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、生成器、迭代器、装饰器、闭包</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、内建方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、内建方法</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-03 python入门笔记" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python笔记</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-03-28 14:34:00" datetime="2019-03-28T06:34:00.000Z" itemprop="datePublished">2019-03-28</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">11</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="一、基本语法"><a href="#一、基本语法" class="headerlink" title="一、基本语法"></a>一、基本语法</h1><p>1、ipython命令技能实现python命令，也能实现部分linux命令。<br>2、python2不能识别文件里的中文，如果硬要识别，在头文件中加上 -<em>- coding:utf-8 -</em>- （python官方推荐这种方式）<br>3、输入一个数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">high = input("请输入一个数")</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<p>4、输出一个数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">age = 18</span><br><span class="line">print("age的值为%d"%age)</span><br><span class="line">name = "西芙"</span><br><span class="line">print("name的值为%s"%name);</span><br><span class="line">print("name的值是%s,年龄的值是%d"%(name,age))</span><br></pre></td></tr></tbody></table></figure>
+<p>4、if else语句<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">age = 19</span><br><span class="line">if age>18:</span><br><span class="line">    print("已经成年")</span><br><span class="line">else</span><br><span class="line">    print("未成年")</span><br><span class="line">#input获取的所有数据都会当成字符串类型</span><br><span class="line">#python 规定 str（）>int()</span><br><span class="line">#所以如果 age  = input("一个值")</span><br><span class="line">#要与int比较，需要把age换成int类型，即</span><br><span class="line">#age_num = int(age)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>5、python语言是弱类型的编程语言，及赋值的时候已经知道是什么类型<br>6、查看变量类型</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(a)</span><br></pre></td></tr></tbody></table></figure>
+<p>7、python的变量类型<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">·Numbers(数字)： int(有符号整型)，long（长整型[也可代表八进制和十六进制]），float（浮点型），complex（复数）</span><br><span class="line">·布尔类型： True，False</span><br><span class="line">·String（字符串）</span><br><span class="line">·List（列表）</span><br><span class="line">·Tuple（元组）</span><br><span class="line">·Dictionary（字典）</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>8、关键字<br>查看关键字命令</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import keyword #导入keyword包</span><br><span class="line">keyword.kwlist</span><br></pre></td></tr></tbody></table></figure>
+<p>9、运算符</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"s"*10</span><br><span class="line">#输出'ssssssssss'</span><br><span class="line"></span><br><span class="line">#幂</span><br><span class="line">#**</span><br></pre></td></tr></tbody></table></figure>
+<p>10、is是地址相同的意思，在数值-5到256间，a与b地址相同，其余不同<br>￼<br>11、深拷贝与浅拷贝<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#例1、浅拷贝</span><br><span class="line">a = [11, 22, 33]</span><br><span class="line">b = a #浅拷贝，地址拷贝，地址相同</span><br><span class="line"></span><br><span class="line">#例2、深拷贝</span><br><span class="line">import copy</span><br><span class="line">c = copy.deepcopy(a) #开辟一个内存空间，拷贝内容</span><br><span class="line"></span><br><span class="line">#例3、在数组中，深拷贝数组后，</span><br><span class="line">a = [11,22,33]</span><br><span class="line">b = [44,55,66]</span><br><span class="line">c = [a, b]</span><br><span class="line">d = copy.deepcopy[c]</span><br><span class="line">#查看c，d的id，并不相同，深拷贝</span><br><span class="line">#在a数组中添加[44],查看c[0],d[0]</span><br><span class="line">a.append(44)</span><br><span class="line">c[0]</span><br><span class="line">[11,22,33,44]</span><br><span class="line">d[0]</span><br><span class="line">[11,22,33]</span><br><span class="line">#说明深拷贝后，d另外拷贝了有关a、b的拷贝</span><br><span class="line"></span><br><span class="line">#例4、有关指向a，b的拷贝</span><br><span class="line">e = copy.copy(c)</span><br><span class="line">a.append(55)</span><br><span class="line">c[0]</span><br><span class="line">e[0]</span><br><span class="line">#所看到的结果都是[11,22,33,44,55]</span><br><span class="line">id(c)</span><br><span class="line">id(e)</span><br><span class="line">#所看到的地址不同，所以他们是指向不同的地址但所指向数组的内容地址是相同的</span><br><span class="line">#但如果是c = (a,b)，是元组的话，由于元组是不可变类型，e = copy.copy(c),他们所指向的地址是一样的</span><br><span class="line">#所以使用copy模块的copy功能时候，它会根据当前拷贝的数据类型是可变类型还是不可变类型有不同的处理方式</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>12、私有化<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Test(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__num = 100</span><br><span class="line">    def setNum(self, newNum):</span><br><span class="line">        self.__num = newNum</span><br><span class="line">    def getNum(self):</span><br><span class="line">        return self.__num</span><br><span class="line">t = Test()</span><br><span class="line">t.__num = 200 #可以使用</span><br><span class="line">print(t.__num)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>升级版私有化 property使用<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__num = 100</span><br><span class="line">    def setNum(self, newNum):</span><br><span class="line">        self.__num = newNum</span><br><span class="line">    def getNum(self):</span><br><span class="line">        return self.__num</span><br><span class="line">    num = property(getNum, setNum)#!!!!</span><br><span class="line">#此时，可以用t.num = ?赋值 或者 t.num 取值，不用调用函数</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>装饰器使用<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Test(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__num = 100</span><br><span class="line">    @property    </span><br><span class="line">    def num(self):</span><br><span class="line">        return self.__num</span><br><span class="line">    @num.setter    </span><br><span class="line">    def num(self, newNum):</span><br><span class="line">        self.__num = newNum</span><br><span class="line">#与上面的代码意思相同。理解一下吧~</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>1、xx:公有变量<br>2、<em>x:单前置下划线，私有化属性或方法，from somemodule import * 禁止导入，类对象和子类可以访问<br>3、__x</em>:双前置下划线，避免与子类中的属性命名冲突，无法在外部直接访问（名字重整所以访问不到）<br>4、<strong>x</strong>：双前后下划线，用户名字空间的魔法对象或属性。例如<strong>init</strong>,__不要自己发明这样的名字<br>5、xx_:单后置下划线，用于避免与python关键词的冲突</p>
+<p>###但是私有属性实际上是可以访问，python把私有属性的名字由原来的<strong>_私有属性名 改成  _类名</strong>私有属性名，所以可以通过对象._类名__私有属性名可以获取值！！！</p>
+<p>13、迭代器<br><code>迭代器
+迭代器是访问集合元素的一种方式，迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，知道所有的元素被访问完结束。迭代器只能往前不会后退。</code><br><code>可迭代对象：
+可直接作用于for循环的数据类型有以下几种：
+一类是集合数据类型：如list、tuple、dict、set、str等
+一类是generator，包括生成器和带yield的generator function。
+可以直接作用于for循环的对象统称为可迭代对象：Iterable。</code></p>
+<p>14、闭包：定义：函数里面有另外的函数，并且里面的函数用到了外面的函数的变量<br>闭包的应用：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def test(number):</span><br><span class="line">    print("--1--")</span><br><span class="line">    def test_in(number2):</span><br><span class="line">        print("--2--")</span><br><span class="line">        print(number+number2)</span><br><span class="line">    print("--3--")</span><br><span class="line">    return test_in</span><br><span class="line">    </span><br><span class="line">ret = test(100)</span><br><span class="line">print("-"*30)</span><br><span class="line">ret(1)</span><br><span class="line">ret(100)</span><br><span class="line">ret(200)</span><br><span class="line">#优点 简化了步骤</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><code>linux快捷键： %s/^/#/g  所有行前面加#  1,14/#//g 去掉1-14行的#</code><br>15、装饰器<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def w1(func):</span><br><span class="line">    def inner():</span><br><span class="line">        print("----正在验证权限---")</span><br><span class="line">        func()</span><br><span class="line">    return inner</span><br><span class="line">def f1():</span><br><span class="line">    print("---f1---")</span><br><span class="line">def f2():</span><br><span class="line">    print("---f2---")</span><br><span class="line"></span><br><span class="line">#innerFunc = w1(f1)</span><br><span class="line">#innerFunc()</span><br><span class="line"></span><br><span class="line">f1 = w1(f1)    #把w1（f1）赋值给f1，也就是说f1 = w1.inner，f1指向的就是inner这个函数</span><br><span class="line">f1()   #调用后，执行的是inner，但由于之前传入f1的参数，所以输出结果为inner的输出结果+f1函数的输出结果</span><br><span class="line"></span><br><span class="line">@w1 #与上面f1=w1(f1)意义相同，但只要python执行器执行到了这个代码，name就会自动的进行装饰，而不是等到调用的时候才装饰的  语法糖 @w1</span><br><span class="line">def f1():</span><br><span class="line">    print("---f1---")</span><br></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#若有参数</span><br><span class="line">def func(functionName):</span><br><span class="line">    print("---func---1---")</span><br><span class="line">    def func_in(*args, **kwargs):#如果没有定义参数，会导致调用的时候出现问题</span><br><span class="line">        print("---func_in---1---")</span><br><span class="line">        functionName(*args, **kwargs)#传入同样的参数</span><br><span class="line">        print("---func_in---2---")      </span><br><span class="line">    print("---func---2---")</span><br><span class="line">    return func_in</span><br><span class="line">@func</span><br><span class="line">def test(a, b, c):</span><br><span class="line">    print("---test-a=%d,b=%d,c=%d---"%(a,b,c))</span><br><span class="line">    </span><br><span class="line">@func</span><br><span class="line">def test2(a, b, c, d):</span><br><span class="line">    print("---test-a=%d,b=%d,c=%d,d=%d---"%(a,b,c,d))</span><br><span class="line"></span><br><span class="line">test(11,22,33)</span><br><span class="line">test2(44,55,66,77)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#通用装饰器</span><br><span class="line">def func(functionName):</span><br><span class="line">    def func_in(*args, **kwargs):</span><br><span class="line">        print("---记录日志---")</span><br><span class="line">        ret = functionName(*args, **kwargs)</span><br><span class="line">        return ret</span><br><span class="line">    return func_in</span><br><span class="line"></span><br><span class="line">@func</span><br><span class="line">def test():</span><br><span class="line">    print("---test---")</span><br><span class="line">    return "haha"</span><br><span class="line"></span><br><span class="line">@func</span><br><span class="line">def test2():</span><br><span class="line">    print("---test2---")</span><br><span class="line"></span><br><span class="line">@func</span><br><span class="line">def test3(a):</span><br><span class="line">    print("---test3---a=%d--"%a)</span><br><span class="line">    </span><br><span class="line">ret = test()</span><br><span class="line">print("test return value is %s"%ret)</span><br><span class="line"></span><br><span class="line">a = test2()</span><br><span class="line">print("test2 return value is %s"%a)</span><br><span class="line"></span><br><span class="line">test3(11)</span><br></pre></td></tr></tbody></table></figure>
+<p>16、作用域</p>
+<p>#什么是命名空间<br>在某个范围内所能用到的作用域</p>
+<p>17、类方法与静态方法<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#给类添加方法</span><br><span class="line">import types #导入types包</span><br><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, newName, newAge):</span><br><span class="line">        self.name = newName</span><br><span class="line">        self.age = newAge</span><br><span class="line">    </span><br><span class="line">    def eat(self):</span><br><span class="line">        print("-----%s正在吃----"%self.name)</span><br><span class="line"></span><br><span class="line">def run(self):</span><br><span class="line">    print("-----%s正在跑----"%self.name)</span><br><span class="line">    </span><br><span class="line">p1 = Person("p1", 10)</span><br><span class="line">p1.eat()</span><br><span class="line">p1.run = types.MethodType(run, p1)</span><br><span class="line">p1.run()</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>18、限制class实例添加的属性<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    __slots__ = ("name", "age")</span><br><span class="line">p = Person()</span><br><span class="line">p.name = "老王"</span><br><span class="line">p.age = 20</span><br><span class="line">p.score = 100 #会报错！！！</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="二、生成器、迭代器、装饰器、闭包"><a href="#二、生成器、迭代器、装饰器、闭包" class="headerlink" title="二、生成器、迭代器、装饰器、闭包"></a>二、生成器、迭代器、装饰器、闭包</h1><p>19、生成器</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">In [1]: a = [x*2 for x in range(10)]</span><br><span class="line">In [2]: a</span><br><span class="line">Out[2]: [0, 2, 4, 5, 6, 10, 12, 14, 16, 18]</span><br><span class="line">#如果用[]，会生成数组，同时加载到内存中</span><br><span class="line">#如果用括号（），输出的是一个地址，需要时才提取出</span><br><span class="line">In [3]: b = (x*2 for x in range(10))</span><br><span class="line">In [4]: b</span><br><span class="line">Out[4]: <generator object <genexpr> at 0x7fb057ff06d0></generator></span><br><span class="line">In [5]:next(b)</span><br><span class="line">Out[5]:0</span><br></pre></td></tr></tbody></table></figure>
+<p>20、a，b交换<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def creatNum():</span><br><span class="line">    print("----start----")</span><br><span class="line">    a, b = 0, 1</span><br><span class="line">    for i in range(5):</span><br><span class="line">        print("----1----")</span><br><span class="line">        yield b #python中有一个非常有用的语法叫做生成器，所利用到的关键字就是yield。有效利用生成器这个工具可以有效地节约系统资源，避免不必要的内存占用。当执行到这的时候，会做停顿。</span><br><span class="line">        print("----2----")</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">        print("----3----")</span><br><span class="line">    print("----stop----")</span><br><span class="line">#创建了一个生成器对象</span><br><span class="line">a = creatNum()</span><br><span class="line">#实现交换</span><br><span class="line">a, b = 0, 1</span><br><span class="line">a, b = b, a</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>21、斐波拉契数列<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a,b = 0, 1</span><br><span class="line">a,b = b, a+b #重复此步骤</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>22、类当做装饰器<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#1</span><br><span class="line">class Test(object):</span><br><span class="line">    def __call__(self):</span><br><span class="line">        print("---test---")        </span><br><span class="line">t = Test()</span><br><span class="line">t()</span><br><span class="line">#out: ---test---</span><br><span class="line"></span><br><span class="line">#2</span><br><span class="line">class Test(object):</span><br><span class="line">    def __init__(self, func):</span><br><span class="line">        print('---初始化---')</span><br><span class="line">        print('func name is %s'func.__name__)</span><br><span class="line">        self.__func = func</span><br><span class="line">    def __call__(self):</span><br><span class="line">        print('---装饰器中的功能---')</span><br><span class="line">        self.__func()</span><br><span class="line"></span><br><span class="line">@Test  #相当于 t = Test(test)  </span><br><span class="line">def test():</span><br><span class="line">    print('---test---')</span><br><span class="line"></span><br><span class="line">#out: ---初始化---</span><br><span class="line">#out:func name is 'test'</span><br><span class="line"></span><br><span class="line">test()</span><br><span class="line">#out: ---装饰器中的功能</span><br><span class="line">#out:---test---</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>23、元类<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Test = type("Test", (), {})#相当于创建一个类</span><br><span class="line">Test</span><br><span class="line">#out:__main.Test</span><br><span class="line"></span><br><span class="line">#创建一个拥有属性num=0的Person类</span><br><span class="line">Person = type("Person",(),{"num":0})</span><br><span class="line"></span><br><span class="line">#创建一个拥有方法printNum()的Test3类</span><br><span class="line">def printNum(self):</span><br><span class="line">    print("--num-%d--"%self.num)</span><br><span class="line">Test3 = type("Test3",(),{"printNum":printNum})</span><br></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#设置Foo类的属性变大写！！，通过metaclass设置</span><br><span class="line">def upper_attr(future_class_name, future_class_parents, future_class_attr):</span><br><span class="line">                #Foo                object                {bar:"bip"}</span><br><span class="line">    #遍历属性字典，把不是__开头的属性名字变成大写</span><br><span class="line">    newAttr = {}</span><br><span class="line">    for name, value in future_class_attr.items():</span><br><span class="line">        if not name.startswith("__"):</span><br><span class="line">            newAttr[name.upper()] = value</span><br><span class="line"></span><br><span class="line">    #调用type创建一个类</span><br><span class="line">    return type(future_class_name,future_class_parents,newAttr)</span><br><span class="line"></span><br><span class="line">class Foo(object,metaclass=upper_attr):</span><br><span class="line">  #  __metaclass__ = upper_attr #设置Foo类的元类为upper_attr  python2</span><br><span class="line">    bar = "bip"</span><br><span class="line"></span><br><span class="line">print(hasattr(Foo, "bar"))</span><br><span class="line">print(hasattr(Foo, "BAR"))</span><br><span class="line">f = Foo()</span><br><span class="line">print(f.BAR)</span><br><span class="line"></span><br><span class="line">#out:False</span><br><span class="line">#out:True</span><br><span class="line">#out:bip</span><br></pre></td></tr></tbody></table></figure>
+<p>24、内建属性<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Itcast(object):</span><br><span class="line">    def __init__(self,subject1):</span><br><span class="line">        self.subject1 = subject1</span><br><span class="line">        self.subject2 = 'cpp'</span><br><span class="line">    #属性访问时拦截器，打log</span><br><span class="line">    def __getattribute__(self,obj): #obj-->"subject1"</span><br><span class="line">        if obj == 'subject1':</span><br><span class="line">            print('log subject1')</span><br><span class="line">            return 'redirect python'</span><br><span class="line">        else:</span><br><span class="line">            return object__getattribute__(self,obj)</span><br><span class="line">    </span><br><span class="line">    def show(self):</span><br><span class="line">        print('this is Itcast')</span><br><span class="line">        </span><br><span class="line">s = Itcast("python")</span><br><span class="line">print(s.subject1)</span><br><span class="line">print(s.subject2)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="三、内建方法"><a href="#三、内建方法" class="headerlink" title="三、内建方法"></a>三、内建方法</h1><p>25、lambda之map<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#函数需要一个参数</span><br><span class="line">map(lambda x: x*x, [1, 2,3])</span><br><span class="line">#结果为：[1, 4, 9]</span><br><span class="line"></span><br><span class="line">#函数需要两个参数</span><br><span class="line">map(lambda x, y: x+y, [1, 2, 3], [4, 5, 6])</span><br><span class="line">#结果为:[5,7,9]</span><br><span class="line"></span><br><span class="line">def f1(x, y):</span><br><span class="line">    return (x, y)</span><br><span class="line">l1 = [0,1,2,3,4,5,6]</span><br><span class="line">l2 = ['Sun', 'M', 'T', 'W', 'T', 'F', 'S']</span><br><span class="line">l3 = map(f1, l1, l2)</span><br><span class="line">print(list(l3))</span><br><span class="line">结果为：[(0,'Sun'), (1,'M').....]</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>26、lambda之filter<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fliter(lambda x : x%2, [1, 2 ,3, 4]) #如果为1，则输出</span><br><span class="line">[1, 3]</span><br><span class="line"></span><br><span class="line">filter(None, "she")</span><br><span class="line">'she'</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>27、lambda之reduce<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">reduce(lambda x, y: x+y, [1,2,3,4])</span><br><span class="line">10 #先把1赋值给x，2赋值给2，x+y后=3，把3赋值给x，数组中的3赋值给y，再累加，以此类推</span><br><span class="line"></span><br><span class="line">reduce(lambda x, y:x+y, [1,2,3,4], 5)</span><br><span class="line">15 #如果前面是数组，先把5赋值给x，再累加[1,,2,3,4]</span><br><span class="line"></span><br><span class="line">reduce(lambda x, y: x+y, ['aa', 'bb', 'cc'], 'dd')</span><br><span class="line">ddaabbcc</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>28、sort<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [9,8,7,6,5,4,3,2,1]</span><br><span class="line">a.sort()</span><br><span class="line">a</span><br><span class="line">#[1,2,3,4,5,6,7,8,9]</span><br><span class="line"></span><br><span class="line">b = ['dd','cc','bb','aa']</span><br><span class="line">b.sort()</span><br><span class="line">b</span><br><span class="line">#['aa','bb','cc','dd']</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>28、python的functools包中提供了一个叫wraps的装饰器来消除这样的副作用<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import functools</span><br><span class="line">def note(func):</span><br><span class="line">    "note function"</span><br><span class="line">    @functoolswraps(func)</span><br><span class="line">    def wrapper():</span><br><span class="line">        "wrapper function"</span><br><span class="line">        print("note something")</span><br><span class="line">        return func()</span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line">@note</span><br><span class="line">def test():</span><br><span class="line">    "test function"</span><br><span class="line">    print('I am test')</span><br><span class="line"></span><br><span class="line">test()</span><br><span class="line">print(test.__doc__)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2019-08-05T06:13:14.200Z" itemprop="dateUpdated">2019-08-05 14:13:14</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/c00b24b1/" target="_blank" rel="external">https://xifujiang.github.io/posts/c00b24b1/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/c00b24b1/&title=《python笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/c00b24b1/&title=《python笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、基本语法1、ipython命令技能实现python命令，也能实现部分linux命令。2、python2不能识别文件里的中文，如果硬要识别，在头文件中加..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/c00b24b1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/c00b24b1/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/c00b24b1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/65abd992/" id="post-prev" class="post-nav-link">
+        <h4 class="title">
+          上一篇：python爬虫笔记
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/0/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：Linux复习">下一篇：Linux复习</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/c00b24b1/&title=《python笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/c00b24b1/&title=《python笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、基本语法1、ipython命令技能实现python命令，也能实现部分linux命令。2、python2不能识别文件里的中文，如果硬要识别，在头文件中加..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/c00b24b1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/c00b24b1/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/c00b24b1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aQY6DMAwF0N7/0p1tparhOw4jkTxWFYWSx8K1Y79e8fGeOj7vHf/y91NedxwYGBiPZeRL+X5A9a78TL42DAyMcxhJKExiXY7MQ/D4GgwMDIxf14zD4lx4xcDAwLiDUQ2jeQqIgYGBMVfEdva+VoXyBbU4BgbGAxn5sv7/8y39DQwMjEcx5lqSHeotjVIMDIytGfljxphxepefaa0HAwNja0ZegiZFafXMqt/HwMDYlTFX9c5te/XHv36CMTAwDmCMA19/IHWuTF38/4CBgfFwxvgB1aB5ERynVnLx6jEwMI5hrNqgXxugozYDBgbG1ozktmrBGYXIRklcIGFgYGzH6JeUSTFcbYXmTQUMDIwTGHloq8KqRXKy9MkEEQMD44GMJKRWS9bqm0teSpTJYmBgbMrIk61kg6wfRvujZhgYGHszqtv6c0nhqoGzi2swMDA2YuQlZbXc7QyW5WkiBgbGCYy8EO1XjnmbIQnxF5MjGBgYhzH6Qxhzzc7yCjEwMI5hJOEyx/RHNAqhHwMD4wBGHi7z9kA14LZ6lBgYGJsy3sVjciOs2AYoj89iYGBszciPfICsk2L2i2oMDIxdGZ0gm4fgtcnlZBGLgYHxcEY11at+O/ci8oQSAwMDo/p5fCYvifNnYWBgYOSDEXNlcNIivQjiGBgYBzCSIrYzKJakiXkhjYGBcRqjupeVb64l463VlkOrqYmBgfE8xh/uxCy6l4AbXgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

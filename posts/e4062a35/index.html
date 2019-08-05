@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>HDFS上传和读取流程 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS上传和读取流程">
+<meta property="og:url" content="https://xifujiang.github.io/posts/e4062a35/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-05T06:13:34.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS上传和读取流程">
+<meta name="twitter:description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HDFS上传和读取流程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上传流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">上传流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读取流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">读取流程</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-02 HDFS上传和读取流程" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HDFS上传和读取流程</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-03-28 14:34:00" datetime="2019-03-28T06:34:00.000Z" itemprop="datePublished">2019-03-28</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <center>![Git][git]</center>
+
+<h3 id="上传流程"><a href="#上传流程" class="headerlink" title="上传流程"></a>上传流程</h3><ul>
+<li>1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。</li>
+<li>2.namenode返回是否可以上传</li>
+<li>3.client请求第一个 block该传输到哪些datanode服务器上</li>
+<li><a id="more"></a></li>
+<li>4.namenode返回3个datanode服务器ABC</li>
+<li>5.client请求3台dn中的一台A上传数据（本质上是一个RPC调用，建立pipeline），A收到请求会继续调用B，然后B调用C，将这个pipeline建立完成，逐级返回客户端</li>
+<li>6.client开始往A上传第一个block（先从磁盘读取数据放到一个本地内存缓存），以packet为单位，A收到一个packet就会传给B，B传给C；A每传一个packet会放入一个应答队列等待应答</li>
+<li>7.当一个block传输完成之后，client再次请求namenode上传第二个block的服务器。<h3 id="读取流程"><a href="#读取流程" class="headerlink" title="读取流程"></a>读取流程</h3>客户端读取HDFS数据相比写入数据要简单一些，以下是读取数据步骤：</li>
+<li>1.client访问NameNode，查询元数据信息，获得这个文件的数据块位置列表，返回输入流对象。</li>
+<li>2.就近挑选一台datanode服务器，请求建立输入流。</li>
+<li>3.开始读取这个数据的第一个block块，读取完全之后，开始接着读取这个文件的第二个block，直至把这个数据所有的block都读完了则文件读取完全了。</li>
+<li>4.数据读完之后关闭流连接。</li>
+<li>5.如果读取过程当中读取失败，将会依次读取该数据块的下一个副本，失败的节点将会被记录，不再连接。</li>
+</ul>
+<p>￼# SecondaryNameNode<br>SecondaryNameNode 是 HDFS 架构中的一个组成部分，它用来保存名称节点中对HDFS元数据信息的备份，减小Editlog文件大小，从而缩短名称节点重启的时间。 它一般是单独运行在一台机器上。 SecondaryNameNode让EditLog变小的工作流程如下: </p>
+<ul>
+<li>(1)SecondaryNameNode 会定期和 NameNode 通信，请求其停止使用 EditLog 文件，暂时将 新的写操作写到一个新的文件 edit.new 中，这个操作是瞬间完成的，上层写日志的函数完全感觉不到差别。 </li>
+<li>(2) SecondaryNameNode 通过 HTTP GET 方式从 NameNode 上获取到 Fslmage 和 EditLog 文 件，井下载到本地的相应目录下。 </li>
+<li>(3) SecondaryNameNode 将下载下来的 Fslmage 载入到内存，然后一条一条地执行 EditLog 文件中的各项更新操作，使内存中的 Fslmage 保持最新。 这个过程就是 EditLog 和 Fslmage 文件合 井。 </li>
+<li>(4) SecondaryNameNode 执行完（3）操作之后，会通过 post 方式将新的 Fslmage 文件发送 到 NameNode 节点上</li>
+<li>(5) NameNode 将从 SecondaryNameNode 接收到的新的 Fslmage 替换旧的 Fslmage 文件，同 时将 Edit.new 替换 EditLog 文件，从而减小 EditLog 文件大小。<br>￼<br>从上面的过程可以看出，第二名称节点相当于为名称节点设置一个“检查点” ，周期性备份 名称节点中的元数据信息，但第二名称节点在 HDFS 设计中只是一个冷备份，并不能起到“热备 份”的作用。 HDFS 设计并不支持当名称节点故障时直接切换到第二名称节点。</li>
+</ul>
+<p>HDFS Federation<br>HDFSl.O 的单 NameNode 设计不仅存在单点故障问题，还存在可扩展性和性能问题。只有一 个 NameNode， 不利于水平扩展。 HDFS Federation (HDFS 联邦）特性允许一个 HDFS 集群中存在 多个 NameNode 同时对外提供服务，这些 NameNode 分管一部分目录（水平切分），彼此之间相 互隔离，但共享底层的 DataNode 存储资源。每个 NameNode 是独立的，不需要和其他 Nam巳Node 协调合作。 如图 4-5 所示 ， Federation 使用了 多 个独立的 NameNode/NameSpace 命名空间。这些 NameNode 之间是联合的，也就是说， 它们之间相互独立且不需要互相协调，各自分工管理自己的 区域。分布式的 DataNode 被用作通用的数据块存储设备。每个 DataNode 要向集群中所有的 NameNode 注册，且周期性地向所有 NameNode 发送心跳和块报告， 并执行来自所有 NameNode 的命令。每一个 DataNode 作为统一的块存储设备被所有 NameNode 节点使用。 每一个 DataNode 节点都在所有的 NameNode 进行注册。 DataNode 发送心跳信息、块报告到 所有 NameNode，同时执行所有 NameNode 发来的命令。<br>￼</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2019-08-05T06:13:34.064Z" itemprop="dateUpdated">2019-08-05 14:13:34</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/e4062a35/" target="_blank" rel="external">https://xifujiang.github.io/posts/e4062a35/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&source=![Git][git]
+
+上传流程
+1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。
+2.namenode..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/e4062a35/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/e4062a35/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/e4062a35/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/346bfea7/" id="post-prev" class="post-nav-link">
+        <h4 class="title">
+          上一篇：hbase笔记
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/5fe19fd1/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：bat批量存放信息到excel">下一篇：bat批量存放信息到excel</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&source=![Git][git]
+
+上传流程
+1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。
+2.namenode..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/e4062a35/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/e4062a35/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/e4062a35/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACGUlEQVR42u3aO27DMBAFwNz/0k6TwkBg5z2uHEDksAoEW+S42OyHX1/xejyt309eredPvn/zq10uXhgYGLdl5Ef5vUH7rfxJfjYMDIxzGEkobANltH2578vnGBgYGHHQnIRXDAwMjE8E3DaM5ikgBgYGxloRmyRzCXIt6bysFsfAwLghI++6///fH5lvYGBg3IrxKNeceu15ft6MgYGxNSPfJmn9J8liWzwX58HAwNiakQS+Txz62vdjYGCcxkgCYtv2ml//SsAYGBh7M9YCYh402zJ11HrDwMDYmpEPF9tG/2QIWoR7DAyM7RjtZYj55z9ypRUDA2Nrxlpp+v4oa1fE5oNSDAyMcxgTUsJLStzJ6BQDA+McxvwyRN76z4Np9ONiYGBsx2iLzJbaNtoWfzgMDIytGW2SN7mcMRmUFv8SMDAwtmO0bfoctnYTrX0/BgbGCYxJaz4ZW84vlhWFLgYGxgGMtYQvT+nW0s06t8XAwDiMsXYJNR9VXtXUw8DAOI2Rt8PaVK/F12UwBgbGYYzkKJMLqfM0cfFeGwYGxg0Zj3LNx5l5cVvsi4GBsTUjX3kIvqrEzdNWDAyMExhtkF1sh8W5ajtSxcDAOIcxCXx5qjdJJf9AYmBgYMStt8mYIeoOvvoWBgYGxmBI2Y5Cc/wFARcDA+NWjLXrDu+ftGliW0hjYGCcw2h7WWttuHxEOi+nMTAwNmJ8A3ZvVYNavPZQAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
