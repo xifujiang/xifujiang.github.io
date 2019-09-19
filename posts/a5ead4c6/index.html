@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>hadoop详细学习 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="1、hadoop1.1 hadoop介绍1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。 2）主要解决海量数据的存储和海量数据的分析计算问题。 3）Hadoop生态圈">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop详细学习">
+<meta property="og:url" content="https://xifujiang.github.io/posts/a5ead4c6/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="1、hadoop1.1 hadoop介绍1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。 2）主要解决海量数据的存储和海量数据的分析计算问题。 3）Hadoop生态圈">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/yarn架构.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/大数据技术生态体系.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/HDFS的写数据流程.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/网络拓扑-节点距离计算.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/机架选择">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/HDFS的读数据流程.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/namenode工作机制">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/Fsimage和Edits概念.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/DataNode工作机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/HDFS-HA故障转移机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/MapReduce核心编程思想.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/wordcount程序执行过程.png)">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/数据切片与MapTask并行度决定机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/FileInputFormat切片源码解析.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/FileInputFormat切片大小的参数配置.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/CombineTextInputFormat切片机制.png">
+<meta property="og:image" content="c:/Users/jo/AppData/Roaming/Typora/typora-user-images/1568639170123.png">
+<meta property="og:image" content="c:/Users/jo/AppData/Roaming/Typora/typora-user-images/1568639177258.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/shuffle机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/MapTask工作机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/Reduece工作机制.png">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/MapReduce数据压缩">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/Yarn架构">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/Yarn工作机制">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/作业提交过程之MapReduce">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/大数据/clusterId不统一.png">
+<meta property="og:updated_time" content="2019-09-19T07:33:46.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hadoop详细学习">
+<meta name="twitter:description" content="1、hadoop1.1 hadoop介绍1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。 2）主要解决海量数据的存储和海量数据的分析计算问题。 3）Hadoop生态圈">
+<meta name="twitter:image" content="d:/blog/myblog/source/_posts/大数据/yarn架构.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">hadoop详细学习</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1、hadoop"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、hadoop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-hadoop介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 hadoop介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-Lucence框架"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 Lucence框架</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-hadoop三大发行版本"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 hadoop三大发行版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-hadoop的优势（面试）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">1.4 hadoop的优势（面试）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-hadoop1-x-和hadoop2-x区别"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1.5 hadoop1.x 和hadoop2.x区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-6-组件架构"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">1.6 组件架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、hdfs架构概述"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">1、hdfs架构概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、Yarn架构"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">2、Yarn架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、MapReduce架构概述"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">3、MapReduce架构概述</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-7-大数据技术生态体系"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">1.7 大数据技术生态体系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-8-hadoop重要目录"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">1.8 hadoop重要目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-9完全分布式运行模式"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">1.9完全分布式运行模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2、HDFS"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、HDFS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、1-介绍"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2、1 介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-1-优点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2.1 优点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-2-缺点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.2.2 缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-组件功能"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">2.3 组件功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-文件块大小"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">2.4 文件块大小</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-5-HDFS的数据流（面试重点）"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">2.5 HDFS的数据流（面试重点）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、HDFS的写数据流程"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">1、HDFS的写数据流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、网络拓扑-节点距离计算"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text">2、网络拓扑-节点距离计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、副本节点选择"><span class="post-toc-number">2.6.3.</span> <span class="post-toc-text">3、副本节点选择</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、HDFS的读数据流程"><span class="post-toc-number">2.6.4.</span> <span class="post-toc-text">4、HDFS的读数据流程</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-6-NameNode和SecondaryNameNode（面试开发重点）"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">2.6 NameNode和SecondaryNameNode（面试开发重点）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、NN和2NN工作机制"><span class="post-toc-number">2.7.1.</span> <span class="post-toc-text">1、NN和2NN工作机制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-7-DataNode-工作机制"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">2.7 DataNode 工作机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-7-1DataNode掉线时限参数设置"><span class="post-toc-number">2.8.1.</span> <span class="post-toc-text">2.7.1DataNode掉线时限参数设置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-7-2-服役新数据节点、退役旧数据节点"><span class="post-toc-number">2.8.2.</span> <span class="post-toc-text">2.7.2  服役新数据节点、退役旧数据节点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-8-HDFS新特性"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">2.8 HDFS新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-8-1-集群间的数据拷贝"><span class="post-toc-number">2.9.1.</span> <span class="post-toc-text">2.8.1 集群间的数据拷贝</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-8-2-小文件存档"><span class="post-toc-number">2.9.2.</span> <span class="post-toc-text">2.8.2 小文件存档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-8-3-回收站功能参数"><span class="post-toc-number">2.9.3.</span> <span class="post-toc-text">2.8.3 回收站功能参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-9-HDFS-HA高可用"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">2.9 HDFS HA高可用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-9-1HDFS-HA工作要点"><span class="post-toc-number">2.10.1.</span> <span class="post-toc-text">2.9.1HDFS-HA工作要点</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3、MapReduce"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、MapReduce</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-优缺点"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 优缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-核心编程思想"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 核心编程思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-编程规范"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3 编程规范</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-4-wordcount"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.4 wordcount</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-5-序列化和反序列化（重要）"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.5 序列化和反序列化（重要）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-1-定义与作用"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text">3.5.1 定义与作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-5-2-操作"><span class="post-toc-number">3.5.2.</span> <span class="post-toc-text">3.5.2 操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-2-切片与MapTask并行度决定机制"><span class="post-toc-number">3.5.3.</span> <span class="post-toc-text">3.6.2 切片与MapTask并行度决定机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-3-FileInputFormat切片源码解析："><span class="post-toc-number">3.5.4.</span> <span class="post-toc-text">3.6.3 FileInputFormat切片源码解析：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-4-FileInputFormat切片大小的参数配置"><span class="post-toc-number">3.5.5.</span> <span class="post-toc-text">3.6.4 FileInputFormat切片大小的参数配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-6-5-CombineTextInputFormat切片机制"><span class="post-toc-number">3.5.6.</span> <span class="post-toc-text">3.6.5 CombineTextInputFormat切片机制</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-6-MapReduce详细工作流程"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">3.6 MapReduce详细工作流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-7-Shuffle机制"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">3.7 Shuffle机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-7-1-Partition分区"><span class="post-toc-number">3.7.1.</span> <span class="post-toc-text">3.7.1 Partition分区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-7-2-WritableComparable排序"><span class="post-toc-number">3.7.2.</span> <span class="post-toc-text">3.7.2 WritableComparable排序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-7-3-Combiner合并"><span class="post-toc-number">3.7.3.</span> <span class="post-toc-text">3.7.3 Combiner合并</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-8-MapReduce-shuffle-工作机制（面试）"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">3.8 MapReduce +shuffle 工作机制（面试）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-9-Join多种应用"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">3.9 Join多种应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-9-1-Reduce-Join"><span class="post-toc-number">3.9.1.</span> <span class="post-toc-text">3.9.1 Reduce Join</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-9-2-Map-Join"><span class="post-toc-number">3.9.2.</span> <span class="post-toc-text">3.9.2 Map Join</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-10-计数器应用"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">3.10 计数器应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-11-数据清洗（ETL）"><span class="post-toc-number">3.11.</span> <span class="post-toc-text">3.11 数据清洗（ETL）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-12-Hadoop数据压缩"><span class="post-toc-number">3.12.</span> <span class="post-toc-text">3.12 Hadoop数据压缩</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-12-1-压缩概念"><span class="post-toc-number">3.12.1.</span> <span class="post-toc-text">3.12.1 压缩概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-12-2-MR支持的压缩编码"><span class="post-toc-number">3.12.2.</span> <span class="post-toc-text">3.12.2 MR支持的压缩编码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-12-3-压缩方式选择"><span class="post-toc-number">3.12.3.</span> <span class="post-toc-text">3.12.3 压缩方式选择</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-12-4-压缩位置的选择"><span class="post-toc-number">3.12.4.</span> <span class="post-toc-text">3.12.4 压缩位置的选择</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5、Yarn资源调度器"><span class="post-toc-number">4.</span> <span class="post-toc-text">5、Yarn资源调度器</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6、优化"><span class="post-toc-number">5.</span> <span class="post-toc-text">6、优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-1-MapReduce优化"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">6.1 MapReduce优化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-2HDFS小文件优化"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">6.2HDFS小文件优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-2-1-HDFS小文件弊端"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">6.2.1 HDFS小文件弊端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-2-2-HDFS小文件解决方案"><span class="post-toc-number">5.2.2.</span> <span class="post-toc-text">6.2.2 HDFS小文件解决方案</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1、MAVEN内存溢出"><span class="post-toc-number">6.</span> <span class="post-toc-text">1、MAVEN内存溢出!</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-01 hadoop" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">hadoop详细学习</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-09-13 17:50:11" datetime="2019-09-13T09:50:11.087Z" itemprop="datePublished">2019-09-13</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">37</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1、hadoop"><a href="#1、hadoop" class="headerlink" title="1、hadoop"></a>1、hadoop</h1><h2 id="1-1-hadoop介绍"><a href="#1-1-hadoop介绍" class="headerlink" title="1.1 hadoop介绍"></a>1.1 hadoop介绍</h2><p>1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。</p>
+<p>2）主要解决海量数据的存储和海量数据的分析计算问题。</p>
+<p>3）Hadoop生态圈</p>
+<a id="more"></a>
+<h2 id="1-2-Lucence框架"><a href="#1-2-Lucence框架" class="headerlink" title="1.2 Lucence框架"></a>1.2 Lucence框架</h2><p>1）Lucene框架使Doug Cutting开创的开源软件，用户Java书写代码，实现与Google类似的全文搜索功能，它提供了全文检索引擎的架构，包括完整的查询引擎和索引引擎。</p>
+<p>2）2001年年底Lucene成为Apache基金会的一个子项目。</p>
+<p>3）对于海量数据的场景，Lucence面对与Google同样的困难，存储数据困难，检索速度慢。</p>
+<p>4）学习和模仿Google解决这些问题的办法：微型版Nutch。</p>
+<p>5）Google是Haddop的思想之源。</p>
+<p>6）2003-2004年，Google公开了部分GFS和MapReduce思想的细节，以此为基础Doug Cutting等人用了2年业余时间实现了DFS和MapReduce机制，使Nutch性能飙升。</p>
+<p>7）2005年Hadoop作为Lucene的子项目Nutch的一部分正式引入Apache基金会。</p>
+<p>8）2006年3月份，Map-Reduce和Nutch Distributed File System（NDFS）分别被纳入称为Hadoop的项目中。</p>
+<p>9）名字来源于Doug Cutting儿子的玩具大象。</p>
+<h2 id="1-3-hadoop三大发行版本"><a href="#1-3-hadoop三大发行版本" class="headerlink" title="1.3 hadoop三大发行版本"></a>1.3 hadoop三大发行版本</h2><p>Apache、Cloudera、Hortonworks。</p>
+<h2 id="1-4-hadoop的优势（面试）"><a href="#1-4-hadoop的优势（面试）" class="headerlink" title="1.4 hadoop的优势（面试）"></a>1.4 hadoop的优势（面试）</h2><p>1)高可靠性：Hadoop底层维护多个数据副本，所以即使Hadoop某个计算元素或存储出现故障，也不会导致数据的丢失。</p>
+<p>2）高扩展性：在集群间分配任务数据，可方便的扩展数以千计的节点。</p>
+<p>3）高效性：在MapReduce的思想下，Hadoop是并行工作的，以加快任务处理速度。</p>
+<p>4）高容错性：能够自动将失败的任务重新分配。</p>
+<h2 id="1-5-hadoop1-x-和hadoop2-x区别"><a href="#1-5-hadoop1-x-和hadoop2-x区别" class="headerlink" title="1.5 hadoop1.x 和hadoop2.x区别"></a>1.5 hadoop1.x 和hadoop2.x区别</h2><p><strong>hadoop1.x组成：</strong></p>
+<ul>
+<li>Common（辅助工具）、HDFS（数据存储）、MapReduce（计算+资源调度）</li>
+<li>CPU 8  内存：128MB 磁盘 8T</li>
+</ul>
+<p><strong>hadoop2.x组成：</strong></p>
+<ul>
+<li>Common（辅助工具）、HDFS（数据存储）、MapReduce（计算）、yarn（资源调度）</li>
+<li>CPU 8  内存：128MB 磁盘 8T</li>
+</ul>
+<p>对比：hadoop1.x时代，MapReduce既处理运算，又处理资源调度，耦合性较大。hadoop1.x时代，增加了Yarn。Yarn只负责资源的调度，MapReduce只负责运算。</p>
+<h2 id="1-6-组件架构"><a href="#1-6-组件架构" class="headerlink" title="1.6 组件架构"></a>1.6 组件架构</h2><h3 id="1、hdfs架构概述"><a href="#1、hdfs架构概述" class="headerlink" title="1、hdfs架构概述"></a>1、hdfs架构概述</h3><p>1）NameNode（nn）：存储文件的元数据，如文件名，文件目录结构，文件属性（生成时间、福本数、文件权限），以及每个文件的块列表和块所在的DataNode等。</p>
+<p>2）DataNode（dn）：在本地文件系统存储文件数据，以及数据的校验和。</p>
+<p>3）Secondary NameNode（2nn）：用来监控HDFS状态的辅助后台程序，每隔一段时间获取HDFS元数据的快照。加快启动速度。</p>
+<h3 id="2、Yarn架构"><a href="#2、Yarn架构" class="headerlink" title="2、Yarn架构"></a>2、Yarn架构</h3><p>1）ResourceManager （RM）主要作用如下</p>
+<p>（1）处理客户端请求</p>
+<p>（2）监控NodeManager</p>
+<p>（3）启动或监控ApplicationMaster（集群中运行的一个job）</p>
+<p>（4）资源的分配与调度</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\yarn架构.png" alt="yarn架构" title>
+                </div>
+                <div class="image-caption">yarn架构</div>
+            </figure>
+<p>2）NodeManager（NM）主要作用如下</p>
+<p>（1）管理单个节点上的资源</p>
+<p>（2）<strong>处理来自</strong>ResourceManager<strong>的命令</strong></p>
+<p>（3）<strong>处理来自</strong>ApplicationMaster<strong>的命令</strong></p>
+<p>3）ApplicationMaster（AM）作用如下</p>
+<p>（1）负责数据的切分</p>
+<p>（2）为某个程序申请资源并分配给内部的任务</p>
+<p>（3）任务的监控与容错</p>
+<p>4）Container</p>
+<p>container是Yarn中的资源抽象，它封装了某个节点上的多维度资源，如内存、CPU、磁盘、网络等。</p>
+<h3 id="3、MapReduce架构概述"><a href="#3、MapReduce架构概述" class="headerlink" title="3、MapReduce架构概述"></a>3、MapReduce架构概述</h3><p>MapReduce将计算过程分为两个阶段：Map和Reduce</p>
+<p>1）Map阶段<strong>并行处理</strong>输入数据。</p>
+<p>2）Reduce阶段对Map结果进行汇总</p>
+<h2 id="1-7-大数据技术生态体系"><a href="#1-7-大数据技术生态体系" class="headerlink" title="1.7 大数据技术生态体系"></a>1.7 大数据技术生态体系</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\大数据技术生态体系.png" alt="大数据技术生态体系" title>
+                </div>
+                <div class="image-caption">大数据技术生态体系</div>
+            </figure>
+<p>图中涉及的技术名词解释如下：</p>
+<p>1）<strong>Sqoop</strong>：Sqoop是一款开源的工具，主要用于在Hadoop、Hive与传统的数据库(MySql)间进行**数据的迁移，可以将一个关系型数据库（例如 ：MySQL，Oracle 等）中的数据导进到Hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。</p>
+<p>2）<strong>Flume</strong>：Flume是Cloudera提供的一个高可用的，高可靠的，分布式的海量<strong>日志采集</strong>、聚合和传输的系统，Flume支持在日志系统中定制各类数据发送方，用于收集数据；同时，Flume提供对数据进行简单处理，并写到各种数据接受方（可定制）的能力。</p>
+<p>3）<strong>Kafka</strong>：Kafka是一种<strong>高吞吐量的分布式发布订阅消息系统</strong>，有如下特性：</p>
+<p>（1）通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。</p>
+<p>（2）高吞吐量：即使是<strong>非常普通的硬件Kafka也可以支持每秒数百万的消息</strong>。</p>
+<p>（3）支持通过Kafka服务器和消费机集群来分区消息。</p>
+<p>（4）支持Hadoop<strong>并行数据加载</strong>。</p>
+<p>4）<strong>Storm</strong>：Storm用于“连续计算”，对<strong>数据流做连续查询</strong>，在计算时就将结果以流的形式输出给用户。</p>
+<p>5）<strong>Spark</strong>：Spark是当前最流行的开源大数据内存计算框架。可以基于Hadoop上存储的大数据进行<strong>计算</strong>。</p>
+<p>6）<strong>Oozie</strong>：Oozie是一个管理Hdoop作业（job）的工作流程调度管理系统。</p>
+<p>7）<strong>Hbase</strong>：HBase是一个分布式的、面向列的开源数据库。HBase不同于一般的关系数据库，它是一个适合于非结构化数据存储的数据库。</p>
+<p>8）<strong>Hive</strong>：Hive是基于Hadoop的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并提供简单的SQL查询功能，可以将SQL语句转换为MapReduce任务进行运行。 其优点是学习成本低，可以通过类SQL语句快速实现简单的MapReduce统计，不必开发专门的MapReduce应用，十分适合数据仓库的统计分析。</p>
+<p>10）<strong>R语言</strong>：R是用于统计分析、绘图的语言和操作环境。R是属于GNU系统的一个自由、免费、源代码开放的软件，它是一个用于统计计算和统计制图的优秀工具。</p>
+<p>11）<strong>Mahout</strong>：Apache Mahout是个可扩展的机器学习和数据挖掘库。</p>
+<p>12）<strong>ZooKeeper</strong>：Zookeeper是Google的Chubby一个开源的实现。它是一个针对大型分布式系统的可靠协调系统，提供的功能包括：配置维护、名字服务、 分布式同步、组服务等。ZooKeeper的目标就是封装好复杂易出错的关键服务，将简单易用的接口和性能高效、功能稳定的系统提供给用户。</p>
+<h2 id="1-8-hadoop重要目录"><a href="#1-8-hadoop重要目录" class="headerlink" title="1.8 hadoop重要目录"></a>1.8 hadoop重要目录</h2><p>（1）bin目录：存放对Hadoop相关服务（HDFS,YARN）进行操作的脚本</p>
+<p>（2）etc目录：Hadoop的配置文件目录，存放Hadoop的配置文件</p>
+<p>（3）lib目录：存放Hadoop的本地库（对数据进行压缩解压缩功能）</p>
+<p>（4）sbin目录：存放启动或停止Hadoop相关服务的脚本</p>
+<p>（5）share目录：存放Hadoop的依赖jar包、文档、和官方案例</p>
+<h2 id="1-9完全分布式运行模式"><a href="#1-9完全分布式运行模式" class="headerlink" title="1.9完全分布式运行模式"></a>1.9完全分布式运行模式</h2><p>1、准备三台客户机（关闭防火墙、静态ip、主机名称）</p>
+<p>2、安装JDK</p>
+<p>3、配置环境变量</p>
+<p>4、安装hadoop</p>
+<p>5、配置环境变量</p>
+<p>6、配置集群</p>
+<p>7、单点启动</p>
+<p>8、配置ssh</p>
+<p>9、群起并测试集群</p>
+<h1 id="2、HDFS"><a href="#2、HDFS" class="headerlink" title="2、HDFS"></a>2、HDFS</h1><h2 id="2、1-介绍"><a href="#2、1-介绍" class="headerlink" title="2、1 介绍"></a>2、1 介绍</h2><p>产生背景：数据量大，一个操作系统存不过来，<strong>需要一种系统管理多台机器上的文件</strong></p>
+<p>定义：HDFS(Hadoop Distributed File System)，<strong>分布式文件管理系统。</strong>用于存储文件，通过目录树来定位文件。</p>
+<p>使用场景：适合一次写入，多次读出的场景，且不支持文件的修改。</p>
+<h2 id="2-2-1-优点"><a href="#2-2-1-优点" class="headerlink" title="2.2.1 优点"></a>2.2.1 优点</h2><p>1、高容错性</p>
+<p>（1）数据自动<strong>保存多个副本</strong>。通过增加副本的形式，提高容错性。</p>
+<p>（2）某个副本丢失后，可以<strong>自动恢复</strong></p>
+<p>2、适合处理大数据</p>
+<p>（1）数据规模：那个处理数据规模达到<strong>GB、TB、甚至PB级别</strong>的数据；</p>
+<p>（2）文件规模：能够处理<strong>百万规模以上的文件数量</strong>，数量相当之大。</p>
+<p>3、可构建在廉价机器上，通过多副本机制，提高可靠性。</p>
+<h2 id="2-2-2-缺点"><a href="#2-2-2-缺点" class="headerlink" title="2.2.2 缺点"></a>2.2.2 缺点</h2><p>1）不适合<strong>低延时数据</strong>访问，比如毫秒级的存储数据，是做不到的。</p>
+<p>2）无法高效的<strong>对大量小文件</strong>进行存储。</p>
+<p>（1）存储大量小文件的话，它会占用NameNode大量的内存来<strong>存储文件目录</strong>和<strong>块信息</strong>。这样是不可取的，因为<strong>NameNode的内存总是有限</strong>的；</p>
+<p>（2）小文件存储的<strong>寻址时间会超过读取时间</strong>，它违反了HDFS的设计目标。</p>
+<p>3）<strong>不支持并发写入、文件随机修改</strong>。</p>
+<p>（1）一个文件只能有一个写，不允许 多个线程同时写。</p>
+<p>（2）仅支持数据append（追加），不支持文件的随机修改。</p>
+<h2 id="2-3-组件功能"><a href="#2-3-组件功能" class="headerlink" title="2.3 组件功能"></a>2.3 组件功能</h2><p>1）NameNode（nn）：就是Master，它是一个管理者。</p>
+<p>（1）<strong>管理HDFS的名称空间</strong>；</p>
+<p>（2）配置<strong>副本策略</strong>；</p>
+<p>（3）<strong>管理数据块（Block）映射信息</strong>；</p>
+<p>（4）<strong>处理客户端读写请求</strong>。</p>
+<p>2）DataNode：就是slave。NameNode下达命令。DataNode执行实际的操作。</p>
+<p>（1）<strong>存储实际的数据块</strong>；</p>
+<p>（2）<strong>执行数据块的读/写操作</strong>。</p>
+<p>3）client：客户端</p>
+<p>（1）文件切分。文件上传HDFS的时候，Client将文件切分成一个一个的Block，然后进行上传；</p>
+<p>（2）与NameNode交互，获取文件的位置信息；</p>
+<p>（3）与DataNode交互，读取或者写入数据；</p>
+<p>（4）Client提供一些命令来管理HDFS，比如NameNode格式化；</p>
+<p>（5）Client可以通过一些命令来访问HDFS，比如对HDFS增删查改操作；</p>
+<p>4）Secondary NameNode：并非NameNode的热备。当NameNode挂掉的时候，它并不能替代NameNode并提供服务。</p>
+<p>（1）辅助NameNode，分担其工作量，比如<strong>定期合并Fsimage和Edits</strong>，并推送给NameNode；</p>
+<p>（2）在紧急情况下，可辅助恢复NameNode。</p>
+<h2 id="2-4-文件块大小"><a href="#2-4-文件块大小" class="headerlink" title="2.4 文件块大小"></a>2.4 文件块大小</h2><p>HDFS中的文件在物理上是分块存储（Block），块的大小可以通过配置参数（dfs.blocksize）来规定，默认大小在Hadoop2.x版本中是128M，老版中是64M。</p>
+<p> 1、集群中的block，2、如果寻址时间约为10ms，即查到目标block的时间为10ms，3寻址时间为传输时间的1%时，则为最佳状态。因此，传输时间=10ms/0.01=1000ms=1s。4 而目前磁盘的传输速率普遍为100MB/s。</p>
+<p>思考：为什么块的大小不能设置太小，也不能设置太大？</p>
+<p>1）HDFS的块设置太小，会增加寻址时间，程序一直在找块的开始位置；</p>
+<p>2）如果块设置的太大，从磁盘传输数据的时间会明显大于定位这个块开始位置所需要的时间。导致程序在处理这块数据时。会非常慢。</p>
+<p>总结：HDFS块的大小设置主要取决于磁盘传输速率。</p>
+<h2 id="2-5-HDFS的数据流（面试重点）"><a href="#2-5-HDFS的数据流（面试重点）" class="headerlink" title="2.5 HDFS的数据流（面试重点）"></a>2.5 HDFS的数据流（面试重点）</h2><h3 id="1、HDFS的写数据流程"><a href="#1、HDFS的写数据流程" class="headerlink" title="1、HDFS的写数据流程"></a>1、HDFS的写数据流程</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\HDFS的写数据流程.png" alt="1568448314627" title>
+                </div>
+                <div class="image-caption">1568448314627</div>
+            </figure>
+<p>然后重复3-7步骤</p>
+<h3 id="2、网络拓扑-节点距离计算"><a href="#2、网络拓扑-节点距离计算" class="headerlink" title="2、网络拓扑-节点距离计算"></a>2、网络拓扑-节点距离计算</h3><p>节点距离：两个节点到达最近的共同祖先的距离总和。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\网络拓扑-节点距离计算.png" alt="1568448821111" title>
+                </div>
+                <div class="image-caption">1568448821111</div>
+            </figure>
+<h3 id="3、副本节点选择"><a href="#3、副本节点选择" class="headerlink" title="3、副本节点选择"></a>3、副本节点选择</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\机架选择" alt="1568449200994" title>
+                </div>
+                <div class="image-caption">1568449200994</div>
+            </figure>
+<h3 id="4、HDFS的读数据流程"><a href="#4、HDFS的读数据流程" class="headerlink" title="4、HDFS的读数据流程"></a>4、HDFS的读数据流程</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\HDFS的读数据流程.png" alt="1568449571543" title>
+                </div>
+                <div class="image-caption">1568449571543</div>
+            </figure>
+<h2 id="2-6-NameNode和SecondaryNameNode（面试开发重点）"><a href="#2-6-NameNode和SecondaryNameNode（面试开发重点）" class="headerlink" title="2.6 NameNode和SecondaryNameNode（面试开发重点）"></a>2.6 NameNode和SecondaryNameNode（面试开发重点）</h2><h3 id="1、NN和2NN工作机制"><a href="#1、NN和2NN工作机制" class="headerlink" title="1、NN和2NN工作机制"></a>1、NN和2NN工作机制</h3><p>思考：NameNode中的元数据是存储在哪里的？</p>
+<p>首先，我们做个<strong>假设</strong>，如果存储在NameNode节点的磁盘中，因为<strong>经常需要进行随机访问，还有响应客户请求</strong>，必然是<strong>效率过低</strong>。因此，<strong>元数据需要存放在内存</strong>中。但如果只存在内存中，一旦断电，元数据丢失，整个集群就无法工作了。因此<strong>产生在磁盘中备份元数据的FsImage</strong>。</p>
+<p>这样又会带来新的问题，当在内存中的元数据更新时，如果同时更新FsImage，就会导致<strong>效率过低</strong>，但如果不更新，就会发生一致性问题，一旦NameNode节点断电，就会产生数据丢失。因此，引入Edits文件(只进行追加操作，效率很高)。<strong>每当元数据有更新或者添加元数据时，修改内存中的元数据并追加到Edits中。这样，一旦NameNode节点断电，可以通过FsImage和Edits的合并，合成元数据。</strong></p>
+<p>但是，如果长时间添加数据到Edits中，会导致该文件数据过大，效率降低，而且一旦断电，恢复元数据需要的时间过长。因此，需要定期进行FsImage和Edits的合并，如果这个操作由NameNode节点完成，又会效率过低。因此，<strong>引入一个新的节点SecondaryNamenode，专门用于FsImage和Edits的合并。</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\namenode工作机制" alt="1568450098120" title>
+                </div>
+                <div class="image-caption">1568450098120</div>
+            </figure>
+<ol>
+<li>第一阶段：NameNode启动</li>
+</ol>
+<p>（1）<strong>第一次启动</strong>NameNode<strong>格式化后</strong>，<strong>创建Fsimage</strong>和<strong>Edits文件</strong>。如果<strong>不是第一次启动</strong>，<strong>直接加载</strong>编辑日志和镜像文件到内存。</p>
+<p>（2）客户端<strong>对元数据进行增删改</strong>的请求。</p>
+<p>（3）NameNode<strong>记录操作日志</strong>，<strong>更新滚动日志</strong>。</p>
+<p>（4）NameNode在<strong>内存中对数据进行增删改</strong>。</p>
+<p>\2. 第二阶段：Secondary NameNode工作</p>
+<p>​       （1）Secondary NameNode询问NameNode是否需要<strong>CheckPoint</strong>。直接带回NameNode是否检查结果。</p>
+<p>​       （2）Secondary NameNode请求执行CheckPoint。</p>
+<p>​       （3）NameNode滚动正在写的Edits日志。</p>
+<p>​       （4）将<strong>滚动前的编辑日志和镜像文件拷贝</strong>到Secondary NameNode。</p>
+<p>​       （5）Secondary NameNode加载<strong>编辑日志和镜像文件到内存，并合并</strong>。</p>
+<p>​       （6）<strong>生成新的镜像文件fsimage.chkpoint</strong>。</p>
+<p>​       （7）<strong>拷贝</strong>fsimage.chkpoint到NameNode。</p>
+<p>​       （8）NameNode将fsimage.chkpoint<strong>重新命名</strong>成fsimage。</p>
+<p>注：</p>
+<p><strong>NN和2NN</strong>工作机制详解：</p>
+<p>Fsimage：NameNode内存中元数据序列化后形成的文件。</p>
+<p>Edits：记录客户端<strong>更新元数据信息</strong>的每一步操作（可通过Edits运算出元数据）。</p>
+<p>NameNode启动时，先滚动Edits并生成一个空的edits.inprogress，然后加载Edits和Fsimage到内存中，此时NameNode内存就持有最新的元数据信息。Client开始对NameNode发送元数据的增删改的请求，这些请求的操作首先会被记录到edits.inprogress中（查询元数据的操作不会被记录在Edits中，因为查询操作不会更改元数据信息），如果此时NameNode挂掉，重启后会从Edits中读取元数据的信息。然后，NameNode会在内存中执行元数据的增删改的操作。</p>
+<p>由于Edits中记录的操作会越来越多，Edits文件会越来越大，导致NameNode在启动加载Edits时会很慢，所以需要对Edits和Fsimage进行合并（所谓合并，就是将Edits和Fsimage加载到内存中，照着Edits中的操作一步步执行，最终形成新的Fsimage）。SecondaryNameNode的作用就是帮助NameNode进行Edits和Fsimage的合并工作。</p>
+<p>SecondaryNameNode首先会询问是否需要（触发需要满足两个条件中的任意一个，定时时间到和中数据写满了）。直接带回是否检查结果。执行操作，首先会让滚动并生成一个空的，滚动的目的是给打个标记，以后所有新的操作都写入，其他未合并的和会拷贝到的本地，然后将拷贝的和加载到内存中进行合并，生成，然后将拷贝给，重命名为后替换掉原来的。在启动时就只需要加载之前未合并的和即可，因为合并过的中的元数据信息已经被记录在中。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\Fsimage和Edits概念.png" alt="1568451755272" title>
+                </div>
+                <div class="image-caption">1568451755272</div>
+            </figure>
+<h2 id="2-7-DataNode-工作机制"><a href="#2-7-DataNode-工作机制" class="headerlink" title="2.7 DataNode 工作机制"></a>2.7 DataNode 工作机制</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\DataNode工作机制.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="2-7-1DataNode掉线时限参数设置"><a href="#2-7-1DataNode掉线时限参数设置" class="headerlink" title="2.7.1DataNode掉线时限参数设置"></a>2.7.1DataNode掉线时限参数设置</h3><p>1、DataNode进程死亡或者网络故障造成DataNode无法与NameNode通信</p>
+<p>2、NameNode不会立即把该节点判定为死亡，要经过一段时间，这段时间暂称作超时时长。</p>
+<p>3、HDFS默认的超时时长为10分钟+30秒。</p>
+<p>4=如果定义超时时间为TimeOut，则超时时长的计算公式为：timeout = 2<em>XXX(分钟)+10\</em>YYY（秒）。</p>
+<h3 id="2-7-2-服役新数据节点、退役旧数据节点"><a href="#2-7-2-服役新数据节点、退役旧数据节点" class="headerlink" title="2.7.2  服役新数据节点、退役旧数据节点"></a>2.7.2  服役新数据节点、退役旧数据节点</h3><p>1、添加白名单</p>
+<p>2、黑名单退役 </p>
+<p>3、不允许白名单和黑名单中同时出现同一个主机名称。</p>
+<h2 id="2-8-HDFS新特性"><a href="#2-8-HDFS新特性" class="headerlink" title="2.8 HDFS新特性"></a>2.8 HDFS新特性</h2><h3 id="2-8-1-集群间的数据拷贝"><a href="#2-8-1-集群间的数据拷贝" class="headerlink" title="2.8.1 集群间的数据拷贝"></a>2.8.1 集群间的数据拷贝</h3><p>1．scp实现两个远程主机之间的文件复制</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -r hello.txt [root@hadoop103:/user/atguigu/hello.txt](mailto:root@hadoop103:/user/atguigu/hello.txt)             // 推 push</span><br><span class="line"></span><br><span class="line">scp -r [root@hadoop103:/user/atguigu/hello.txt  hello.txt](mailto:root@hadoop103:/user/atguigu/hello.txt  hello.txt) // 拉 pull</span><br><span class="line"></span><br><span class="line">scp -r [root@hadoop103:/user/atguigu/hello.txt](mailto:root@hadoop103:/user/atguigu/hello.txt) root@hadoop104:/user/atguigu   //是通过本地主机中转实现两个远程主机的文件复制；如果在两个远程主机之间ssh没有配置的情况下可以使用该方式。</span><br></pre></td></tr></tbody></table></figure>
+<p>2．采用distcp命令实现两个Hadoop集群之间的递归数据复制</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$  bin/hadoop distcp</span><br><span class="line">hdfs://haoop102:9000/user/atguigu/hello.txt hdfs://hadoop103:9000/user/atguigu/hello.txt</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-8-2-小文件存档"><a href="#2-8-2-小文件存档" class="headerlink" title="2.8.2 小文件存档"></a>2.8.2 小文件存档</h3><p>1、HDFS存储小文件的弊端</p>
+<p><strong>大量的小文件会消耗NameNode中的大部分内存</strong>。但注意，存储小文件所需要的磁盘容量与数据块的大小无关。</p>
+<p>2、解决存储小文件的办法之一</p>
+<p>HDFS存档文件或HAR文件，是一个更高效的文件存档工具，它将文件存入HDFS块，在减少NameNode内存使用的同时，允许对文件进行透明的访问。<strong>也就是说HDFS存档问你件对内还是一个一个独立文件，对NameNode而言却是一个整体，减少了NameNode的内存</strong></p>
+<p>3、实操</p>
+<p>1）先启动hadoop集群</p>
+<p>2）把某目录下的所有文件归档成xx.har的归档文件，并把归档后文件存储到xxx/output路径下。</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hadoop archive -archiveName input.har -p /data/input /data/out</span><br></pre></td></tr></tbody></table></figure>
+<p>3）查看归档</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hadoop fs -ls -R har:///data/out/input.har</span><br><span class="line">-rw-r--r--   3 root supergroup         38 2019-09-15 23:21 har:///data/out/input.har/1</span><br><span class="line">-rw-r--r--   3 root supergroup         26 2019-09-15 23:21 har:///data/out/input.har/2</span><br><span class="line">-rw-r--r--   3 root supergroup         97 2019-09-13 22:54 har:///data/out/input.har/wc.input</span><br></pre></td></tr></tbody></table></figure>
+<p>4）解归档文件</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -cp har:/// data/output/input.har/*    /data</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-8-3-回收站功能参数"><a href="#2-8-3-回收站功能参数" class="headerlink" title="2.8.3 回收站功能参数"></a>2.8.3 回收站功能参数</h3><p>1、默认值fs.trash.interval = 0, 0表示禁用回收站；其他值表示设置文件的存活时间。</p>
+<p>2、默认值fs.trash.checkpoint.interval = 0，检查回收站的间隔时间。如果该值为0，则该值设置和fs.trash.interval的参数值相等。</p>
+<p>3、要求：fs.trash.checkpoint.interval <= fs.trash.interval 。< p>
+<h2 id="2-9-HDFS-HA高可用"><a href="#2-9-HDFS-HA高可用" class="headerlink" title="2.9 HDFS HA高可用"></a>2.9 HDFS HA高可用</h2><p>策略：<strong>消除单点故障</strong></p>
+<h3 id="2-9-1HDFS-HA工作要点"><a href="#2-9-1HDFS-HA工作要点" class="headerlink" title="2.9.1HDFS-HA工作要点"></a>2.9.1HDFS-HA工作要点</h3><ol>
+<li>元数据管理方式需要改变</li>
+</ol>
+<p>内存中各自保存一份元数据；</p>
+<p>Edits日志<strong>只有Active</strong>状态的NameNode节点可以做<strong>写操作</strong>；</p>
+<p>两个NameNode<strong>都可以读取Edits</strong>；</p>
+<p>共享的Edits放在一个<strong>共享存储中管理</strong>（qjournal和NFS两个主流实现）；</p>
+<ol start="2">
+<li>需要一个状态管理功能模块</li>
+</ol>
+<p>实现了一个zkfailover，常驻在每一个namenode所在的节点，每一个zkfailover负责监控自己所在NameNode节点，利用zk进行状态标识，当需要进行状态切换时，由zkfailover来负责切换，切换时需要防止brain split现象的发生。</p>
+<ol start="3">
+<li><p>必须保证两个NameNode之间能够ssh无密码登录</p>
+</li>
+<li><p>隔离（Fence），即同一时刻<strong>仅仅有一个</strong>NameNode<strong>对外</strong>提供服务</p>
+</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\HDFS-HA故障转移机制.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h1 id="3、MapReduce"><a href="#3、MapReduce" class="headerlink" title="3、MapReduce"></a>3、MapReduce</h1><p>定义：MapReduce是一个<strong>分布式运算程序</strong>的编程框架，是用户开发“基于Hadoop的<strong>数据分析</strong>应用”的核心框架。</p>
+<p>核心功能是将<strong>用户编写的业务逻辑代码</strong>和<strong>自带默认组件</strong>整合成一个完整的分布式运算程序，<strong>并发</strong>运行在一个Hadoop集群上。</p>
+<h2 id="3-1-优缺点"><a href="#3-1-优缺点" class="headerlink" title="3.1 优缺点"></a>3.1 优缺点</h2><p>1、优点：</p>
+<p>1、MapReeduce<strong>易于编程</strong>：它简单的实现一些接口，就可以完成一个分布式程序。</p>
+<p>2、<strong>良好的扩展性</strong>。通过<strong>简单的增加机器</strong>来扩展计算能力。</p>
+<p>3、<strong>高容错性</strong>：如果一台机器宕机，它可以把上面的计算任务转移到另一个节点上运行，不至于这个任务运行的失败。</p>
+<p>4、适合PB级以上<strong>海量数据的离线处理</strong></p>
+<p>缺点：</p>
+<p>1、<strong>不擅长实时计算</strong></p>
+<p>2、<strong>不擅长流式计算</strong>：流式计算的输入数据时动态的，而MapReduce的输入数据集是静态的。</p>
+<p>3、<strong>不擅长DAG（有向图）计算</strong>：多个应用程序存在依赖关系，后一个应用程序的输入为前一个的输出。在这种情况下，MapReduce并不是不能做，<strong>而是使用后，每个MapReduce作业的输出结果都会写入到磁盘，造成大量的磁盘IO，导致性能非常的低下。</strong></p>
+<h2 id="3-2-核心编程思想"><a href="#3-2-核心编程思想" class="headerlink" title="3.2 核心编程思想"></a>3.2 核心编程思想</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\MapReduce核心编程思想.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p>一个完整的MapReduce程序在分布式运行时有三类实例进程：</p>
+<p>1）MrAppMaster：负责整个程序的过程调度及状态协调</p>
+<p>2）MapTask：负责Map阶段的整个数据处理流程。</p>
+<p>3）ReduceTask：负责Reduce阶段的整个数据处理流程。</p>
+<h2 id="3-3-编程规范"><a href="#3-3-编程规范" class="headerlink" title="3.3 编程规范"></a>3.3 编程规范</h2><p>1、Mapper阶段</p>
+<p>（1）用户自定义的Mapper要继承自己的父类</p>
+<p>（2）Mapper的输入数据时KV对的形式（KV的类型可自定义）</p>
+<p>（3）Mapper中的业务逻辑写在map（）方法中</p>
+<p>（4）Mapper的输出数据时KV对的形式（KV的类型可自定义）</p>
+<p>（5）map（）方法（MapTask进程）对每一个<k, v>调用一次</k,></p>
+<p>2、Reducer阶段</p>
+<p>（1）用户自定义的Reducer要继承自己的父类</p>
+<p>（2）Reducer的输入数据类型对应Mapper的输出数据类型，也是KV</p>
+<p>（3）Reducer的业务逻辑卸载reduce（）方法中</p>
+<p>（4）ReducerTask进程对每一组相同的k的<k,v>组调用一次reduce()方法</k,v></p>
+<p>3、Driver阶段</p>
+<p>相当于Yarn集群的客户端，用于提交我们整个程序到Yarn集群，提交的是封装了MapReduce程序相关运行参数的job对象。</p>
+<h2 id="3-4-wordcount"><a href="#3-4-wordcount" class="headerlink" title="3.4 wordcount"></a>3.4 wordcount</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\wordcount程序执行过程.png)" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h2 id="3-5-序列化和反序列化（重要）"><a href="#3-5-序列化和反序列化（重要）" class="headerlink" title="3.5 序列化和反序列化（重要）"></a>3.5 序列化和反序列化（重要）</h2><h3 id="3-5-1-定义与作用"><a href="#3-5-1-定义与作用" class="headerlink" title="3.5.1 定义与作用"></a>3.5.1 定义与作用</h3><p>序列化就是把<strong>内存中的对象，转换成字节序列</strong>（或其他数据传输协议）以便于<strong>存储到磁盘（持久化）</strong>和<strong>网络传输</strong>。</p>
+<p>反序列化就是将字节序列（或其他数据传输协议）或者是磁盘的持久化数据，转换成内存中的对象。</p>
+<p>为什么要序列化：对象只生存在内存里，关机断电就莫得了，序列化可以存储“活的”对象，可以将“活的”对象发送到远程计算机。</p>
+<p>！！！为什么不用java的序列化</p>
+<p>java的序列化是重量级序列化框架，一个对象被序列化后，会附带很多额外的信息（各种校验信息，Header，继承体系等），不便于在网络中高效传输。所以，Hadoop自己开发了一套序列化机制（Writable）。</p>
+<p>hadoop<strong>序列化的特点</strong>：</p>
+<p>1）紧凑：高效实用存储空间。</p>
+<p>2）快速：读写数据的额外开销小。</p>
+<p>3）可扩展：随着通信协议的升级而可升级</p>
+<p>4）互操作：支持多语言的交互</p>
+<h3 id="3-5-2-操作"><a href="#3-5-2-操作" class="headerlink" title="3.5.2 操作"></a>3.5.2 操作</h3><p>七步走：</p>
+<p>（1）必须实现Writable接口</p>
+<p>（2）反序列化时，需要反射调用空参构造函数，所以必须有空参构造</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FlowBean</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(DataOutput out)</span> <span class="keyword">throws</span> IOException </span>{       				out.writeLong(upFlow);       </span><br><span class="line">	out.writeLong(downFlow);       </span><br><span class="line">	out.writeLong(sumFlow);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>（4）重写反序列化方法</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readFields</span><span class="params">(DataInput   in)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">upFlow   = in.readLong();       </span><br><span class="line">downFlow   = in.readLong();       </span><br><span class="line">sumFlow   = in.readLong();   </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>（5）注意反序列化的顺序和序列化的顺序完全一致</p>
+<p>（6）要想把结果显示在文件中，需要重写toString()，可用”\t”分开，方便后续用。</p>
+<p>（7）如果需要将自定义的bean放在key中传输，则还需要实现Comparable接口，因为MapReduce框中的Shuffle过程要求对key必须能排序。详见后面排序案例。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(FlowBean o)</span>   </span>{       <span class="comment">//   倒序排列，从大到小       	return this.sumFlow > o.getSumFlow() ? -1 : 1;   </span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-6-2-切片与MapTask并行度决定机制"><a href="#3-6-2-切片与MapTask并行度决定机制" class="headerlink" title="3.6.2 切片与MapTask并行度决定机制"></a>3.6.2 切片与MapTask并行度决定机制</h3><p>1．问题引出</p>
+<p>MapTask的并行度决定Map阶段的任务处理并发度，进而影响到整个Job的处理速度。</p>
+<p>思考：1G的数据，启动8个MapTask，可以提高集群的并发处理能力。那么1K的数据，也启动8个MapTask，会提高集群性能吗？MapTask并行任务是否越多越好呢？哪些因素影响了MapTask并行度？                                                  </p>
+<p>2．MapTask并行度决定机制</p>
+<p><strong>数据块：</strong>Block是<strong>HDFS物理上</strong>把数据分成一块一块。</p>
+<p><strong>数据切片：</strong>数据切片只是在<strong>逻辑</strong>上对输入进行分片，并不会在磁盘上将其切分成片进行存储。</p>
+<p><img src="D:\blog\myblog\source\_posts\大数据\数据切片与MapTask并行度决定机制.png" alt="img"></p>
+<h3 id="3-6-3-FileInputFormat切片源码解析："><a href="#3-6-3-FileInputFormat切片源码解析：" class="headerlink" title="3.6.3 FileInputFormat切片源码解析："></a>3.6.3 FileInputFormat切片源码解析：</h3><p>重点：</p>
+<p>默认情况：切片大小= blocksize</p>
+<p>每次切片时，要判断切完剩余部分是否大于块的1.1倍，不大于1.1倍就划分1块切片</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\FileInputFormat切片源码解析.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p>切片时不考虑数据集整体，而是<strong>逐个对每一个文件单独切片</strong>。</p>
+<h3 id="3-6-4-FileInputFormat切片大小的参数配置"><a href="#3-6-4-FileInputFormat切片大小的参数配置" class="headerlink" title="3.6.4 FileInputFormat切片大小的参数配置"></a>3.6.4 FileInputFormat切片大小的参数配置</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\FileInputFormat切片大小的参数配置.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h3 id="3-6-5-CombineTextInputFormat切片机制"><a href="#3-6-5-CombineTextInputFormat切片机制" class="headerlink" title="3.6.5 CombineTextInputFormat切片机制"></a>3.6.5 CombineTextInputFormat切片机制</h3><p>框架默认的TextInputFormat切片机制是对任务按文件规划切片，<strong>不管文件多小，都会是一个单独的切片</strong>，都会交给一个MapTask，这样如果有大量小文件，就会<strong>产生大量的MapTask</strong>，处理<strong>效率极其低下</strong>。</p>
+<p>1、应用场景：</p>
+<p><strong>CombineTextInputFormat</strong>用于小文件过多的场景，它可以将多个小文件从逻辑上规划到一个切片中，这样，多个小文件就可以交给一个MapTask处理。</p>
+<p>2、虚拟存储切片最大值设置</p>
+<p><strong>CombineTextInputFormat.setMaxInputSplitSize(job, 4194304)</strong>;// 4m</p>
+<p>注意：虚拟存储切片最大值设置最好根据实际的小文件大小情况来设置具体的值。</p>
+<p>3、切片机制</p>
+<p>生成切片过程包括：虚拟存储过程和切片过程二部分。！！！！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\CombineTextInputFormat切片机制.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h2 id="3-6-MapReduce详细工作流程"><a href="#3-6-MapReduce详细工作流程" class="headerlink" title="3.6 MapReduce详细工作流程"></a>3.6 MapReduce详细工作流程</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\jo\AppData\Roaming\Typora\typora-user-images\1568639170123.png" alt="1568639170123" title>
+                </div>
+                <div class="image-caption">1568639170123</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="C:\Users\jo\AppData\Roaming\Typora\typora-user-images\1568639177258.png" alt="1568639177258" title>
+                </div>
+                <div class="image-caption">1568639177258</div>
+            </figure>
+<h2 id="3-7-Shuffle机制"><a href="#3-7-Shuffle机制" class="headerlink" title="3.7 Shuffle机制"></a>3.7 Shuffle机制</h2><h3 id="3-7-1-Partition分区"><a href="#3-7-1-Partition分区" class="headerlink" title="3.7.1 Partition分区"></a>3.7.1 Partition分区</h3><p>1、问题引出</p>
+<p>要求将统计结果<strong>按照条件输出到不同文件中</strong>（分区）。比如：将统计结果按照手机归属地不同省份输出到不同文件中（分区）</p>
+<p>2、默认Partitioner分区</p>
+<p>Map方法之后，Reduce方法之前的数据处理过程称之为Shuffle。如图4-14所示。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\shuffle机制.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h3 id="3-7-2-WritableComparable排序"><a href="#3-7-2-WritableComparable排序" class="headerlink" title="3.7.2 WritableComparable排序"></a>3.7.2 WritableComparable排序</h3><p>排序概述：</p>
+<blockquote>
+<p>​    排序是MapReduce框架中最重要的操作之一。</p>
+<p>​    MapTask和ReduceTask均会对数据按照Key进行排序。该操作属于Hadoop的默认行为。任何应用程序中的数据均会被排序，而不管逻辑上是否需要。</p>
+<p>​    默认排序是按照字典顺序排序，且实现该排序的方法是快速排序。</p>
+<p>​    对于MapTask，它会将处理的结果暂时放到环形缓冲区中，当环形缓冲区使用率达到一定阈值后，再对缓冲区中的数据进行一次快速排序，并将这些有序数据溢写到磁盘上，而当数据处理完毕后，它会对磁盘上所有文件进行归并排序。</p>
+<p>​    对于ReduceTask，它从每个MapTask上远程拷贝相应的数据文件，如果文件大小超过一定阈值，则溢写磁盘上，否则存储在内存中。如果磁盘上文件数目达到一定阈值，则进行一次归并排序以生成一个更大文件；如果内存中文件大小或者数目超过一定阈值，则进行一次合并后将数据溢写到磁盘上。当所有数据拷贝完毕后，ReduceTask统一对内存和磁盘上的所有数据进行一次归并排序。</p>
+</blockquote>
+<p>排序的分类</p>
+<blockquote>
+<p>​    1、部分排序</p>
+<p>​    MapReduce根据输入记录的键对数据集排序。保证输出的每个文件内部有序。</p>
+<p>​    2、全排序</p>
+<p>​    最终输出结果只有一个文件，且文件内部有序。实现方法是只设置一个ReduceTask。但该方法在处理大型文件时效率极低，因为一台机器处理所有文件，完全丧失了MapReduce所提供的并行架构。</p>
+<p>​    3、辅助排序（GroupingComparator分组）</p>
+<p>​    在Reduce端对key进行分组。应用于：在接收的key为bean对象时，想让一个或几个字段相同（全部字段比较不相同）的key进入到同一个reduce方法时，可以采用分组排序。</p>
+<p>​    4、二次排序</p>
+<p>​    在自定义排序过程中，如果compareTo中的判断条件为两个即为二次排序。</p>
+</blockquote>
+<p>1、实现全排序</p>
+<p>2、实现区内排序</p>
+<h3 id="3-7-3-Combiner合并"><a href="#3-7-3-Combiner合并" class="headerlink" title="3.7.3 Combiner合并"></a>3.7.3 Combiner合并</h3><p>（1）Combiner是MR程序中Mapper和Reducer之外的一种组件。</p>
+<p>（2）Combiner组件的父类就是Reducer</p>
+<p>（3）Combiner和Reducer的区别在于运行的位置</p>
+<p>Combiner是在每一个MapTask所在的节点运行</p>
+<p>Reducer是接收全局所有Mapper的输出结果</p>
+<p>（4）Combiner的意义就是对每一个MapTask的输出进行局部汇总，以减小网络传输量。</p>
+<p>（5）Combiner能够应用的前提是不能影响最终的业务逻辑，而且Combiner的输出kv应该跟Reducer的输入kv类型对应起来。</p>
+<p><strong>order举例</strong></p>
+<h2 id="3-8-MapReduce-shuffle-工作机制（面试）"><a href="#3-8-MapReduce-shuffle-工作机制（面试）" class="headerlink" title="3.8 MapReduce +shuffle 工作机制（面试）"></a>3.8 MapReduce +shuffle 工作机制（面试）</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\MapTask工作机制.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p>（1）Read阶段：MapTask通过用户编写的RecordReader，从输入InputSplit中解析出一个个key/value。</p>
+<p>​       （2）Map阶段：该节点主要是将解析出的key/value交给用户编写map()函数处理，并产生一系列新的key/value。</p>
+<p>​       （3）Collect收集阶段：在用户编写map()函数中，当数据处理完成后，一般会调用OutputCollector.collect()输出结果。在该函数内部，它会将生成的key/value分区（调用Partitioner），并写入一个环形内存缓冲区中。</p>
+<p>​       （4）Spill阶段：即“溢写”，当环形缓冲区满后，MapReduce会将数据写到本地磁盘上，生成一个临时文件。需要注意的是，将数据写入本地磁盘之前，先要对数据进行一次本地排序，并在必要时对数据进行合并、压缩等操作。</p>
+<p>​       溢写阶段详情：</p>
+<p>​       步骤1：利用快速排序算法对缓存区内的数据进行排序，排序方式是，先按照分区编号Partition进行排序，然后按照key进行排序。这样，经过排序后，数据以分区为单位聚集在一起，且同一分区内所有数据按照key有序。</p>
+<p>​       步骤2：按照分区编号由小到大依次将每个分区中的数据写入任务工作目录下的临时文件output/spillN.out（N表示当前溢写次数）中。如果用户设置了Combiner，则写入文件之前，对每个分区中的数据进行一次聚集操作。</p>
+<p>​       步骤3：将分区数据的元信息写到内存索引数据结构SpillRecord中，其中每个分区的元信息包括在临时文件中的偏移量、压缩前数据大小和压缩后数据大小。如果当前内存索引大小超过1MB，则将内存索引写到文件output/spillN.out.index中。</p>
+<p>​       （5）Combine阶段：当所有数据处理完成后，MapTask对所有临时文件进行一次合并，以确保最终只会生成一个数据文件。</p>
+<p>​       当所有数据处理完后，MapTask会将所有临时文件合并成一个大文件，并保存到文件output/file.out中，同时生成相应的索引文件output/file.out.index。</p>
+<p>​       在进行文件合并过程中，MapTask以分区为单位进行合并。对于某个分区，它将采用多轮递归合并的方式。每轮合并io.sort.factor（默认10）个文件，并将产生的文件重新加入待合并列表中，对文件排序后，重复以上过程，直到最终得到一个大文件。</p>
+<p>​       让每个MapTask最终只生成一个数据文件，可避免同时打开大量文件和同时读取大量小文件产生的随机读取带来的开销。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\Reduece工作机制.png" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p>（1）Copy阶段：ReduceTask从各个MapTask上远程拷贝一片数据，并针对某一片数据，如果其大小超过一定阈值，则写到磁盘上，否则直接放到内存中。</p>
+<p>​       （2）Merge阶段：在远程拷贝数据的同时，ReduceTask启动了两个后台线程对内存和磁盘上的文件进行合并，以防止内存使用过多或磁盘上文件过多。</p>
+<p>​       （3）Sort阶段：按照MapReduce语义，用户编写reduce()函数输入数据是按key进行聚集的一组数据。为了将key相同的数据聚在一起，Hadoop采用了基于排序的策略。由于各个MapTask已经实现对自己的处理结果进行了局部排序，因此，ReduceTask只需对所有数据进行一次归并排序即可。</p>
+<p>​       （4）Reduce阶段：reduce()函数将计算结果写到HDFS上。</p>
+<h2 id="3-9-Join多种应用"><a href="#3-9-Join多种应用" class="headerlink" title="3.9 Join多种应用"></a>3.9 Join多种应用</h2><h3 id="3-9-1-Reduce-Join"><a href="#3-9-1-Reduce-Join" class="headerlink" title="3.9.1 Reduce Join"></a>3.9.1 Reduce Join</h3><p>1、Reduce Join工作原理：</p>
+<blockquote>
+<p>​     Map端的主要工作：为来自不同表或文件的key/value对，<strong>打标签以区别不同来源的记录</strong>。然后用连接字段作为key，其余部分和新加的标志作为value，最后进行输出。</p>
+<p>​    Reduce端的主要工作：在Reduce端以连接字段作为key的分组已经完成，我们只需要在每一个分组当中<strong>将那些来源于不同文件的记录（在Map阶段已经打标志）分开</strong>，最后进行合并就OK了。</p>
+</blockquote>
+<p>2、缺点及解决方案</p>
+<blockquote>
+<p>​    缺点：这种方式中，合并的操作是在Reduce阶段完成，Reduce端的处理压力太大，Map节点的运算负载则很低，资源利用率不高，且在Reduce阶段极易产生数据倾斜。</p>
+<p>​    解决方案：Map端实现数据合并</p>
+</blockquote>
+<h3 id="3-9-2-Map-Join"><a href="#3-9-2-Map-Join" class="headerlink" title="3.9.2 Map Join"></a>3.9.2 Map Join</h3><blockquote>
+<p>1．使用场景</p>
+<p>Map Join适用于一张表十分小、一张表很大的场景。</p>
+<p>2．优点</p>
+<p>思考：在Reduce端处理过多的表，非常容易产生数据倾斜。怎么办？</p>
+<p>在Map端缓存多张表，提前处理业务逻辑，这样增加Map端业务，减少Reduce端数据的压力，尽可能的减少数据倾斜。</p>
+<p>3．具体办法：采用DistributedCache</p>
+<p>​       （1）在Mapper的setup阶段，将文件读取到缓存集合中。</p>
+<p>​       （2）在驱动函数中加载缓存。</p>
+<p>// 缓存普通文件到Task运行节点。</p>
+<p>job.addCacheFile(new URI(“file://e:/cache/pd.txt”));</p>
+</blockquote>
+<h2 id="3-10-计数器应用"><a href="#3-10-计数器应用" class="headerlink" title="3.10 计数器应用"></a>3.10 计数器应用</h2><p>hadoop为每个作业维护若干内置计数器，以描述多项指标。例如，某些计数器记录已处理的字节数和记录数，使用户可监控已处理的输入数据量和已产生的输出数据量</p>
+<p>1、计数器API</p>
+<p>（1）采用枚举的方式统计计数</p>
+<p>（2）采用计数器组、计数器名称的方式统计</p>
+<p>（3）计数结果在程序运行后的控制台上查看。</p>
+<h2 id="3-11-数据清洗（ETL）"><a href="#3-11-数据清洗（ETL）" class="headerlink" title="3.11 数据清洗（ETL）"></a>3.11 数据清洗（ETL）</h2><h2 id="3-12-Hadoop数据压缩"><a href="#3-12-Hadoop数据压缩" class="headerlink" title="3.12 Hadoop数据压缩"></a>3.12 Hadoop数据压缩</h2><h3 id="3-12-1-压缩概念"><a href="#3-12-1-压缩概念" class="headerlink" title="3.12.1 压缩概念"></a>3.12.1 压缩概念</h3><p>压缩概述：</p>
+<blockquote>
+<p>压缩技术能够有效减少底层存储系统（HDFS）读写字节数。压缩提高了网络带宽和磁盘空间的效率。在运行MR程序时，I/O操作、网络数据传输、Shuffle和Merge要花大量的时间，尤其是<strong>数据规模很大和工作负载密集的情况下</strong>，因此，使用数据压缩显得非常重要。</p>
+<p>数据压缩对于节省资源、最小化磁盘I/O和网络传输非常有帮助。可以在任意MapReduce阶段启动压缩。</p>
+</blockquote>
+<p>压缩策略和原则</p>
+<blockquote>
+<p><strong>优化策略</strong></p>
+<p>通过对Mapper、Reducer运行过程的数据进行压缩，以减少磁盘IO，提高MR程序运行速度。</p>
+<p>注意：采用压缩技术减少了磁盘IO，但同时也增加了CPU运算负担。所以，压缩特性运用得当能提高性能，但运用不当也可能降低性能。</p>
+<p><strong>压缩原则</strong>：</p>
+<p>1、运算密集型的job，少用压缩</p>
+<p>2、IO密集型的job，多用压缩</p>
+</blockquote>
+<h3 id="3-12-2-MR支持的压缩编码"><a href="#3-12-2-MR支持的压缩编码" class="headerlink" title="3.12.2 MR支持的压缩编码"></a>3.12.2 MR支持的压缩编码</h3><table>
+<thead>
+<tr>
+<th>压缩格式</th>
+<th>hadoop自带？</th>
+<th>算法</th>
+<th>文件扩展名</th>
+<th>是否可切分</th>
+<th>换成压缩格式后，原来的程序是否需要修改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEFLATE</td>
+<td>是，直接使用</td>
+<td>DEFLATE</td>
+<td>.deflate</td>
+<td>否</td>
+<td>和文本处理一样，不需要修改</td>
+</tr>
+<tr>
+<td>Gzip</td>
+<td>是，直接使用</td>
+<td>DEFLATE</td>
+<td>.gz</td>
+<td>否</td>
+<td>和文本处理一样，不需要修改</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td>是，直接使用</td>
+<td>bzip2</td>
+<td>.bz2</td>
+<td>是</td>
+<td>和文本处理一样，不需要修改</td>
+</tr>
+<tr>
+<td>LZO</td>
+<td>否，需要安装</td>
+<td>LZO</td>
+<td>.lzo</td>
+<td>是</td>
+<td>需要建索引，还需要指定输入格式</td>
+</tr>
+<tr>
+<td>Snappy</td>
+<td>否，需要安装</td>
+<td>Snappy</td>
+<td>.snappy</td>
+<td>否</td>
+<td>和文本处理一样，不需要修改</td>
+</tr>
+</tbody>
+</table>
+<p>为了支持多种压缩/解压缩算法，Hadoop引入了编码/解码器，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>压缩格式</th>
+<th>对应的编码/解码器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEFLATE</td>
+<td>org.apache.hadoop.io.compress.DefaultCodec</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>org.apache.hadoop.io.compress.GzipCodec</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td>org.apache.hadoop.io.compress.BZip2Codec</td>
+</tr>
+<tr>
+<td>LZO</td>
+<td>com.hadoop.compression.lzo.LzopCodec</td>
+</tr>
+<tr>
+<td>Snappy</td>
+<td>org.apache.hadoop.io.compress.SnappyCodec</td>
+</tr>
+</tbody>
+</table>
+<p>压缩性能的比较</p>
+<table>
+<thead>
+<tr>
+<th>压缩算法</th>
+<th>原始文件大小</th>
+<th>压缩文件大小</th>
+<th>压缩速度</th>
+<th>解压速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gzip</td>
+<td>8.3GB</td>
+<td>1.8GB</td>
+<td>17.5MB/s</td>
+<td>58MB/s</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td>8.3GB</td>
+<td>1.1GB</td>
+<td>2.4MB/s</td>
+<td>9.5MB/s</td>
+</tr>
+<tr>
+<td>LZO</td>
+<td>8.3GB</td>
+<td>2.9GB</td>
+<td>49.3MB/s</td>
+<td>74.6MB/s</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://google.github.io/snappy/" target="_blank" rel="noopener">http://google.github.io/snappy/</a></p>
+<p>On a single core of a Core i7 processor in 64-bit mode, Snappy compresses at about 250 MB/sec or more and decompresses at about 500 MB/sec or more.</p>
+<h3 id="3-12-3-压缩方式选择"><a href="#3-12-3-压缩方式选择" class="headerlink" title="3.12.3 压缩方式选择"></a>3.12.3 压缩方式选择</h3><p>Gzip压缩：</p>
+<blockquote>
+<p>优点：压缩率比较高，压缩/解压速度快；hadoop本身支持，在应用中处理Gzip格式的文件就和直接处理文本一样；大部分Linux系统都自带Gzip命令，使用方便。</p>
+<p>缺点：不支持split。</p>
+<p>应用场景：<strong>当每个文件压缩之后130M以内的（1个块大小内），都可以考虑Gzip压缩格式</strong>。例如说一天或者一个小时的日志压缩成一个Gzip文件。</p>
+</blockquote>
+<p>Bzip2压缩：</p>
+<blockquote>
+<p>优点：支持split，具有很高的压缩率，比Gzip压缩率都高；Hadoop本身自带，使用方便。</p>
+<p>缺点：压缩/解压速度慢。</p>
+<p>应用场景：适合<strong>对速度要求不高，但需要较高的压缩率的时候</strong>；或者<strong>输出之后的数据比较大</strong>，处理之后的数据需要压缩存档减少磁盘空间并以后数据用得比较少的情况；或者对<strong>单个很大的文本文件想压缩减少存储空间</strong>，同时又需要支持split，而且兼容之前的应用程序的情况。</p>
+</blockquote>
+<p>Lzo</p>
+<blockquote>
+<p>优点：<strong>压缩/解压速度也比较快</strong>，合理的压缩率，支持split，是Hadoop中最流行的压缩格式；可以在linux系统下安装lzop命令，使用方便。</p>
+<p>缺点：压缩率比Gzip要低一些；Hadoop本身不支持，需要安装；在应用中对Lzo格式的文件需要做一些特殊处理（为了支持split需要建索引，还需要指定InputFormat为Lzo格式）。</p>
+<p>应用场景：<strong>一个很大的文本文件，压缩之后还大于200M以上的可以考虑，而且单个文件越大，Lzo优点越明显</strong>。</p>
+</blockquote>
+<p>Snappy</p>
+<blockquote>
+<p>优点：高速压缩速度和合理的压缩率。</p>
+<p>缺点：不支持Split；压缩率比Gzip要低；Hadoop本身不支持，需要安装。</p>
+<p>应用场景：<strong>当MapReduce作业的Map输出的数据比较大的时候，作为Map到Reduce的中间数据</strong>的压缩格式；或者<strong>作为一个MapReduce作业的输出和另一个MapReduce作业的输入。</strong></p>
+</blockquote>
+<h3 id="3-12-4-压缩位置的选择"><a href="#3-12-4-压缩位置的选择" class="headerlink" title="3.12.4 压缩位置的选择"></a>3.12.4 压缩位置的选择</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\MapReduce数据压缩" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h1 id="5、Yarn资源调度器"><a href="#5、Yarn资源调度器" class="headerlink" title="5、Yarn资源调度器"></a>5、Yarn资源调度器</h1><p><strong>Yarn</strong>是一个资源调度平台，负责为运算程序<strong>提供服务器运算资源</strong>，相当于一个分布式操作系统平台，而<strong>MapReduce</strong>等运算程序则相当于运行于<strong>操作系统之上的应用程序</strong>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\Yarn架构" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p><img src="D:\blog\myblog\source\_posts\大数据\Yarn工作机制" alt="img"></p>
+<p>工作机制详解</p>
+<p>​       （1）MR程序提交到客户端所在的节点。</p>
+<p>​       （2）YarnRunner向ResourceManager申请一个Application。</p>
+<p>​       （3）RM将该应用程序的资源路径返回给YarnRunner。</p>
+<p>​       （4）该程序将运行所需资源提交到HDFS上。</p>
+<p>​       （5）程序资源提交完毕后，申请运行mrAppMaster。</p>
+<p>​       （6）RM将用户的请求初始化成一个Task。</p>
+<p>​       （7）其中一个NodeManager领取到Task任务。</p>
+<p>​       （8）该NodeManager创建容器Container，并产生MRAppmaster。</p>
+<p>​       （9）Container从HDFS上拷贝资源到本地。</p>
+<p>​       （10）MRAppmaster向RM 申请运行MapTask资源。</p>
+<p>​       （11）RM将运行MapTask任务分配给另外两个NodeManager，另两个NodeManager分别领取任务并创建容器。</p>
+<p>​       （12）MR向两个接收到任务的NodeManager发送程序启动脚本，这两个NodeManager分别启动MapTask，MapTask对数据分区排序。</p>
+<p>​        （13）MrAppMaster等待所有MapTask运行完毕后，向RM申请容器，运行ReduceTask。</p>
+<p>​       （14）ReduceTask向MapTask获取相应分区的数据。</p>
+<p>​       （15）程序运行完毕后，MR会向RM申请注销自己。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\作业提交过程之MapReduce" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h1 id="6、优化"><a href="#6、优化" class="headerlink" title="6、优化"></a>6、优化</h1><h2 id="6-1-MapReduce优化"><a href="#6-1-MapReduce优化" class="headerlink" title="6.1 MapReduce优化"></a>6.1 MapReduce优化</h2><p>MapReduce程序效率的瓶颈在于两点：</p>
+<blockquote>
+<p>1、计算机性能</p>
+<p>​    CPU、内存、磁盘健康、网络</p>
+<p>2、I/O操作优化</p>
+<p>（1）数据倾斜</p>
+<p>（2）Map和Reduce数设置不合理</p>
+<p>（3）Map运行时间太长，导致Reduce等待过久</p>
+<p>（4）小文件过多</p>
+<p>（5）大量的不可分块超大文件</p>
+<p>（6）Spill次数过多</p>
+<p>（7）Merge次数过多等。</p>
+</blockquote>
+<p>优化方法：</p>
+<p>1、数据输入</p>
+<p>（1）<strong>合并小文件</strong>：在执行MR任务前将小文件进行合并，大量的小文件会产生大量的Map任务，增大Map任务装载次数，而任务的装载比较耗时，从而导致MR运行较慢。</p>
+<p>（2）采用CombineTextInputFormat来作为输入，解决输入端大量小文件场景。</p>
+<p>2、Map阶段</p>
+<p>（1）<strong>减少溢写（Spill）次数</strong>：通过调整io.sort.mb及sort.spill.percent参数值，增大触发Spill的内存上限，减少Spill次数，从而减少磁盘IO.</p>
+<p>（2）<strong>减少合并（Merge）次数</strong>：通过调整io.sort.factor参数，增大Merge的文件数目，减少Merge的次数，从而缩短MR处理时间。</p>
+<p>（3）<strong>在Map之后，不影响业务逻辑前提下，先进行Combine处理，减少I/O</strong>。</p>
+<p>3、Reduce阶段</p>
+<p>（1）<strong>合理设置Map和Reduce数</strong>。</p>
+<p>（2）<strong>设置Map、Reduce共存</strong>。调整slowstart.completedmaps参数，使Map运行到一定程度后，Reduce也开始运行，减少Reduce的等待时间。</p>
+<p>（3）<strong>规避使用Reduce</strong>：因为Reduce在用于连接数据集的时候将会产生大量的网络消耗。</p>
+<p>（4）<strong>合理设置Reduce端的Buffer</strong>。</p>
+<p>4、I/O传输</p>
+<p>（1）<strong>采用数压缩的方式</strong></p>
+<p>（2）<strong>使用SequenceFile二进制文件</strong></p>
+<p>5、数据倾斜问题</p>
+<blockquote>
+<p>1）数据倾斜现象</p>
+<p>数据频率倾斜——某一个区域的数据量要远远大于其他区域。</p>
+<p>数据大小倾斜——部分记录的大小远远大于平均值。</p>
+<p>2）减少数据倾斜的方法</p>
+<p>1）抽样和范围分区</p>
+<p>2）自定义分区</p>
+<p>3）Combine</p>
+<p>4）采用Map Join， 尽量避免Reduce Join。</p>
+</blockquote>
+<h2 id="6-2HDFS小文件优化"><a href="#6-2HDFS小文件优化" class="headerlink" title="6.2HDFS小文件优化"></a>6.2HDFS小文件优化</h2><h3 id="6-2-1-HDFS小文件弊端"><a href="#6-2-1-HDFS小文件弊端" class="headerlink" title="6.2.1 HDFS小文件弊端"></a>6.2.1 HDFS小文件弊端</h3><p>HDFS上每个文件都要在NameNode上建立一个索引，这个索引的大小约为150byte，这样当小文件比较多的时候，就会产生很多的索引文件，<strong>一方面会大量占用NameNode的内存空间，另一方面就是索引文件过大使得索引速度变慢。</strong></p>
+<h3 id="6-2-2-HDFS小文件解决方案"><a href="#6-2-2-HDFS小文件解决方案" class="headerlink" title="6.2.2 HDFS小文件解决方案"></a>6.2.2 HDFS小文件解决方案</h3><p>小文件的优化无非以下几种方式：</p>
+<p>（1）在数据采集的时候，就将小文件或小批数据合成大文件再上传HDFS。</p>
+<p>（2）在业务处理之前，在HDFS上使用MapReduce程序对小文件进行合并。</p>
+<p>（3）在MapReduce处理时，可采用CombineTextInputFormat提高效率。</p>
+<h1 id="1、MAVEN内存溢出"><a href="#1、MAVEN内存溢出" class="headerlink" title="1、MAVEN内存溢出!"></a>1、MAVEN内存溢出!</h1><p>（1）MAVEN install时候JVM内存溢出</p>
+<p>处理方式：在环境配置文件和maven的执行文件均可调整MAVEN_OPT的heap大小。（详情查阅MAVEN 编译 JVM调优问题，如：<a href="http://outofmemory.cn/code-snippet/12652/maven-outofmemoryerror-method）" target="_blank" rel="noopener">http://outofmemory.cn/code-snippet/12652/maven-outofmemoryerror-method）</a></p>
+<p>（2）编译期间maven报错。可能网络阻塞问题导致依赖库下载不完整导致，多次执行命令（一次通过比较难）：</p>
+<p>[root@hadoop101 hadoop-2.7.2-src]#mvn package -Pdist,nativeN -DskipTests -Dtar</p>
+<p>（3）报ant、protobuf等错误，插件下载未完整或者插件版本问题，最开始链接有较多特殊情况，同时推荐</p>
+<p>DataNode和NameNode进程同时只能工作一个。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\大数据\clusterId不统一.png" alt="clusterId不统一" title>
+                </div>
+                <div class="image-caption">clusterId不统一</div>
+            </figure>
+<p>10）执行命令不生效，粘贴word中命令时，遇到-和长–没区分开。导致命令失效</p>
+<p>解决办法：尽量不要粘贴word中代码。</p>
+<p>11）jps发现进程已经没有，但是重新启动集群，提示进程已经开启。原因是在linux的根目录下/tmp目录中存在启动的进程临时文件，将集群相关进程删除掉，再重新启动集群。</p>
+<p>12）jps不生效。</p>
+<p>原因：全局变量hadoop java没有生效。解决办法：需要source /etc/profile文件。</p>
+<p>13）8088端口连接不上</p>
+<p>[atguigu@hadoop102 桌面]$ cat /etc/hosts</p>
+<p>注释掉如下代码</p>
+<p>#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</p>
+<p>#::1         hadoop102</p>
+<p>​                                                    </p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </=></p></div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2019-09-19T07:33:46.599Z" itemprop="dateUpdated">2019-09-19 15:33:46</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/a5ead4c6/" target="_blank" rel="external">https://xifujiang.github.io/posts/a5ead4c6/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/a5ead4c6/&title=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/a5ead4c6/&title=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&source=1、hadoop1.1 hadoop介绍1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。
+2）主要解决海量数据的存储和海量数据的分析..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/a5ead4c6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/a5ead4c6/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/a5ead4c6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/0/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：机器学习算法">下一篇：机器学习算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/a5ead4c6/&title=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/a5ead4c6/&title=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&source=1、hadoop1.1 hadoop介绍1）hadoop是一个由Apache基金会所开发的分布式系统基础架构。
+2）主要解决海量数据的存储和海量数据的分析..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/a5ead4c6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hadoop详细学习》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/a5ead4c6/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/a5ead4c6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aQW7DMAwEwP7/0ynQa1pnSSpFLI1OhgPLGh8YUtTXVzweP+P5+vpO7/7zr8sGBgbGbRmPy/HXQufLSt6VrA0DA+McRh5kc+Q1NQnf+VMYGBgYeVhMPkHv82FgYGD0pssDaJLeVVNSDAyM0xhJEVsoKeOdsTwNXVaLY2Bg3JAxaQy8+/qf+hsYGBgfzHgMRp7MXQfQ+XowMDD2ZiQb99Uod827vtMraDEwMPZmzF+zNvnLi9Vf/jcwMDC2ZswPga1tDFSbFhgYGHszEsw8sPbSwfwpDAyMExh5AdlL73rBPZkTAwPjBMa8mEzY8/D6YmYMDIytGdWQl2ycVTHVcIyBgXEmI3kgPyqRY/LAGm23YWBgHMBYVQ1fA3qLXlCXY2Bg3JzRazrm7cYqOAniy3qnGBgYH89I0sH8xdXmQfWzvjgzgoGBsTWjmrRVF/eOY2HlvToMDIzbMqqYvOCsJpHLWpgYGBibMuYpYL7RVm1SVoteDAyMXRmjjkGr2bkqlVzX+MDAwLgHo9d0zK8n7x31GTAwMLZgrNqy713ny803/jAwMHZiPIqjR82TyGa7AgMDY2vGPH2chOPqUTAMDIyTGdUgm4TIVUG5MA8GBsYBjPzARG/TP08umzwMDAyM4MXVlC4/OhYV0hgYGBiLUsbqbHlCiYGBcQIjKWLzdHCePjYPWGBgYGzKmDQGqkclklSverAVAwNja8Y36AEsumFawA0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
