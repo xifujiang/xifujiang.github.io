@@ -338,120 +338,6 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-loading/NoSQL02——MongoDB" class="article-card article-type-post" itemprop="blogPost">
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/posts/9d19f718/">NoSQL02——MongoDB</a>
-    </h3>
-  
-
-
-
-
-     <div class="post-meta">
-        <time class="post-time" title="2019-12-18 00:00:00" datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished">2019-12-18</time>
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <h1 id="一、定义-amp-概念"><a href="#一、定义-amp-概念" class="headerlink" title="一、定义&概念"></a>一、定义&概念</h1><h2 id="1-1定义-amp-概念"><a href="#1-1定义-amp-概念" class="headerlink" title="1.1定义&概念"></a>1.1定义&概念</h2><p>mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写</p>
-    
-        <div class="post-more-div">
-            <a href="/posts/9d19f718/" class="post-more waves-button">
-                阅读全文 »
-            </a>
-        </div>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-loading/Java笔记04——一些常用的函数" class="article-card article-type-post" itemprop="blogPost">
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/posts/f77bb893/">Java笔记04——一些常用的函数</a>
-    </h3>
-  
-
-
-
-
-     <div class="post-meta">
-        <time class="post-time" title="2019-12-05 15:26:00" datetime="2019-12-05T07:26:00.000Z" itemprop="datePublished">2019-12-05</time>
-
-    </div>
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <h1 id="StringUtils"><a href="#StringUtils" class="headerlink" title="StringUtils"></a>StringUtils</h1><table>
-<thead>
-<tr>
-<th>函数</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>isBlank(CharSequence cs)</td>
-<td>字符串是否只有 “”,\n\n\t,null</td>
-</tr>
-<tr>
-<td>isNotBlank(CharSequence cs)</td>
-<td>字符串是否不只有 “”,\n\n\t,null</td>
-</tr>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h1 id="MultiValueMap"><a href="#MultiValueMap" class="headerlink" title="MultiValueMap"></a>MultiValueMap</h1><p>Map之一个Key存多个Value</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MultiValueMap<string, string> stringMultiValueMap = <span class="keyword">new</span> LinkedMultiValueMap<>();</string,></span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周一"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周二"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"中班 13:00-16:00"</span>, <span class="string">"周三"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周四"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"测试1天2次 09:00 - 12:00"</span>, <span class="string">"周五"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"测试1天2次 09:00 - 12:00"</span>, <span class="string">"周六"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"中班 13:00-16:00"</span>, <span class="string">"周日"</span>);</span><br><span class="line"><span class="comment">//打印所有值</span></span><br><span class="line">Set<string> keySet = stringMultiValueMap.keySet();</string></span><br><span class="line"><span class="keyword">for</span> (String key : keySet) {</span><br><span class="line">	List<string> values = stringMultiValueMap.get(key);</string></span><br><span class="line">    System.out.println(StringUtils.join(values.toArray(),<span class="string">" "</span>)+<span class="string">":"</span>+key);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">周一 周二 周四:早班 <span class="number">9</span>:<span class="number">00</span>-<span class="number">11</span>:<span class="number">00</span></span><br><span class="line">周三 周日:中班 <span class="number">13</span>:<span class="number">00</span>-<span class="number">16</span>:<span class="number">00</span></span><br><span class="line">周五 周六:测试<span class="number">1</span>天<span class="number">2</span>次 <span class="number">09</span>:<span class="number">00</span> - <span class="number">12</span>:<span class="number">00</span></span><br></pre></td></tr></tbody></table></figure>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-    
-        <div class="post-more-div">
-            <a href="/posts/f77bb893/" class="post-more waves-button">
-                阅读全文 »
-            </a>
-        </div>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-JAVAEE笔记03—包名区别" class="article-card article-type-post" itemprop="blogPost">
 
     
@@ -533,7 +419,43 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-loading/自我介绍与项目介绍" class="article-card article-type-post" itemprop="blogPost">
+            <article id="post-JAVA爬虫——webmagic" class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/a896d992/">WebMagic</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2019-12-01 20:04:27" datetime="2019-12-01T12:04:27.199Z" itemprop="datePublished">2019-12-01</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="1、架构介绍"><a href="#1、架构介绍" class="headerlink" title="1、架构介绍"></a>1、架构介绍</h1><h2 id="1-1、四大组件"><a href="#1-1、四大组件" class="headerlink" title="1.1、四大组件"></a>1.1、四大组件</h2><p>WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由Spider将彼此组织起来。这四大组件对应爬虫声明周期中的下载、处理、管理和持久化等功能。WebMagic的设计参考了Scapy，但是实现方式更Java化一些。</p>
+    
+        <div class="post-more-div">
+            <a href="/posts/a896d992/" class="post-more waves-button">
+                阅读全文 »
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-数据库笔记——mysql" class="article-card article-type-post" itemprop="blogPost">
 
     
 
@@ -548,411 +470,14 @@
 
 
      <div class="post-meta">
-        <time class="post-time" title="2019-12-02 10:19:21" datetime="2019-12-02T02:19:21.378Z" itemprop="datePublished">2019-12-02</time>
+        <time class="post-time" title="2019-11-21 19:42:01" datetime="2019-11-21T11:42:01.012Z" itemprop="datePublished">2019-11-21</time>
 
     </div>
 
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        <h1 id="1、自我介绍——一定要有亮点"><a href="#1、自我介绍——一定要有亮点" class="headerlink" title="1、自我介绍——一定要有亮点"></a>1、自我介绍——一定要有亮点</h1><p>权限-》看需求文档-》了解文档-》分配文档-》了解模块-》编码开发-》记录每天工作量</p>
-<p>面试官好，我是沈旖旎，来自吉首大学软件工程专业。</p>
-<p>大学期间我对Java知识很感兴趣，Java基础知识较扎实。</p>
-<p>现在想应聘的工作是Java开发工程师。</p>
-<p>大学期间，学院有开设软件工程、计算机网络、设计模式等科目。我擅长数据开发和web开发，曾自学Java和大数据。</p>
-<p>我在校期间做过几个项目，曾获得过最高分，其中基于Maven小说阅读网项目是我做的全栈项目，曾给全院同学做过演示，我对项目流程有一定的了解。</p>
-<p>我在组织管理方面也有一定的能力，担任过实验室的管理员和社团社长。</p>
-<p>我在校期间成绩优秀，有过ACM大赛的经历，多次获得奖学金，成绩排5%内。</p>
-<p>我平常喜欢旅游、看动漫、逛一些技术网站等。</p>
-<p> 自我介绍大概就这样了。</p>
-<p>我从大一的时候学习C语言，课设期间编写过一个双人泡泡龙对战游戏，获得最高分。大一的时候加入实验室，是实验室的管理员。大二的时候我自学Java，做过一个从需求分析、数据库开发、前端、后端独立开发的全栈web项目，小说文学网站，大三时期自学大数据，和实验室的学长们合作完成一个B2C的电商项目。我平常喜欢旅游、看动漫、逛一些技术网站等等。 自我介绍大概就这样了。</p>
-<h1 id="2、项目介绍"><a href="#2、项目介绍" class="headerlink" title="2、项目介绍"></a>2、项目介绍</h1><h2 id="简单介绍尚客零食采购电商平台"><a href="#简单介绍尚客零食采购电商平台" class="headerlink" title="简单介绍尚客零食采购电商平台"></a>简单介绍尚客零食采购电商平台</h2><p>这个项目是实验室老师接的外包项目，我负责的模块是数据分析和报表这块。我所拿到的初始数据比较杂乱无章，我先通过sqoop把数据导入到HDFS，通过 Map处理掉无用的脏数据，提取有效的列信息，按照tab切割，其中也利用了shuffle机制，再利用reduce到hdfs中，hdfs转存到hive，用hive做数据分析。</p>
-<p>具体：例如针对10天内销量前10的城市排序，用已经处理的数据，写HQL语句，</p>
-<p>select  cname, count(cid) as num </p>
-<p>from city </p>
-<p>group by cid </p>
-<p>order by num desc </p>
-<p>limit 1 10</p>
-<p>用group by 对城市进行分组，取某个阶段的时间，再用order by降序，llimit 10；</p>
-<p>查看每个城市每天完成订单数，取消订单数，下单订单数，下单用户数</p>
-<p>select cname, sum(if(order_status=5, 1, 0)) as success,</p>
-<p> sum(if(order_status=3, 1, 0)) as cannel , sum(if(order_status = 1, 1, 0)) as ord,sum, count(distinct CUST_ID) as cnt_ord_user //用户ID去重</p>
-<p>from order</p>
-<h2 id="小说阅读网"><a href="#小说阅读网" class="headerlink" title="小说阅读网"></a>小说阅读网</h2><p>目的：因为我个人喜欢阅读小说，我身边也有很多文学爱好者，我就开始筹备这个项目，当时我跟朋友讨论做自己喜欢的项目，我们讨论做这个阅读网站。</p>
-<p>我们这个小说阅读网，有作者端和阅读的用户端，作者端的功能的话是上传作品，用户端主要负责阅读搜索、投币、评论等功能。</p>
-<p>这个项目呢，是从需求分析、数据库设计、前端设计、后端设计完全是我独立开发的，算是一个全栈项目。</p>
-<p>现在的话还挂在我的服务器上，之前经过一些途经的宣传收获一波关注量。现在我把它给关了，觉得系统还有很多需要完善的地方。</p>
-<p>遇到的困难：我个人在ajax访问，和书的封面上传方面遇到了一些问题，书的图片上传方面的话，我通过一些字节流的处理解决了这个问题。</p>
-<p>结果：我这个项目受到了一些好评，也给全校的学生展示过。</p>
-<p>用的bootstrap搭建，使用jsp，ajax的技术，后台使用ssm技术，用了javamail、solr、友盟等一些插件，做了关于面向作者和阅读者的小说阅读网。该网站上传到我的云服务器，通过一些途径，像论坛、表白墙、群等的宣传，收获了不少注册量，平台的点击数也在友盟后台可以看到。该项目也是课设的代表项目，有幸在答辩期间给全院的同学作展示，当时获得展示机会的只有两个女生。</p>
-<h2 id="局域网聊天系统"><a href="#局域网聊天系统" class="headerlink" title="局域网聊天系统"></a>局域网聊天系统</h2><p>这是我一个基于Java SE的java项目，主要是利用socket套接字等技术。是用的C/S架构，模拟QQ做的局域网项目。</p>
-<p>本地的进程间通信（IPC）有很多种方式，但可以总结为下面4类：</p>
-<ul>
-<li>消息传递（管道、FIFO、消息队列）</li>
-<li>同步（互斥量、条件变量、读写锁、文件和写记录锁、信号量）</li>
-<li>共享内存（匿名的和具名的）</li>
-<li>远程过程调用（Solaris门和Sun RPC）</li>
-</ul>
-<h2 id="火拼泡泡龙游戏介绍"><a href="#火拼泡泡龙游戏介绍" class="headerlink" title="火拼泡泡龙游戏介绍"></a>火拼泡泡龙游戏介绍</h2><p>这是款基于C语言的火拼泡泡龙游戏，游戏开始随机生成初始泡泡，玩家通过击落泡泡获取积分，打败对手，或者在对手打击你的时候消除自己的泡泡。该游戏利用了多线程，事件监听，递归等算法，使用链表、图的深搜等数据结构相关知识</p>
-<h1 id="3、大数据"><a href="#3、大数据" class="headerlink" title="3、大数据"></a>3、大数据</h1><h2 id="HDFS上传"><a href="#HDFS上传" class="headerlink" title="HDFS上传"></a>HDFS上传</h2><p>简言之：客户端上传文件，向NameNode发送请求，NameNode返回可执行，返回DN的位置后，客户端的OutputFormat再向DataNode建立连接和传输，传输完毕后客户端还要向NameNode汇报。</p>
-<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>Map端获取数据后对数据进行逻辑处理，两次排序，溢写到文件中，可以对数据分区操作。Shuffle端在Map、Reduce之间充当洗牌、发牌的角色，核心是分区、排序缓存，是对局部value排序，提高处理性能。reduce端接收数据，通过归并，把处理的数据写到目标文件夹下。</p>
-<p>shuffle：对数据进行分区、排序、缓存</p>
-<p>mapjoin：</p>
-<p>1）把小表加载到缓存中</p>
-<p>2）</p>
-<h2 id="Yarn的job提交流程"><a href="#Yarn的job提交流程" class="headerlink" title="Yarn的job提交流程"></a>Yarn的job提交流程</h2><p>简言之：Job向RM请求Application，RM同意后创建任务到调度队列里，NodeManger领取到任务后创建容器，用来运行mrAppMaster，AppMaster再请求任务，用来运行MapTask任务和ReduceTask任务，运行mr。yarn就是封装了mapreduce的任务，使得hadoop解耦 。</p>
-<h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>zookeeper是一个分布式的应用程序协调服务，像hadoop HA、kafka、HBase都可以向zookeeper注册服务。</p>
-<p>选举机制：半数机制（Paxos 协议）：集群中半数以上机器存活，集群可用。所以Zookeeper适合装在奇数台机器上。 </p>
-<h2 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h2><p>1、Hive 和数据库除了拥有类似的查询语言，再无类似之处。 </p>
-<p>2、Hive的元数据存储在数据库中，hive封装了执行器、sql解析器、编译器、优化器等，他的底层实现是mapreduce，所以处理起来延时较高，适合离线计算，hive数据存储在HDFS中，适合一次写入，多次读取。hive没有建立索引，是对全部数据暴力扫描，访问延迟较高。hive的可扩展性强，支持很大的数据规模。</p>
-<p>3、内部表和外部表</p>
-<ul>
-<li>默认创建的表都是管理表（内部表），hive会控制数据的生命周期，默认的存储位置为（/user/hive/warehouse）的目录下。删除一个管理表时，Hive也会删除这个表中的数据。所以<strong>管理表不适合和其他工具共享数据</strong>。</li>
-<li>外部表，Hive并非人为其完全拥有这份数据。<strong>删除该表并不会删除掉这份数据</strong>，不过描述表的<strong>元数据信息会被删除掉</strong></li>
-</ul>
-<p>4、排序区别</p>
-<ul>
-<li>a) Sort By：每个Reducer内部有序； </li>
-<li>b) Order By：全局排序，只有一个Reducer； </li>
-<li>c) Cluster By：当distribute by和sorts by字段相同时，可以使用cluster by方式。cluster by除了具有distribute by的功能外还兼具sort by的功能。但是排序只能是倒序排序，不能指定排序规则为ASC或者DESC。 </li>
-<li>d) Distrbute By：类似MR中partition，进行分区，结合sort by使用，Hive要求<br>DISTRIBUTE BY语句要写在SORT BY语句之前。</li>
-</ul>
-<p>3、窗口函数</p>
-<ul>
-<li>a) OVER()：指定分析函数工作的数据窗口大小，这个数据窗口大小可能会随着行的变化而变化 </li>
-<li>b) CURRENT ROW：当前行</li>
-<li>c) n PRECEDING：往前n行数据 </li>
-<li>d) n FOLLOWING：往后n行数据 </li>
-<li>e) UNBOUNDED：起点，UNBOUNDED PRECEDING 表示从前面的起点，UNBOUNDED FOLLOWING表示到后面的终点 </li>
-<li>f) LAG(col,n)：往前第n行数据 </li>
-<li>g) LEAD(col,n)：往后第n行数据 </li>
-<li>h) NTILE(n)：把有序分区中的行分发到指定数据的组中，各个组有编号，编号从1开<br>始，对于每一行，NTILE返回此行所属的组的编号。注意：n必须为int类型。 </li>
-</ul>
-<p>4、UDF函数</p>
-<h2 id="Flume"><a href="#Flume" class="headerlink" title="Flume"></a>Flume</h2><p>Agent是JVM进程，以事件的形式将数据从源头传送到目的地</p>
-<p>flume组成：source、channel、sink</p>
-<p>传输单元：event、event有header+body，header为可选消息头</p>
-<p>拦截器：自定义拦截器把日志分类，为每个Event加上header，header就是日志的类型，当日志传输到kafka时候，通过header便知道属于哪种类型的。我在使用的时候发现我的flume版本太低，我用的是0.9版本的，没有拦截器，后来重新装了个0.11版的，好像0.9.6版本是分水岭。</p>
-<p>自定义拦截器的操作：</p>
-<ul>
-<li>给项目pom添加flume依赖</li>
-<li>寻找Flume拦截器类TimestampInterceptor（系统时间拦截器），把这个类的代码copy到自定义类，按要求修改，打包。</li>
-<li>在flume的配置文件中指定拦截器的类型</li>
-</ul>
-<p>监控器ganglia：</p>
-<blockquote>
-<p>监控source写入channel的总数量与成功写入且提交的数量，看是否有丢失数据，sink尝试拉取的数量与成功读取的数量，还有channel启动时间，停止时间，等等。</p>
-</blockquote>
-<p>双层flume</p>
-<ul>
-<li>负载均衡、容灾</li>
-<li>第一层用于数据采集</li>
-<li>第二层用于数据聚合</li>
-</ul>
-<h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><p>kafka数据丢失分为两个部分，分别是<strong>生产者和kafka应用交互时丢失</strong>，<strong>消费者丢失</strong></p>
-<p>1.生产者和kafka应用交互</p>
-<blockquote>
-<p>kafka存储一个topic中的数据至kafka时，会存储至不同的partition，每个partition又会有多个副本，当某一个broker宕机时，kafka会去重新选举partition的leader，如果此时follower中的数据没有和leader中保持一致的话，就会导致数据丢失。</p>
-</blockquote>
-<p>解决办法</p>
-<blockquote>
-<p>kafka至少应该设置以下几个参数<br>1.replication.factor:副本的数量，至少应该大于1，也就是说每个partition必须存储两个副本；<br>2.min.insync.replications参数：这个值必须大于1，这个是要求每个leader至少感知到有一个follower还和自己保持同步；<br>3.在producer中设置ack = all，确保每个数据必须是写入了所有副本之后，才算是写成功了；<br>4.producer设置retries=MAX,失败之后，需要重新发送MAX次，这个值一般设置成一个很大的值，相当于无限重试。</p>
-</blockquote>
-<p>2.消费者</p>
-<blockquote>
-<p>消费者需要提交offset，在消费者消费到这个消息但是尚未处理的时候，自动去提交这个offset，但是此时程序发生异常，kafka不会再次发送数据，消费者又没有真正消费到这个数据。</p>
-</blockquote>
-<p>解决办法</p>
-<blockquote>
-<p>将自动提交offset关闭（auto.commit.enable=true 改为false）</p>
-</blockquote>
-<p>ISR(In-Sync Replicas)，副本同步队列，包括leader和follower，所有的副本统称为AR</p>
-<p>ISR是AR中的一个子集，leader维护ISR列表，follower从leader同步数据有一些延迟。</p>
-<p>OSR（Outof-Sync Replicas）列表，新加入的follower会先存放在OSR中。</p>
-<p>AR = ISR + OSR</p>
-<p>kafka分区分配策略</p>
-<p>rebalance：某个消费者的所有权转移到其他消费者</p>
-<p>需要满足下面的条件才会产生分区分配</p>
-<ul>
-<li><blockquote>
-<p> 同一个 Consumer Group 内新增消费者</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p> 消费者离开当前所属的Consumer Group，包括shuts down 或crashs</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>订阅的主题新增分区 </p>
-</blockquote>
-</li>
-</ul>
-<p>range</p>
-<blockquote>
-<p>Range策略是对每个主题而言的，首先对同一个主题里面的分区按照序号进行排序，<br>并对消费者按照字母顺序进行排序。然后将partitions的个数除于消费者线程的总数来决定每个消费者线程消费几个分区。如果除不尽，那么前面几个消费者线程将会多消费一个分区。</p>
-</blockquote>
-<blockquote>
-<p>但如果有多个话题，前面的消费者可能会比后面的多消耗几个分区，这就是Range strategy的一个很明显的弊端</p>
-</blockquote>
-<p>roundRobin</p>
-<p>使用RoundRobin策略有两个前提条件必须满足： </p>
-<ul>
-<li>同一个Consumer Group里面的所有消费者的num.streams必须相等； </li>
-<li>每个消费者订阅的主题必须相同。</li>
-</ul>
-<blockquote>
-<p>RoundRobin策略的工作原理：将所有主题的分区组成 TopicAndPartition 列表，然后对 TopicAndPartition 列表按照 hashCode 进行排序，最后按照round-robin风格将分区分别分配给不同的消费者线程。 </p>
-</blockquote>
-<h2 id="HBase"><a href="#HBase" class="headerlink" title="HBase"></a>HBase</h2><p>HBase是一个开源的、分布式的、版本化、列式存储的非关系型数据库。</p>
-<p>优点：</p>
-<ul>
-<li>HDFS支持的海量存储，链家PC存储PB级数据仍能有百毫秒内的响应速度。（扩展性十分好）</li>
-<li>极易扩展（可添加很多RS节点进行处理能力扩展，也可添加多个HDFS DataNode进行存储能力扩展），表自动分片，且支持自动Failover</li>
-<li>高效地、强一致性地读写海量数据，CP</li>
-<li>MapReduce可读写HBase</li>
-<li>JavaAPI, Thrift / REST API, Shell</li>
-<li>依赖Blockcache和布隆过滤器提供实时查询</li>
-<li>服务端侧的过滤器实现谓词下推，加速查询</li>
-<li>可通过JMX监控HBase各指标</li>
-<li>面向列，列式存储，且<strong>列可以按需动态增加</strong></li>
-<li>稀疏。空Cell不占空间</li>
-<li>数据多版本</li>
-<li>数据类型单一，都是字符串，无类型（要用类型可用Phoenix实现）</li>
-<li>作为曾经Hadoop项目的子项目，HBase还是与Hadoop生态关系密切。HBase底层存储用了<code>HDFS</code>，并可直接用<code>MapReduce</code>操作HBase</li>
-</ul>
-<p>适用场景</p>
-<ul>
-<li>持久化存储大量数据（TB、PB）</li>
-<li><strong>对扩展伸缩性有要求</strong></li>
-<li>需要良好的随机读写性能</li>
-<li><strong>简单的业务KV</strong>查询(不支持复杂的查询比如表关联等)</li>
-<li>能够同时处理结构化和非结构化的数据</li>
-</ul>
-<p>订单流水、交易记录、需要<strong>记录历史版本的数据</strong>等</p>
-<p>不适用场景</p>
-<ul>
-<li>数据量少、跨行事务（目前HBase只支持单行事务），SQL查询或复杂的业务结构，硬件太少（HBase依赖服务很多，如hdfs、zookeeper集群等）、需要表间Join</li>
-</ul>
-<p><strong>行列存储最大的不同</strong>就是<strong>表的组织方式不同</strong>，硬盘存储方式不同，可以看成一个是一行为单位的数组存储，一个是一列为单位的数组存储。</p>
-<p>行列存储对比</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">行</th>
-<th style="text-align:left">列</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">优点</td>
-<td style="text-align:left">1.便于按行查询数据，OLTP往往是此场景 2.便于行级插入、删除、修改 3.易保证行级一致性</td>
-<td style="text-align:left">1.便于按列使用数据，如对列分组、排序、聚合等，OLAP很多是这样 2.列数据同类型，便于压缩 3.表设计灵活，易扩展列</td>
-</tr>
-<tr>
-<td style="text-align:left">缺点</td>
-<td style="text-align:left">1.当只需查询某几个列时，还是会读整行数据 2.扩展列代价往往较高</td>
-<td style="text-align:left">1.不便于按行使用数据 2.很难保证行级一致性</td>
-</tr>
-<tr>
-<td style="text-align:left">优化思想</td>
-<td style="text-align:left">读取过程尽量减少不需要的数据</td>
-<td style="text-align:left">提高读写效率</td>
-</tr>
-<tr>
-<td style="text-align:left">优化措施</td>
-<td style="text-align:left">1.设计表时尽量减少冗余列 2.内存中累积写入到阈值再批量写入</td>
-<td style="text-align:left">1.多线程方式并行读取不同列文件 2.行级一致性，可通过加入RDBMS中回滚机制、校验码等 3.内存中累积写入到阈值再批量写入</td>
-</tr>
-<tr>
-<td style="text-align:left">应用场景</td>
-<td style="text-align:left">OLTP（联机事务处理）</td>
-<td style="text-align:left">OLAP（联机分析处理）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Client</strong></p>
-<ol>
-<li><p>Client有访问Hbase的接口，会去meta表查询目标region所在位置（此信息会放入缓存），并连接对应RegionServer进行数据读写。</p>
-</li>
-<li><p>当master rebalance region时，Client会重新进行查找。</p>
-</li>
-</ol>
-<p><strong>Zookeeper</strong></p>
-<ol>
-<li>HMaster和RegionServer都注册到ZK上，使HMaster可感知RegionServer上下线。</li>
-<li>选举，保证HMaster HA。</li>
-<li>保存<code>.META.</code>表所在RegionServer位置</li>
-</ol>
-<p><strong>HMaster</strong></p>
-<ol>
-<li>监控RegionServer状态，并为之分配Region，以维护整个集群的负载均衡</li>
-<li>通过HMasterInterface接口维护集群的元数据信息，管理用户对table的增删改查操作</li>
-<li>Region Failover：发现失效的Region，就到正常的RegionServer上恢复该Region</li>
-<li>RegionSever Failover：由HMaster对其上的region进行迁移</li>
-</ol>
-<p><strong>HRegionServer</strong></p>
-<ol>
-<li>处理用户读写请求，并和底层HDFS的交互。我们说RegionServer拥有某个region意思是这个region读写、flush之类的操作都是由当前regionserver管理的。如果该RegionServer本地没有HDFS DataNode 底层数据就要从其他DataNode节点远程读写。</li>
-<li><strong>负责Region变大以后的split</strong></li>
-<li><strong>负责Storefile的合并工作</strong></li>
-</ol>
-<p>rowkey设计原则</p>
-<pre><code>1)长度原则：
-最大值64kb，推荐长度为10-100byte
-最好8的倍数，能端这段，rowkey太长会影响性能
-2)唯一原则：rowkey应该具备唯一性
-3)散列原则
-在rowkey前增加随机数
-3-2) 字符串反转：1312312334342， 1312312334345
-电话号码： 133 + 0123 + 4567
-3-3) 计算分区号：hashMap
- rowkey = regionNum + call1 + time + call2 + duration
-</code></pre><h2 id="scala-正在学习中"><a href="#scala-正在学习中" class="headerlink" title="scala 正在学习中"></a>scala 正在学习中</h2><p>元组（元组元素的访问有下划线，并且访问下标从1开始，而不是0）</p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">方式<span class="number">1</span>： </span><br><span class="line"><span class="keyword">for</span> (elem <- tuple1.productiterator ) { < span><br><span class="line">   print(elem) </span><br><span class="line">} </span><br><span class="line">println() </span><br><span class="line">方式<span class="number">2</span>： </span><br><span class="line">tuple1.productIterator.foreach(i => println(i)) </span><br><span class="line">tuple1.produIterator.foreach(print(_))</span><br></-></span></pre></td></tr></tbody></table></figure>
-<p>隐函数</p>
-<p>隐式转换函数是以implicit关键字声明的带有单个参数的函数。这种函数将会自动应用，将值从一种类型转换为另一种类型。 </p>
-<figure class="highlight scala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">a</span></span>(d: <span class="type">Double</span>) = d.toInt </span><br><span class="line"><span class="comment">//不加上边这句你试试 </span></span><br><span class="line"><span class="keyword">val</span> i1: <span class="type">Int</span> = <span class="number">3.5</span> </span><br><span class="line">println(i1)</span><br></pre></td></tr></tbody></table></figure>
-<p>柯里化</p>
-<h2 id="spark-正在学习中"><a href="#spark-正在学习中" class="headerlink" title="spark 正在学习中"></a>spark 正在学习中</h2><h1 id="3、近期需要了解的"><a href="#3、近期需要了解的" class="headerlink" title="3、近期需要了解的"></a>3、近期需要了解的</h1><h2 id="1、dubbo"><a href="#1、dubbo" class="headerlink" title="1、dubbo"></a>1、dubbo</h2><h2 id="2、红黑树"><a href="#2、红黑树" class="headerlink" title="2、红黑树"></a>2、红黑树</h2><h2 id="3、HashMap"><a href="#3、HashMap" class="headerlink" title="3、HashMap"></a>3、HashMap</h2><p>我有简单了解HashMap，他是通过拉链法的hash，避免同义词冲突，允许存储空key和value。</p>
-<h2 id="4、大数据项目"><a href="#4、大数据项目" class="headerlink" title="4、大数据项目"></a>4、大数据项目</h2><h2 id="5、solr"><a href="#5、solr" class="headerlink" title="5、solr"></a>5、solr</h2><p>Solr是一个基于Luence的全文搜索的企业级应用服务器，搜索引擎的核心是索引库。我当时做这个项目的时候，导入了中文分词器，通过同步数据库的相关内容到solr索引库，用户通过搜索关键词检索书本或者作者，读取相关小说信息。</p>
-<p>具体谈谈solr：他是对每个字进行检索，排序位置，对词建立语法数。实现快速检索</p>
-<h2 id="6、docker镜像"><a href="#6、docker镜像" class="headerlink" title="6、docker镜像"></a>6、docker镜像</h2><h2 id="7、redis"><a href="#7、redis" class="headerlink" title="7、redis"></a>7、redis</h2><p>1、主从复制<br>2、哨兵（监控、提醒、故障迁移）<br>3、集群（代理服务器 Twemproxy twitter），失败节点自动删除<br>Redis sentinel 是一个分布式系统中监控 redis 主从服务器，并在主服务器下线时自动进行故障转移。其中三个特性：<br>监控（Monitoring）：  Sentinel  会不断地检查你的主服务器和从服务器是否运作正常。<br>提醒（Notification）： 当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知。<br>自动故障迁移（Automatic failover）： 当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作。<br>特点：<br>1、保证高可用。<br>2、监控各个节点。<br>3、自动故障迁移。<br>缺点：主从模式，切换需要时间丢数据。<br>没有解决 master 写的压力。</p>
-<h2 id="8、非关系型数据库"><a href="#8、非关系型数据库" class="headerlink" title="8、非关系型数据库"></a>8、非关系型数据库</h2><p>CAP原则又称CAP定理，指的是在一个分布式系统中，一致性（Consistency）、可用性（Availability）、分区容错性（Partition tolerance）。CAP 原则指的是，这三个要素最多只能同时实现两点，不可能三者兼顾。</p>
-<h2 id="9、Linux分区"><a href="#9、Linux分区" class="headerlink" title="9、Linux分区"></a>9、Linux分区</h2><p>linux分区<br>boot 200mb<br>tmp  swap 内存2倍<br>home 4096<br>/ 其他</p>
-<h2 id="10、非关系型数据库CAP原则"><a href="#10、非关系型数据库CAP原则" class="headerlink" title="10、非关系型数据库CAP原则"></a>10、非关系型数据库CAP原则</h2><p>CAP定理指出，分布式系统可以保持以下三个特征中的两个：</p>
-<ul>
-<li><strong><em>C</em>onsistency，一致性</strong><br>请求所有节点都看到相同的数据</li>
-<li><strong><em>A</em>vailability，可用性</strong><br>每个请求都能及时收到响应，无论成功还是失败。</li>
-<li><strong><em>P</em>artition tolerance，分区容忍</strong><br>即使其他组件无法使用，系统也会继续运行。</li>
-</ul>
-<h2 id="11、OLTP-与-OLAP"><a href="#11、OLTP-与-OLAP" class="headerlink" title="11、OLTP 与 OLAP"></a>11、OLTP 与 OLAP</h2><p>1、适用人员不同：OLTP主要供基层人员使用，进行一线业务操作。OLAP则是探索并挖掘数据价值，作为企业高层进行决策的参考。</p>
-<p>2、面向内容不同：OLTP面向应用，OLAP面向主题；</p>
-<p>4、数据特点不同：OLTP的数据特点是当前的、最新的、细节的, 二维的、分立的；而OLTP则是历史的, 聚集的, 多维的，集成的, 统一的；</p>
-<p>5、存取能力不同：OLTP可以读/写数十条记录，而OLAP则可以读上百万条记录；</p>
-<p>6、工作事件的复杂度不同：OLTP执行的是简单的事务，而OLAP执行的是复杂任务；</p>
-<p>7、可承载用户数量不同：OLTP的可承载用户数量为上千个，而OLAP则是上百万个；</p>
-<p>8、DB大小不同：OLTP的DB 大小为100GB，而OLAP则可以达到100TB；</p>
-<p>9、执行时间要求不同：OLTP具有实时性，OLAP对时间的要求不严格。</p>
-<h2 id="12、布隆过滤器"><a href="#12、布隆过滤器" class="headerlink" title="12、布隆过滤器"></a>12、布隆过滤器</h2><p>假设你现在要处理这样一个问题，你有一个网站并且拥有很多访客，每当有用户访问时，你想知道这个ip是不是第一次访问你的网站。这是一个很常见的场景，为了完成这个功能，你很容易就会想到下面这个解决方案：</p>
-<p>BitSet<br>32位无符号int型能表示的最大值是4294967295，所有的ip都在这个范围内，我们可以用一个bit位来表示某个ip是否出现过，如果出现过，就把代表该ip的bit位置为1，那么我们最多需要429496729个bit就可以表示所有的ip了。举个例子比如10.0.0.1转换成int是167772161，那么把长度为4294967295的bit数组的第167772161个位置置为1即可，当有ip访问时，只需要检查该标志位是否为1就行了。<br>4294967295bit = 536870912Byte = 512M。如果用hash表示所有4294967295范围内的数组的话，需要十几G的空间。</p>
-<h2 id="10、扯到其他的时候"><a href="#10、扯到其他的时候" class="headerlink" title="10、扯到其他的时候"></a>10、扯到其他的时候</h2><p>电脑 512的固态</p>
-<p>分了40g给linux系统，用过deepin、elementaryOS、ubuntu</p>
-<h1 id="4、项目：通话记录数据离线分析项目"><a href="#4、项目：通话记录数据离线分析项目" class="headerlink" title="4、项目：通话记录数据离线分析项目"></a>4、项目：通话记录数据离线分析项目</h1><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="E:\BIG" alt="电信项目技术框架" title="DATA尚硅谷大数据技术之电信客服综合案例2.资料流程图电信项目技术框架.png">
-                </div>
-                <div class="image-caption">DATA尚硅谷大数据技术之电信客服综合案例2.资料流程图电信项目技术框架.png</div>
-            </figure>
-<p>1、生成模拟数据calllog</p>
-<ul>
-<li>通过一张联系人表，模拟建立calllog，其中字段有 主叫用户、被叫用户、通话时间（yyyyMMddHHmmss）、通话时长(s)。模拟起始时间到终止时间。</li>
-</ul>
-<p>2、flume数据采集</p>
-<ul>
-<li>分析：flume source端使用exec接收数据，channel用memory channel，sink端使用kafka接收，充当kafka的生产者。</li>
-<li>创建flume-ct-kafka.conf，填写配置文件。</li>
-<li>启动命令：bin/flume-ng agent –conf conf/–name a1 –conf-file data/flume-2-kafka.conf</li>
-</ul>
-<p>3、kafka消费</p>
-<ul>
-<li><p>1、编写kafka消费的类，实现Consumer接口；2、创建kafkaConsumer对象，订阅主题；3、获取消费主题（0.1秒1次）4、控制台输出</p>
-</li>
-<li><p>主题为tc，消费组为xifu。</p>
-</li>
-</ul>
-<p>4、存入HBase中</p>
-<ul>
-<li>kafka获取的内容存入到Hbase。</li>
-<li>创建BaseDao抽象类，连接HBase</li>
-<li>创建命名空间、表</li>
-<li>rowkey设计（采用异或校验算法） 分区号_号码1_通话时间_号码2_时长_(0/1)</li>
-<li>创建put对象，添加列，上传数据（列族，列族限定符，值）</li>
-<li>使用协处理器</li>
-</ul>
-<p>5、mapreduce计算，处理数据</p>
-<ul>
-<li>scan 扫描列族，得到数据</li>
-<li>map操作，按照key为(某个用户、年/月/日)，value为 通话时长</li>
-<li>reduce操作，将(某个用户、年/月/日)的通话数累加，通话时长累加，key不变，valye为（通话数_通话时长）</li>
-</ul>
-<p>6、保存到mysql中（redis缓冲）</p>
-<ul>
-<li>mapreduce输出到mysql中。</li>
-<li>首先从mysql中提取两张表信息，分别是（时间表，有2018年【12+365+1 = 378】条数据。联系人表），存到redis中</li>
-<li>根据mapreduce输出的结果，将（用户、日期、通话数、通话总时间）保存到mysql表中，记为ct_call</li>
-</ul>
-<p>7、界面显示，使用echarts。</p>
-<ul>
-<li>使用ssm框架，读取 mysql值</li>
-<li>做前端查询，echarts分析展示结果</li>
-</ul>
-<h1 id="对公司的看法或建议"><a href="#对公司的看法或建议" class="headerlink" title="对公司的看法或建议"></a>对公司的看法或建议</h1><p>1、我觉得从用户留存方面看的话，目前租租车这边像骑士卡的话现在好像还处于推广阶段，为了更好的实现用户留存，想借鉴像支付宝的蚂蚁森林，美团的果园等这些公益活动，让人们参与到公益事业，坚持每天给app打卡，通过打卡浇水啊这些形式，用户自己可以得到一些福利，通过浇水打卡，用户会更关注我们的app产品，每天使用我们app的时间增加，从而实现留存。</p>
-<p>2、因为租租车是个租车平台，租车出行的话，停车也是必不可少的，我认为我们可以和一些停车厂合作，做一些有关停车导航的业务，我个人觉得可以。</p>
-<p>我的想法还不太成熟，我想听一下你对我所说的有什么意见吗？ </p>
-<h1 id="请问还有什么想问我们公司的吗"><a href="#请问还有什么想问我们公司的吗" class="headerlink" title="请问还有什么想问我们公司的吗"></a>请问还有什么想问我们公司的吗</h1><p>其实这是我第一个技术面试，我知道我的表现可能不太优秀，我想请问一下，我可以回去准备两个月，再投你们家公司吗？</p>
-<p>众所周知，大数据现在是一个很流行的行业。我的话其一是对数据比较敏感，其二，我认为用大数据开发与分析来解决一些业务问题，是一个从根本上解决问题的方法，我觉得非常有必要，非常的牛</p>
-<h1 id="4、Java"><a href="#4、Java" class="headerlink" title="4、Java"></a>4、Java</h1><h2 id="IOC的概念"><a href="#IOC的概念" class="headerlink" title="IOC的概念"></a>IOC的概念</h2><p>IoC(Inversion of Control)，意为控制反转，不是什么技术，而是一种设计思想。Ioc意味着<strong>将你设计好的对象交给容器控制，而不是传统的在对象内部直接控制</strong>。</p>
-<p>传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由<strong>Ioc容器来控制对象的创建</strong>；</p>
-<p>IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）</p>
-<p>因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</p>
-<h2 id="线程Thread"><a href="#线程Thread" class="headerlink" title="线程Thread"></a>线程Thread</h2><p>在多任务处理应用程序中起着至关重要的作用。之前所接触的应用程序使采用<strong>单线程处理模式</strong>。单线程在某些功能方面会受到限制，无法同时处理多个互不干扰的任务。</p>
-<p>序列化</p>
-<p>是把对象转换为一个可以存储和传输的东西，这样就可以被二进制流传输。</p>
-<p>transient</p>
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p>原子性 一致性 隔离性 持久性</p>
-<p>① Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</p>
-<p>② Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</p>
-<p>③ Read committed (读已提交)：可避免脏读的发生。</p>
-<p>④ Read uncommitted (读未提交)：最低级别，任何情况都无法保证</p>
-<p>一.HTTP通信机制是在一次完整的HTTP通信过程中，Web浏览器与Web服务器之间将完成下列7个步骤： </p>
-<p>1.域名解析</p>
-<p>2.发起TCP的3次握手 </p>
-<p>3.Web浏览器向Web服务器发送http请求命令 </p>
-<p>一旦建立了TCP连接，Web浏览器就会向Web服务器发送请求命令。例如：GET/sample/hello.jsp HTTP/1.1。</p>
-<p>4.Web浏览器发送http请求头信息 </p>
-<p>浏览器发送其请求命令之后，还要以头信息的形式向Web服务器发送一些别的信息，之后浏览器发送了一空白行来通知服务器，它已经结束了该头信息的发送。 </p>
-<ol start="5">
-<li>Web服务器应答 </li>
-</ol>
-<p>客户机向服务器发出请求后，服务器会客户机回送应答， HTTP/1.1 200 OK ，应答的第一部分是协议的版本号和应答状态码。</p>
-<ol start="6">
-<li>Web服务器发送应答头信息 </li>
-</ol>
-<p>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据及被请求的文档。 </p>
-<ol start="7">
-<li>Web服务器向浏览器发送数据 </li>
-</ol>
-<p>Web服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此为结束，接着，它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据。</p>
-<ol start="8">
-<li>Web服务器关闭TCP连接 </li>
-</ol>
-<p>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码：</p>
-<p>Connection:keep-alive </p>
-<p>TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</p>
-<p>三.当我们在浏览器的地址栏输入 <a href="http://www.linux178.com" target="_blank" rel="noopener">www.linux178.com</a> ，然后回车，回车这一瞬间到看到页面到底发生了什么呢？</p>
-<p>以下过程仅是个人理解：</p>
-<p>域名解析 –> 发起TCP的3次握手 –> 建立TCP连接后发起http请求 –> 服务器响应http请求，浏览器得到html代码 –> 浏览器解析html代码，并请求html代码中的资源（如js、css、图片等） –> 浏览器对页面进行渲染呈现给用户</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+        <h1 id="一、数据库"><a href="#一、数据库" class="headerlink" title="一、数据库"></a>一、数据库</h1><h2 id="1、left-join-和-inner-join的区别"><a href="#1、left-join-和-inner-join的区别" class="headerlink" title="1、left join 和 inner join的区别"></a>1、left join 和 inner join的区别</h2>
     
         <div class="post-more-div">
             <a href="/posts/0/" class="post-more waves-button">
@@ -966,7 +491,7 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-loading/大数据面试笔记" class="article-card article-type-post" itemprop="blogPost">
+            <article id="post-NoSQL01——redis" class="article-card article-type-post" itemprop="blogPost">
 
     
 
@@ -981,84 +506,53 @@
 
 
      <div class="post-meta">
-        <time class="post-time" title="2019-12-02 10:19:18" datetime="2019-12-02T02:19:18.066Z" itemprop="datePublished">2019-12-02</time>
+        <time class="post-time" title="2019-11-21 19:40:28" datetime="2019-11-21T11:40:28.576Z" itemprop="datePublished">2019-11-21</time>
 
     </div>
 
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        <h1 id="技术面试"><a href="#技术面试" class="headerlink" title="技术面试"></a>技术面试</h1><h2 id="1-你知道现在Hadoop最新版本发行在几点几了，你现在用的是几点几的版本？"><a href="#1-你知道现在Hadoop最新版本发行在几点几了，你现在用的是几点几的版本？" class="headerlink" title="1.你知道现在Hadoop最新版本发行在几点几了，你现在用的是几点几的版本？"></a>1.你知道现在Hadoop最新版本发行在几点几了，你现在用的是几点几的版本？</h2><p>1、hadoop现在发行到了3.几的版本，在2.0的基础上，hdfs增加了纠错码、对云计算平台的支持（虚拟化存储），增加了common机制（JDK1.8+、更强的兼容性；单个DataNode上，不同硬盘间的数据balancer；部分服务默认端口修改、重新实现的Shell、Classpath隔离）。2、hadoop二点版本以上在一点多版本上增加了yarn机制。3、我现在使用的是2.6.0的版本，还比较稳定。</p>
-<h2 id="2-那我就你笔试中的答题情况来问你一些问题，我们公司出的这些题你都会吗？"><a href="#2-那我就你笔试中的答题情况来问你一些问题，我们公司出的这些题你都会吗？" class="headerlink" title="2.那我就你笔试中的答题情况来问你一些问题，我们公司出的这些题你都会吗？"></a>2.那我就你笔试中的答题情况来问你一些问题，我们公司出的这些题你都会吗？</h2><p>【讨论题】我个人觉得你们公司出的题比较（容易/复杂）,不过我在来之前已经做好了准备，所以这套题对我来说难度不大。我对其中几道题印象比较深刻，像hql…语句xxxxx….</p>
-<h2 id="3-NameNode节点启动的瓶颈是什么？"><a href="#3-NameNode节点启动的瓶颈是什么？" class="headerlink" title="3.NameNode节点启动的瓶颈是什么？"></a>3.NameNode节点启动的瓶颈是什么？</h2><p>内存。</p>
-<p>在整个启动过程中，包括:内存中构建namespace、保存block->datanode list信息以及为保存副本的三元组结构，都会耗费相当多的内存。</p>
-<p>fsimage阶段主要耗时的地方是在java原生接口的调用中，如字节流读取，类型转换等。</p>
-<p>blockReport阶段耗时主要是跟当前的namenode设计以及内存结构有关。</p>
-<p>原因：</p>
-<p>1、先简述NameNode是如何启动的。NameNode的启动过程是先加载fsimage文件，读取头信息，存储多少个文件和目录，再加载fsimage里所存储的信息，像hdfs的文件和目录的元数据，如果最后读取的数量小于读取的数据，重新加载。（详细：NameNode依次读取fsimage的文件信息，如果是目录，则创建INodeDirectory，读取元数据并保存，如果是文件，则创建文件，并读取blocks信息，保存到INodeFile中，把所有blocks添加到BlocksMap中，添加好后，NameNode进程将进入rpc等待状态，等待所有的DataNode发送blockReports。当所有的DataNode汇报完block，NameNode针对每个DataNode的汇报进行过处理后，NameNode的启动过程到此结束。此时BlocksMap中block->DataNode的对应关系已经初始化完毕。如果此时已经达到安全模式的推出阈值，则hdfs主动退出安全模式，开始提供服务。）</p>
-<p>1、第一点，如果NameNode第一次格式化后，先要保证hdfs的配置文件的准确性。</p>
-<p>2、如果已经上传过多次文件，要保证磁盘的空间充足。</p>
-<p>3、fsimage和editlog的文件完整性。因为fsimage存储的是hdfs文件和目录的元数据，如果损失对NameNode启动造成影响。</p>
-<h1 id="4、MapReduce和Hive数据倾斜"><a href="#4、MapReduce和Hive数据倾斜" class="headerlink" title="4、MapReduce和Hive数据倾斜"></a>4、MapReduce和Hive数据倾斜</h1><h1 id="5、MapJoin"><a href="#5、MapJoin" class="headerlink" title="5、MapJoin"></a>5、MapJoin</h1><p>mapjoin的应用场景是大表join小表，将小表加载到内存中，可以省去reduce的时候shuffle大量数据传输。大表join小表也是会导致数据倾斜的，所以这边可以通过MapJoin进行解决。</p>
-<h1 id="6、Flume-的-Source，Sink，Channel-的作用？你们-Source-是什么类"><a href="#6、Flume-的-Source，Sink，Channel-的作用？你们-Source-是什么类" class="headerlink" title="6、Flume 的 Source，Sink，Channel 的作用？你们 Source 是什么类"></a>6、Flume 的 Source，Sink，Channel 的作用？你们 Source 是什么类</h1><p>型？<br> 1、作用<br>（1）Source 组件是专门用来收集数据的，可以处理各种类型、各种格式的日志数据，<br>包括 <strong>avro</strong>(序列化格式)、thrift、<strong>exec</strong>、jms、<strong>spooling directory</strong>、<strong>netcat</strong>、sequence generator、syslog、http、legacy<br>（2）Channel 组件<strong>对采集到的数据进行缓存</strong>，可以存放在 <strong>Memory</strong> 或 <strong>File</strong> 中。<br>（3）Sink 组件是用于把数据发送到目的地的组件，目的地包括 <strong>HDFS</strong>、<strong>Logger</strong>、avro、<br>thrift、ipc、<strong>file</strong>、<strong>Hbase</strong>、<strong>solr</strong>、自定义</p>
-<h1 id="7、Flume采集数据会丢失吗？"><a href="#7、Flume采集数据会丢失吗？" class="headerlink" title="7、Flume采集数据会丢失吗？"></a>7、Flume采集数据会丢失吗？</h1><p>不会，Channel 存储可以存储在 File 中，数据传输自身有事务，像source到channel，channel到sink中都有事务性，遇到错误就回滚。同时的话，我们也可以采取用ganglia来监控flume。</p>
-<h1 id="8、Flume-的-Channel-Selectors"><a href="#8、Flume-的-Channel-Selectors" class="headerlink" title="8、Flume 的 Channel Selectors"></a>8、Flume 的 Channel Selectors</h1><p>Channel Selectors，可以让不同的项目日志通过不同的Channel到不同的Sink中去。 官方文档上Channel Selectors 有两种类型:Replicating Channel Selector (default)和 Multiplexing Channel Selector<br>这两种Selector的区别是:Replicating 会将source过来的events发往所有channel,而 Multiplexing可以选择该发往哪些Channel。</p>
-<h1 id="HDFS外部表与内部表的区别"><a href="#HDFS外部表与内部表的区别" class="headerlink" title="HDFS外部表与内部表的区别"></a>HDFS外部表与内部表的区别</h1><p>对于一些原始日志文件，同时被多个部门同时操作的时候就需要使用外部表，如果不小心将meta data删除了，HDFS上 的data还在可以恢复，增加了数据的安全性。</p>
-<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p>hashMap 是一个<strong>散列表</strong>，他存储的内容是key-value键值对映射。</p>
-<p>hashMap继承于<strong>abstractMap</strong>，实现了<strong>Map、cloneable、java.io.serializebale</strong>(启用其序列化功能的接口)。</p>
-<p>hashMap的<strong>实现不是同步</strong>的，也就是意味着hashMap<strong>不是线程安全</strong>的。他的key-value都可以为null，此外他的映射不是有序的。</p>
-<p>hashMap的实例有两个参数影响其性能：“初始容量”和”加载因子”。初始容量只是在哈希表在创建时桶的数量。加载因子是哈希表在其容量增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行rehash操作（即重构内部数据结构），从而哈希表将具有两倍的桶数。</p>
-<p>通常，<strong>默认加载因子是0.75</strong>。如果<strong>初始容量大于最大条目数除以加载因子，则不会发生rehash操作。</strong></p>
-<p>hashMap有四个构造方法。<strong>（默认构造方法、指定容量和加载因子的构造方法、指定容量的构造方法、包含子Map的构造方法）</strong></p>
-<p>hashMap是通过<strong>拉链法</strong>实现的哈希表。成员变量有：</p>
-<p>table是一个Entry[]数组类型，而Entry实际是一个单向链表。哈希表的key-value都是储存在Entry数组中。</p>
-<p>size 保存键值对的数量。</p>
-<p>threshold 是hashMap的阈值，用于判断是否需要rehash，rehash操作使容量加倍。</p>
-<p>loadFactor 加载因子。</p>
-<p>modCount 用来实现fail-fast机制。</p>
-<p>hash有两种法，一种是<strong>开放地址法</strong>，一种是<strong>拉链法</strong>。开放地址法，<strong>非同义词可能会引起冲突</strong>，而拉链法就是解决这种冲突，拉链法也适合<strong>增加和删除</strong>。</p>
-<h1 id="9、自定义UDF函数"><a href="#9、自定义UDF函数" class="headerlink" title="9、自定义UDF函数"></a>9、自定义UDF函数</h1><p>1．创建一个Maven工程Hive</p>
-<p>2．导入依赖</p>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag"><<span class="name">dependencies</span>></span></span><br><span class="line">       <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">           <span class="tag"><<span class="name">groupId</span>></span>org.apache.hive<span class="tag">groupId</span>></span>          <br><span class="line">           <span class="tag"><<span class="name">artifactId</span>></span>hive-exec<span class="tag">artifactId</span>></span><br><span class="line">           <span class="tag"><<span class="name">version</span>></span>1.2.1<span class="tag">version</span>></span>         <br><span class="line">       <span class="tag">dependency</span>></span><br><span class="line"><span class="tag">dependencies</span>></span><br></pre></td></tr></tbody></table></figure>
-<p>3．创建一个类</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.hive;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hive.ql.exec.UDF;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lower</span> <span class="keyword">extends</span> <span class="title">UDF</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">evaluate</span> <span class="params">(<span class="keyword">final</span> String s)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> s.toLowerCase();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>4．打成jar包上传到服务器/opt/module/jars/udf.jar</p>
-<p>5．将jar包添加到hive的classpath</p>
-<p>hive (default)> add jar /opt/module/datas/udf.jar;</p>
-<p>6．创建临时函数与开发好的java class关联</p>
-<p>hive (default)> create temporary function mylower as “com.atguigu.hive.Lower”;</p>
-<p>7．即可在hql中使用自定义的函数strip </p>
-<p>hive (default)> select ename, mylower(ename) lowername from emp;</p>
-<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="1、B树和B-树"><a href="#1、B树和B-树" class="headerlink" title="1、B树和B+树"></a>1、B树和B+树</h2><p>为什么会出现B树、B+树？</p>
-<p>二叉树速度很快，但他每层花在磁盘IO的时间太久了。而B树、B+树的话改变原来高瘦的树的情况，变得矮胖，牺牲比较次数来减少磁盘IO的时间。</p>
-<p>B树</p>
-<p>又称多路平衡查找树，B树中所有结点的孩子结点数的最大值称为B树的阶，通常用m表示。一课m阶B树或为空树，或为满足如下特性的m叉树：</p>
-<p>1.根结点至少有<strong>两个子女</strong>。<br>2.每个中间节点都包含k-1个元素和k个孩子，其中 ceil（m/2） ≤ k ≤ m<br>3.每一个叶子节点都包含k-1个元素，其中 ceil（m/2） ≤ k ≤ m<br>4.<strong>所有的叶子结点都位于同一层</strong>。<br>5.每个节点中的元素从小到大排列，节点当中k-1个元素正好是k个孩子包含的元素的值域划分<br>6.每个结点的结构为：（n，A0，K1，A1，K2，A2，…  ，Kn，An）<br>    其中，Ki(1≤i≤n)为关键字，且Ki<ki+1(1≤i≤n-1)。<br>Ai(0≤i≤n)为指向子树根结点的指针。且Ai所指子树所有结点中的关键字均小于Ki+1。<br>n为结点中关键字的个数，满足ceil(m/2)-1≤n≤m-1。</ki+1(1≤i≤n-1)。<br></p>
-<p>B+树 </p>
-<p>1.有k个子树的中间节点包含有k个元素（B树中是k-1个元素），<strong>每个元素不保存数据</strong>，<strong>只用来索引</strong>，所有数据都保存在叶子节点。</p>
-<p>2.所有的叶子结点中包含了全部元素的信息，及指向含这些元素记录的指针，且叶子结点本身依关键字的大小<strong>自小而大</strong>顺序链接。</p>
-<p>3.所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素。</p>
-<p>4、有两个索引，一个是索引data</p>
-<p>5、每次查找都是根结点到叶结点的路径</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="redis支持的数据类型"><a href="#redis支持的数据类型" class="headerlink" title="redis支持的数据类型"></a>redis支持的数据类型</h2><p>String，hash（哈希），List（列表），set（集合），zset（有序集合）</p>
+    
+        <div class="post-more-div">
+            <a href="/posts/0/" class="post-more waves-button">
+                阅读全文 »
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JAVA笔记02——线程" class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/0/">No title</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2019-11-21 18:32:11" datetime="2019-11-21T10:32:11.282Z" itemprop="datePublished">2019-11-21</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="一、线程"><a href="#一、线程" class="headerlink" title="一、线程"></a>一、线程</h1><h2 id="1、线程的类别"><a href="#1、线程的类别" class="headerlink" title="1、线程的类别"></a>1、线程的类别</h2><ul>
+<li>Thread（类）、Runable、Callable、Future，后面三个都是接口。</li>
+<li>Runable有个无返回值的run的抽象方法，使用时可通过实现类重写run方法，使用Thread封装实现类，然后运行。</li>
+</ul>
     
         <div class="post-more-div">
             <a href="/posts/0/" class="post-more waves-button">
@@ -1076,7 +570,7 @@
     
 <nav id="page-nav">
     <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </div>
 </nav>
 
