@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>WebMagic | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="1、架构介绍1.1、四大组件WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由Spider将彼此组织起来。这四大组件对应爬虫声明周期中的下载、处理、管理和持久化等功能。WebMagic的设计参考了Scapy，但是实现方式更Java化一些。">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebMagic">
+<meta property="og:url" content="https://xifujiang.github.io/posts/a896d992/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="1、架构介绍1.1、四大组件WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由Spider将彼此组织起来。这四大组件对应爬虫声明周期中的下载、处理、管理和持久化等功能。WebMagic的设计参考了Scapy，但是实现方式更Java化一些。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://47.103.115.69/pic/70">
+<meta property="og:updated_time" content="2020-01-13T07:01:31.623Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebMagic">
+<meta name="twitter:description" content="1、架构介绍1.1、四大组件WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由Spider将彼此组织起来。这四大组件对应爬虫声明周期中的下载、处理、管理和持久化等功能。WebMagic的设计参考了Scapy，但是实现方式更Java化一些。">
+<meta name="twitter:image" content="http://47.103.115.69/pic/70">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">WebMagic</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1、架构介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、架构介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1、四大组件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1、四大组件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2、用于数据流转的对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2、用于数据流转的对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2、实现PageProcessor"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、实现PageProcessor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1抽取元素Selectable"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1抽取元素Selectable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-抽取元素API"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 抽取元素API</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3、实现多页面爬虫流程"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、实现多页面爬虫流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-Scheduler组件"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 Scheduler组件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-三种去重方式"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 三种去重方式</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-JAVA爬虫——webmagic" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">WebMagic</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-12-01 20:04:27" datetime="2019-12-01T12:04:27.199Z" itemprop="datePublished">2019-12-01</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1、架构介绍"><a href="#1、架构介绍" class="headerlink" title="1、架构介绍"></a>1、架构介绍</h1><h2 id="1-1、四大组件"><a href="#1-1、四大组件" class="headerlink" title="1.1、四大组件"></a>1.1、四大组件</h2><p>WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由Spider将彼此组织起来。这四大组件对应爬虫声明周期中的下载、处理、管理和持久化等功能。WebMagic的设计参考了Scapy，但是实现方式更Java化一些。</p>
+<a id="more"></a>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://47.103.115.69/pic/70" alt="img" title>
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<h2 id="1-2、用于数据流转的对象"><a href="#1-2、用于数据流转的对象" class="headerlink" title="1.2、用于数据流转的对象"></a>1.2、用于数据流转的对象</h2><p>1、Request</p>
+<blockquote>
+<p>request是对url地址的一层封装，一个Request对应一个url地址。</p>
+<p>它是PageProcessor与Downloader交互的载体，也是PageProcessor控制Downloader唯一方式。</p>
+</blockquote>
+<p>2、Page</p>
+<blockquote>
+<p>Page代表了从Downloader下载到的一个页面——可能是HTML，也可能是Json或者其他文本格式的内容。</p>
+<p>Page是WebMagic抽取过程的核心对象，它提供一些方法可供抽取、结果保存等。</p>
+</blockquote>
+<p>3、ResultItems</p>
+<blockquote>
+<p>ResultItems相当于一个Map，它保存PageProcessor处理的结果供Pipeline使用。它的API与Map很类似，值得注意的是它有一个字段skip，若设置为true，则不应被Pipeline处理。</p>
+</blockquote>
+<h1 id="2、实现PageProcessor"><a href="#2、实现PageProcessor" class="headerlink" title="2、实现PageProcessor"></a>2、实现PageProcessor</h1><h2 id="2-1抽取元素Selectable"><a href="#2-1抽取元素Selectable" class="headerlink" title="2.1抽取元素Selectable"></a>2.1抽取元素Selectable</h2><p>webMageic里使用的三种抽取技术：<strong>XPath、正则表达式和CSS选择器</strong>。对于 JSON格式的内容，可使用JsonPath进行解析。</p>
+<h2 id="2-2-抽取元素API"><a href="#2-2-抽取元素API" class="headerlink" title="2.2 抽取元素API"></a>2.2 抽取元素API</h2><p>Selectable相关的抽取元素链式API是WebMagic的一个核心 功能。使用Selectable接口，可以直接完成页面元素的链式抽取，也无需去关心抽取的细节。</p>
+<p>从刚才的例子中可以看到，page.getHtml()返回的是一个Html对象，它实现了Selectable接口。这个接口包含的方法分为两类：抽取部分和获取结果部分。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xpath(String xpath)</td>
+<td>使用XPath选择</td>
+<td>html.xpath(“//div[@class=’title’]”)</td>
+</tr>
+<tr>
+<td>$(String selector)</td>
+<td>使用Css选择器选择</td>
+<td>html.$(“div.title”)</td>
+</tr>
+<tr>
+<td>$(String selector, String attr)</td>
+<td>使用Css选择器选择</td>
+<td>html.$(“div.title”,”text”)</td>
+</tr>
+<tr>
+<td>css(String selector)</td>
+<td>功能同$(),使用Css选择器选择</td>
+<td>html.css(“div.title”)</td>
+</tr>
+<tr>
+<td>links()</td>
+<td>选择所有链接</td>
+<td>html.links()</td>
+</tr>
+<tr>
+<td>regex(String regex)</td>
+<td>使用正则表达式抽取</td>
+<td>html.regex(“\(.\*?)\“)</td>
+</tr>
+</tbody>
+</table>
+<p>不同API获取一个或多个元素</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get()</td>
+<td>返回一条String类型的结果</td>
+<td>String link = html.links().get()</td>
+</tr>
+<tr>
+<td>toString()</td>
+<td>同get()，返回一条String类型的结果</td>
+<td>String link = html.links().toString()</td>
+</tr>
+<tr>
+<td>all()</td>
+<td>返回所有抽取结果</td>
+<td>List links = html.links().all()</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3、实现多页面爬虫流程"><a href="#3、实现多页面爬虫流程" class="headerlink" title="3、实现多页面爬虫流程"></a>3、实现多页面爬虫流程</h1><p><strong>开始-> 列表页面 -> 获取url（url去重） -> url加入任务 ->结束</strong></p>
+<h2 id="3-1-Scheduler组件"><a href="#3-1-Scheduler组件" class="headerlink" title="3.1 Scheduler组件"></a>3.1 Scheduler组件</h2><p>Scheduler是WebMagic中进行URL管理的组件。</p>
+<p>作用：</p>
+<blockquote>
+<p>对待抓取的URL队列进行管理。</p>
+<p>对已抓取的URL进行去重。</p>
+</blockquote>
+<p>WebMagic内置了几个常用的Scheduler。</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DulicateRemovedScheduler</td>
+<td>抽象基类，提供一些模板方法</td>
+<td>继承它可以实现自己的功能</td>
+</tr>
+<tr>
+<td>QueueScheduler</td>
+<td>使用内存队列保存待抓取URL</td>
+<td></td>
+</tr>
+<tr>
+<td>PriorityScheduler</td>
+<td>使用带有优先级的内存队列保存待抓取URL</td>
+<td>耗费内存较QueueScheduler更大，但是当设置request.priority之后，只能使用PriorityScheduler才可使优先级生效</td>
+</tr>
+<tr>
+<td>FileCacheQueueScheduler</td>
+<td>使用文件保存抓取URL，可以在关闭程序并下次启动时，从之前抓取到的URL继续抓取</td>
+<td>需指定路径，会建立.urls.txt和.cursor.txt</td>
+</tr>
+<tr>
+<td>RedisScheduler</td>
+<td>使用R额滴神保存抓取队列，可进行多台机器同时合作抓取</td>
+<td>需要安装并启动redis</td>
+</tr>
+</tbody>
+</table>
+<p>去重部分被单独抽象成一个接口：DuplicateRemover，从而可以为同一个Scheduler选择不同的去重方式，以适应不同的需要，目前提供两种去重方式。</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HashSetDuplicateRemover</td>
+<td>使用HashSet来进行去重，占用内存较大</td>
+</tr>
+<tr>
+<td>BloomFilterDuplicateRemover</td>
+<td>使用BloomFilter来进行去重，占用内存较小，但是可能漏抓页面</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-2-三种去重方式"><a href="#3-2-三种去重方式" class="headerlink" title="3.2 三种去重方式"></a>3.2 三种去重方式</h2><ul>
+<li><p><strong>HashSet</strong></p>
+<p>使用Java中的HashSet不能重复的特点去重</p>
+<p>优点：容易理解，使用方便。</p>
+<p>缺点：占用内存大，性能较低。</p>
+</li>
+<li><p><strong>Redis去重</strong></p>
+<p>使用Redis的<strong>set</strong>进行去重。</p>
+<p>优点：速度快（Redis本身速度快），去重不会占有爬虫服务器的资源，可以处理更大数据量的数据爬取</p>
+<p>缺点：需要准备Redis服务器，增加开发和使用成本。</p>
+</li>
+<li><p><strong>布隆过滤器（BloomFilter）</strong></p>
+<p><strong>优点：</strong>占用的内存要比使用HashSet要小的多，也适合大量数据的去重操作。</p>
+<p><strong>缺点：</strong>有误判的可能。没有重复可能会判断重复，但是重复的数据一定会判断重复。</p>
+<p><strong>介绍：</strong></p>
+<p>布隆过滤器是一种space efficient的概率型数据结构，用于判断一个元素是否在集合中。在垃圾邮件过滤黑白名单方法、爬虫（crawler）的网址判重模块中等等经常被用到。</p>
+<p>哈希表也能用于判断元素是否在集合中，但布隆过滤器只需要哈希表的1/8或1.4的空间复杂度就能完成同样的问题。布隆过滤器可以插入元素，但不可以删除已有元素。其中的元素越多，误报率越大，但是漏报是不可能的。</p>
+<p><strong>原理：</strong></p>
+<p>布隆过滤器需要的是位数组（二进制数组），全部赋值为0，对于有n个元素的集合S={S1, S2…Sn}，通过k个映射函数{f1,f2,…..fk}，将集合S中的每个元素Sj（1<=j<=n）映射为k个值{g1,g2,….gk}，然后再将位数组array中相对应的array[g1],array[g2]….array[gk]置为1。< p>
+<p>【注】：网站去重为例，对于一个url列表，一个url可以对应一组kv集合，也就是说可以获得多个v，把得到的v，将对应数组中的数值置为1。若下个网站遇到相同的位置已经是1，则该网站已经出现过，会被去重。</p>
+</=j<=n）映射为k个值{g1,g2,….gk}，然后再将位数组array中相对应的array[g1],array[g2]….array[gk]置为1。<></p></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2020-01-13T07:01:31.623Z" itemprop="dateUpdated">2020-01-13 15:01:31</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/a896d992/" target="_blank" rel="external">https://xifujiang.github.io/posts/a896d992/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/a896d992/&title=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/a896d992/&title=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&source=1、架构介绍1.1、四大组件WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/a896d992/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/a896d992/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/a896d992/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/0/" id="post-prev" class="post-nav-link">
+        <h4 class="title">
+          上一篇：[no title]
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/0/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：[no title]">下一篇：[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/a896d992/&title=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/a896d992/&title=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&source=1、架构介绍1.1、四大组件WebMagic的结构分为Downloader、PageProcessor、Scheduler、Pipeline四大组件，并由..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/a896d992/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《WebMagic》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/a896d992/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/a896d992/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aS27DMAxFUe9/0y7QaQr5PlIuIul6ZCSprOMBy4+uC1/37/V5P/6k9vnnt9MuGTJkLMu4h9eY0dkWf9Z4bzJkyDiH0Qmy4xBJMOnKMmTIkEECa/ptbYsyZMiQMWs5EppJekdWkyFDxskMUsSiYjLsjPEieVotLkOGjAUZncHA2/f/NN+QIUPGFzPuxtVpzPFxAtqJDBkytmaQxj0Pwf1PagWtDBkyTmCkj+mPAfjxC46UIUPG3gwecGu/qaWYrcGADBkytmOk44H0vpYO8r+SIUPGOYx+qOVbSUvTCcNLGTJkLMvoFJM8sPbD68PKMmTI2JpRS7zGv0wxfLQpQ4aMkxm1aWA/RPIiuZOqypAhYydGLSCmwZE35iYXtDJkyFickQ4d+QCSp5g8KZw2O5UhQ8YiDHLki7fheNM/PbTx8MpkyJBxDCM4KoqLXn6MI30RVxqVZciQsR2jk2mmhS5PT9EkVoYMGdsxag16nhSSUMsD/UPRK0OGjAMYtZZZOuwkpSxPJa/a/wQZMmQsy+DhkrfS0gNkpKknQ4aMMxlpEOx0vWoHLOJmnAwZMjZi3OHViXWdAvjhFciQIWNrRifXSlNDXuK+EaxlyJCxOqNTsqbINCgH68iQIeMARto448dY3xg//LGCDBkyZIRHLtKkME0QZciQISN9fHrYlIOnjS1lyJCxBeONDaXHwngIliFDxmmMNCjXZgtkbEnWn3ZcTIYMGWswfgAnvp07oNrO2wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

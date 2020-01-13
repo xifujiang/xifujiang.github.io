@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>shiro笔记 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="一、概念什么是shiroshiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shiro笔记">
+<meta property="og:url" content="https://xifujiang.github.io/posts/7d9cd029/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="一、概念什么是shiroshiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://47.103.115.69/pic/image-20191230173141540.png">
+<meta property="og:updated_time" content="2020-01-13T07:02:27.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shiro笔记">
+<meta name="twitter:description" content="一、概念什么是shiroshiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。">
+<meta name="twitter:image" content="http://47.103.115.69/pic/image-20191230173141540.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">shiro笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是shiro"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是shiro</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Primary-Concerns"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Primary Concerns</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Supporting-Features"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Supporting Features</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Shiro的架构"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Shiro的架构</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、用户认证"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、用户认证</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在shiro中用户的认证流程"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">在shiro中用户的认证流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常见的异常信息及处理"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">常见的异常信息及处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行流程"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">执行流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#依赖包"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">依赖包</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#三、JDBCRealm及Authentication-Strategy"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、JDBCRealm及Authentication Strategy</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、MD5加密"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、MD5加密</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#六、授权"><span class="post-toc-number">5.</span> <span class="post-toc-text">六、授权</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#七、Shiro中的权限检查方式有3种"><span class="post-toc-number">6.</span> <span class="post-toc-text">七、Shiro中的权限检查方式有3种</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#八、授权流程："><span class="post-toc-number">7.</span> <span class="post-toc-text">八、授权流程：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#九、自定义Realm实现授权"><span class="post-toc-number">8.</span> <span class="post-toc-text">九、自定义Realm实现授权</span></a></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-shiro学习" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">shiro笔记</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-12-24 10:05:40" datetime="2019-12-24T02:05:40.081Z" itemprop="datePublished">2019-12-24</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">8</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h1><h2 id="什么是shiro"><a href="#什么是shiro" class="headerlink" title="什么是shiro"></a>什么是shiro</h2><p>shiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。</p>
+<a id="more"></a>
+<h2 id="Primary-Concerns"><a href="#Primary-Concerns" class="headerlink" title="Primary Concerns"></a>Primary Concerns</h2><p>Authentication：认证</p>
+<p>验证用户是否合法。也就是登陆。</p>
+<p>Authorization：授权</p>
+<p>授予谁具有访问某些资源的权限。</p>
+<p>Session Management：会话管理</p>
+<p>用户登录后的用户信息通过Session Management来进行管理，不管是在上面应用中。</p>
+<p>Cryptograpy：加密</p>
+<p>提供了常见的一些加密算法，使得在应用中很方便的实现数据安全，并且使用很便捷。</p>
+<h2 id="Supporting-Features"><a href="#Supporting-Features" class="headerlink" title="Supporting Features"></a>Supporting Features</h2><p>Web support：web应用程序支持</p>
+<p>​    Shiro可以很方便的集成到web应用程序中。</p>
+<p>Caching：缓存</p>
+<p>​    Shiro提供了对缓存的支持，多种缓存架构：如ehcache，还支持缓存数据库：如redis</p>
+<p>Concurrency：并发支持</p>
+<p>​    支持多线程并发访问</p>
+<p>Testing：测试</p>
+<p>RunAs：一个允许用户假设为另一个用户身份（如果允许）的功能。</p>
+<p>Remember Me：记住我</p>
+<h2 id="Shiro的架构"><a href="#Shiro的架构" class="headerlink" title="Shiro的架构"></a>Shiro的架构</h2><p><strong>Subject</strong>（org.apache.shiro.subject.Subject）</p>
+<p>​        当前与软件进行交互的<strong>实体</strong>（用户，第三方服务，cron job，等等）的安全特定“视图”。</p>
+<p><strong>SecurityManager</strong>(org.apache.shiro.mgt.SecurityManager)：<strong>安全管理器</strong></p>
+<p>​        如上所述，SecurityManager是Shiro架构的心脏。它基本上是一个“保护伞”对象，协调其管理的组件以确保它们能够一起顺利的工作。它还管理每个应用程序用户的shiro的视图，因此它知道如何执行每个用户的安全操作</p>
+<p><strong>Authenticator</strong>(org.apache.shiro.authc.Authenticator)：<strong>认证器</strong></p>
+<p>​        负责验证用户的身份</p>
+<p><strong>Authorizer：授权器</strong></p>
+<p>​        负责为合法的用户指定其权限。控制用户可以访问那些资源。</p>
+<p><strong>Realms：域</strong></p>
+<p>用户通过shiro来完成相关的安全工作，shiro是不会维护数据信息的。在shiro的工作过程中，数据的查询和获取工作是通过Realm从不同的数据源来获取的。Realm可以获取数据库信息，文本信息等。</p>
+<h1 id="二、用户认证"><a href="#二、用户认证" class="headerlink" title="二、用户认证"></a>二、用户认证</h1><p><strong>Authentication</strong>：用户认证</p>
+<p>验证用户是否合法，需要提交身份和凭证给shiro。</p>
+<p><strong>principals</strong>：用户的身份信息，是subject的标识属性。能够唯一标识Subject。如：电话号码，电子邮箱，身份证号码等。</p>
+<p><strong>Credentials</strong> 凭证：密码。是只被subject知道的秘密值。可以是密码，也可以是数字证书等。</p>
+<p><strong>Pricipals/Credentials</strong> 最常见的组合：用户名/密码。在shiro中通常使用UsernamePasswordToken来指定身份和凭证信息。</p>
+<h2 id="在shiro中用户的认证流程"><a href="#在shiro中用户的认证流程" class="headerlink" title="在shiro中用户的认证流程"></a>在shiro中用户的认证流程</h2><p>1、subject -> 2、sucurity manager ->3、Authenticator ->4、Authentication-> 5、JDBC Realm</p>
+<p><strong>shiro.ini</strong></p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span></span><br><span class="line"><span class="attr">zhangsan</span>=<span class="number">1111</span></span><br><span class="line"><span class="attr">lisi</span>=<span class="number">1111</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>AuthenticationDemo</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthenticationDemo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="comment">//1、创建SecurityManager工厂 读取相应的配置文件</span></span><br><span class="line">        Factory<securitymanager> factory = <span class="keyword">new</span> IniSecurityManagerFactory(<span class="string">"classpath:shiro.ini"</span>);</securitymanager></span><br><span class="line">        <span class="comment">//2、通过SecurityManager工厂获取SecurityManager的实例</span></span><br><span class="line">        SecurityManager securityManager = factory.getInstance();</span><br><span class="line">        <span class="comment">//3、将SecurityManager对象 设置到运行环境中</span></span><br><span class="line">        SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line">        <span class="comment">//4、通过SecurityUtils获取主体Subject</span></span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            <span class="comment">//5、加入登录的用户名zhangsan和1111，</span></span><br><span class="line">            UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">"zhangsan"</span>, <span class="string">"1111"</span>);</span><br><span class="line">            <span class="comment">//进行用户身份验证</span></span><br><span class="line">            subject.login(token);</span><br><span class="line">            <span class="comment">//通过subject判断用户是否通过验证</span></span><br><span class="line">            <span class="keyword">if</span> (subject.isAuthenticated()) {</span><br><span class="line">                System.out.println(<span class="string">"用户登录成功"</span>);</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                System.out.println(<span class="string">"用户名或密码不正确"</span>);</span><br><span class="line">            }</span><br><span class="line">        }<span class="keyword">catch</span> (AuthenticationException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="常见的异常信息及处理"><a href="#常见的异常信息及处理" class="headerlink" title="常见的异常信息及处理"></a>常见的异常信息及处理</h2><p>在认证过程中有一个父异常为：AuthenticationException。</p>
+<p>该异常有几个子类：</p>
+<ul>
+<li><p>DisabledAccountException 账户失效异常</p>
+</li>
+<li><p>ExcessiveAttemptsException 尝试次数过多</p>
+</li>
+<li>UnknowAccountException 用户不正确</li>
+<li>ExpiredCredentialsException 凭证过期异常</li>
+<li>IncorrrectCredentialsException 凭证不正确</li>
+</ul>
+<h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><ul>
+<li>通过shiro相关api，创建securityManager及获取Subject实例</li>
+<li>封装token信息</li>
+<li>通过<strong>subject.login(token)</strong>进行用户认证<ul>
+<li><strong>Subject</strong>接收<strong>token</strong>，通过其实现类<strong>DelegatingSubject</strong>将<strong>token</strong>委托给<strong>SecurityManager</strong>来完成认证。<strong>SecurityManager</strong>是接口通过<strong>DefaultSecurityManager</strong>来完成相关的功能。由<strong>DefaultSecurityManager</strong>中<strong>login</strong>来完成认证过程。在<strong>login</strong>调用了该类<strong>authenticate</strong>()来完成认证。该方法是由<strong>AuthenticatingSecurityManager</strong>来完成的。在该类的<strong>authenticate</strong>()中，通过调用<strong>authenticator</strong>(认证器)来完成认证工作。<strong>Authenticator</strong>是由其默认实现类<strong>ModularRealmAuthentucator</strong>来完成认证。通过<strong>ModularRealmAuthentucator</strong>中的<strong>doAuthenticate</strong>来获取Realms信息。如果是单realm直接将token和realm中的数据进行比较，判断是否认证成功。如果是多realm那么需要通过<strong>Authentication Strategy</strong>来判断对应的认证工作。</li>
+</ul>
+</li>
+<li>通过<strong>subject.isAuthenticate</strong>()来判断是否认证成功。</li>
+</ul>
+<h2 id="依赖包"><a href="#依赖包" class="headerlink" title="依赖包"></a>依赖包</h2><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-aspectj --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-aspectj<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-cas --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-cas<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-core<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-ehcache<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-guice --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-guice<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-quartz --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-quartz<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-spring<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro.tools/shiro-tools-hasher --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro.tools<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-tools-hasher<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-web --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.apache.shiro<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>shiro-web<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.3.2<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.slf4j<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>slf4j-log4j12<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.7.12<span class="tag">version</span>></span><br><span class="line">     <span class="tag"><<span class="name">scope</span>></span>test<span class="tag">scope</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="comment"><!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api --></span></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>org.slf4j<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>slf4j-api<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>1.7.21<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>com.mchange<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>c3p0<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>0.9.5.5<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br><span class="line"> <span class="tag"><<span class="name">dependency</span>></span></span><br><span class="line">     <span class="tag"><<span class="name">groupId</span>></span>mysql<span class="tag">groupId</span>></span><br><span class="line">     <span class="tag"><<span class="name">artifactId</span>></span>mysql-connector-java<span class="tag">artifactId</span>></span><br><span class="line">     <span class="tag"><<span class="name">version</span>></span>5.1.47<span class="tag">version</span>></span><br><span class="line"> <span class="tag">dependency</span>></span><br></pre></td></tr></tbody></table></figure>
+<h1 id="三、JDBCRealm及Authentication-Strategy"><a href="#三、JDBCRealm及Authentication-Strategy" class="headerlink" title="三、JDBCRealm及Authentication Strategy"></a>三、JDBCRealm及Authentication Strategy</h1><p>1、使用shiro框架来完成认证工作，默认情况下使用的是IniRealm。如果需要使用其他Realm，name需要进行相关的配置。</p>
+<p>2、Ini配置文件：</p>
+<p>[main] section是配置应用程序SecurityManager实例及任何它的依赖组件（如Realms）的地方</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[main]</span></span><br><span class="line"><span class="attr">myRealm</span>=cn.sxt.realm.MyRealm</span><br><span class="line"><span class="comment"># 依赖注入</span></span><br><span class="line"><span class="attr">securityManager.reakm</span>=<span class="variable">$myRealm</span></span><br></pre></td></tr></tbody></table></figure>
+<p>[users]section允许定义一组静态的用户账户。在这大部分拥有少数用户账户或用户账户不需要在运行时被动地创建的环境下是很有用的。</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span></span><br><span class="line"><span class="attr">Zhangsan</span>=<span class="number">1111</span></span><br><span class="line"><span class="attr">Lisi</span>=<span class="number">2222</span>,role1,role2</span><br></pre></td></tr></tbody></table></figure>
+<p>[roles]section允许把定义在[user]section中的角色与权限关联起来。另外，这在大部分拥有少数用户账户或账户或用户账户不需要在运行时被动态地创建的环境下是很有用的。</p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[users]</span></span><br><span class="line"><span class="attr">Zhangsan</span>=<span class="number">1111</span></span><br><span class="line"><span class="attr">Lisi</span>=<span class="number">2222</span>,role1,role2</span><br><span class="line"><span class="section">[roles]</span></span><br><span class="line"><span class="attr">role1</span>=user:add,user:delete</span><br></pre></td></tr></tbody></table></figure>
+<p>3.使用JdbcRealm来完成身份认证</p>
+<p>需要实现JdbcRealm</p>
+<ul>
+<li>需要为JdbcRealm设置dataSource</li>
+<li>在指定的dataSource所对应的数据库中应用表users，该表中有username，password，password_salt等字段</li>
+</ul>
+<p>4.实现步骤：</p>
+<ul>
+<li>新建数据库表</li>
+<li>配置shiro.ini文件</li>
+<li>编写认证</li>
+</ul>
+<p>5.<em>Authentication Strategy</em>：认证策略，在shiro中有三种认证策略；</p>
+<ul>
+<li><em>AtLeastOneSuccessfulStrategy</em>：如果一个（或更多Realm）验证成功，则整体尝试被认为是成功的。如果没有一个成功，则整体尝试失败。</li>
+<li>第一个成功则被认为成功</li>
+<li>所有成功被认为成功</li>
+</ul>
+<h1 id="四、MD5加密"><a href="#四、MD5加密" class="headerlink" title="四、MD5加密"></a>四、MD5加密</h1><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Md5Demo</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="comment">//使用md5加密算法加密</span></span><br><span class="line">        Md5Hash md5 = <span class="keyword">new</span> Md5Hash(<span class="string">"1111"</span>);</span><br><span class="line">        System.out.println(<span class="string">"1111=="</span>+md5.toString());</span><br><span class="line">        <span class="comment">//加盐</span></span><br><span class="line">        md5 = <span class="keyword">new</span> Md5Hash(<span class="string">"1111"</span>, <span class="string">"sxt"</span>);</span><br><span class="line">        System.out.println(<span class="string">"1111=="</span>+md5.toString());</span><br><span class="line">        <span class="comment">//迭代次数</span></span><br><span class="line">        md5 = <span class="keyword">new</span> Md5Hash(<span class="string">"1111"</span>, <span class="string">"sxt"</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">"1111=="</span>+md5.toString());</span><br><span class="line">        SimpleHash hash = <span class="keyword">new</span> SimpleHash(<span class="string">"md5"</span>, <span class="string">"1111"</span>, <span class="string">"sxt"</span>, <span class="number">2</span>);</span><br><span class="line">        System.out.println(hash.toString());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1111</span>==b59c67bf196a4758191e42f76670ceba</span><br><span class="line"><span class="number">1111</span>==<span class="number">96</span>c0335dbdd59d920980f1c6a74ed1b0</span><br><span class="line"><span class="number">1111</span>==e41cd85110c7533e3f93b729b25235c3</span><br><span class="line">e41cd85110c7533e3f93b729b25235c3</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="六、授权"><a href="#六、授权" class="headerlink" title="六、授权"></a>六、授权</h1><p>1、授权：给身份认证通过的人，授予他可以访问某些资源的权限。</p>
+<p>2、权限粒度：分为粗粒度和细粒度。</p>
+<ul>
+<li><p>粗粒度：对user的crud操作。</p>
+</li>
+<li><p>细粒度：对记录的操作。如：值允许查询id为1的user的工资。</p>
+</li>
+<li>shiro一般管理的是粗粒度。如：菜单、按钮、url。一般细粒度的权限是通过业务来管理的。</li>
+</ul>
+<p>3、角色：权限的集合。</p>
+<p>4、权限表示规则：<strong>资源:操作:实例</strong>。可以用通配符表示：</p>
+<ul>
+<li>如：user:add 表示对user有添加的权限。user:* 表示对user具有所有操作的权限</li>
+<li>user:delete:100表示对user标识为100的记录有删除的权限。</li>
+</ul>
+<p>5、shiro中的权限流程：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://47.103.115.69/pic/image-20191230173141540.png" alt="image-20191230173141540" title>
+                </div>
+                <div class="image-caption">image-20191230173141540</div>
+            </figure>
+<h1 id="七、Shiro中的权限检查方式有3种"><a href="#七、Shiro中的权限检查方式有3种" class="headerlink" title="七、Shiro中的权限检查方式有3种"></a>七、Shiro中的权限检查方式有3种</h1><ul>
+<li>编程式</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(subject.hasRole(<span class="string">"管理员"</span>)) {</span><br><span class="line"><span class="comment">//操作某个资源</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>注解式</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequireRole</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="comment">//查询数据</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>标签</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><shiro:haspermission name="<span" class="string">"user.update"</shiro:haspermission></span>><br><span class="line">	<a href="#">更新</a></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h1 id="八、授权流程："><a href="#八、授权流程：" class="headerlink" title="八、授权流程："></a>八、授权流程：</h1><ul>
+<li><p>获取subject主体</p>
+</li>
+<li><p>判断主体是否通过认证</p>
+</li>
+<li><p>调用subject.isPermitted*/hasRole*来进行权限的判断</p>
+<ul>
+<li>Subject是由其实现类DelegatingSubject来调用方法的，该类将处理交给了SecurityManager</li>
+<li>SecurityManager是由其实现类DefaultSecurityManager来进行处理，该类的isPermitted来处理，其本质父类AuthorizingSecurityManager来处理的。该类将 处理交给了authorizer（授权器）</li>
+<li>Authorizer由其实现类ModularRealmAuthorizer来处理该类可以调用对应的Realm来获取数据，在该类有PermissionResolver对权限字符串进行解析，在对应的Realm中也有对应的PermissionResolver交给WildcardPermissionResolver该类调用WildcardPermission来进行权限字符串的解析</li>
+<li>返回处理结果</li>
+</ul>
+<h1 id="九、自定义Realm实现授权"><a href="#九、自定义Realm实现授权" class="headerlink" title="九、自定义Realm实现授权"></a>九、自定义Realm实现授权</h1><p>1、仅仅通过配置文件来指定权限不够灵活，并且不方便。在实际的应用中大多数情况下都是将用户信息，角色信息，权限信息保存到了数据库中。所以需要从数据库中去获取相关的数据信息。可以使用shiro提供的JdbcRealm来实现，也可以自定义realm来实现。使用jdbcRealm往往不够灵活，</p>
+</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2020-01-13T07:02:27.972Z" itemprop="dateUpdated">2020-01-13 15:02:27</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/7d9cd029/" target="_blank" rel="external">https://xifujiang.github.io/posts/7d9cd029/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/7d9cd029/&title=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/7d9cd029/&title=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、概念什么是shiroshiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/7d9cd029/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/7d9cd029/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/7d9cd029/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/7a6c41a4/" id="post-prev" class="post-nav-link">
+        <h4 class="title">
+          上一篇：JAVAEE笔记04——微服务
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/d9283bc6/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：git笔记">下一篇：git笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/7d9cd029/&title=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/7d9cd029/&title=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、概念什么是shiroshiro是基于java的开源的安全管理框架。可以完成认证，授权，会话管理，加密，缓存等功能。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/7d9cd029/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《shiro笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/7d9cd029/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/7d9cd029/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHklEQVR42u3aS24jMQwFwNz/0g4wq8nCnfdIO4DVpVXQhtUqLxjx8/UVr8e/lX/6+G+1z6/ftVoYGBgfy3hcruSgs2Ml70rOhoGBcR/GdRhNSEkkzIN1fjYMDAyMZ0dpP50dEQMDA2O/XR6Ok+tdciXFwMC4MyNJYl9V22sD9ItzcQwMjA9ktI2Bv/z7jf0NDAyMD2E8Fqu9Gs7aCdFJMDAwjmYkhfs8BO+fzBJaDAyMsxmbdPEdl7/27T/+b2BgYBzKyIceNs3F2RWzbgxgYGDchtGOk+Zl/fY6mH8LAwPjbMbm8rc5StsGKHqwGBgYhzL2SWzbAGjD6y87Y2BgHM3IX5nfNFvMjISBgXE3xmbrNpWdBdbV6BgGBsbRjLYYl2eUbWLcNjgxMDBOYly3EpMVtRVHg2VFkMXAwDiaMSv656+pRyWCEz7dAQMD4waMpHyfHOJvxsKGIxcYGBhHMNrL4qw01j4Z9jcwMDCOY6wGHeJCWx6+62YqBgbGbRizZHI2EvGqMh8GBsZ9GO0W+1J+kjYXfVcMDIyjGe3WeQ9xmI6WjU8MDIyzGZtQ28a66yQ54T39FgYGxtGM2bjDrNm5KdthYGBgvCPIviooF/tgYGDcgNEmpZsBizreJzwMDAyMRRG//QnaERAMDAyMdngiP3QbsldtSwwMjCMY+WjF9ThXy35V6ouBgXE2Y9YY2A9JzMLrcFAMAwPjUxnfZvu8Ki0FSjIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

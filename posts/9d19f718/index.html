@@ -6,7 +6,7 @@
     
     
     
-    <title>bat批量存放信息到excel | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <title>NoSQL02——MongoDB | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#77AAFF">
@@ -39,23 +39,18 @@
 
 
     
-    <meta name="description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
+    <meta name="description" content="一、定义&amp;概念1.1定义&amp;概念mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写">
 <meta name="keywords" content="xifujiang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bat批量存放信息到excel">
-<meta property="og:url" content="https://xifujiang.github.io/posts/5fe19fd1/index.html">
+<meta property="og:title" content="NoSQL02——MongoDB">
+<meta property="og:url" content="https://xifujiang.github.io/posts/9d19f718/index.html">
 <meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
-<meta property="og:description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
+<meta property="og:description" content="一、定义&amp;概念1.1定义&amp;概念mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png">
-<meta property="og:image" content="http://47.103.115.69/pic/01.png">
-<meta property="og:image" content="http://47.103.115.69/pic/csv列表展示.png">
-<meta property="og:image" content="http://47.103.115.69/pic/csv文件.png">
-<meta property="og:updated_time" content="2020-01-13T02:38:44.032Z">
+<meta property="og:updated_time" content="2020-01-13T07:02:09.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bat批量存放信息到excel">
-<meta name="twitter:description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
-<meta name="twitter:image" content="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png">
+<meta name="twitter:title" content="NoSQL02——MongoDB">
+<meta name="twitter:description" content="一、定义&amp;概念1.1定义&amp;概念mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写">
     
         <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
     
@@ -157,7 +152,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">bat批量存放信息到excel</div>
+        <div class="flex-col header-title ellipsis">NoSQL02——MongoDB</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -197,18 +192,18 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#演示"><span class="post-toc-number">1.</span> <span class="post-toc-text">演示</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、定义-amp-概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、定义&amp;概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1定义-amp-概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1定义&amp;概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2命名规范"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2命名规范</span></a></li></ol></li></ol>
         </nav>
     </aside>
    
-<article id="post-01 .bat批量把txt中想要的信息存放到excel" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-loading/NoSQL02——MongoDB" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">bat批量存放信息到excel</h1>
+        <h1 class="post-card-title">NoSQL02——MongoDB</h1>
         <div class="post-meta">
             <i class="icon icon-lg icon-calendar-o"></i>
             发表于
-            <time class="post-time" title="2019-03-28 14:34:00" datetime="2019-03-28T06:34:00.000Z" itemprop="datePublished">2019-03-28</time>
+            <time class="post-time" title="2019-12-18 00:00:00" datetime="2019-12-17T16:00:00.000Z" itemprop="datePublished">2019-12-18</time>
 
             <br id="mybreak">
             
@@ -230,42 +225,80 @@
             阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。</p>
+            <h1 id="一、定义-amp-概念"><a href="#一、定义-amp-概念" class="headerlink" title="一、定义&概念"></a>一、定义&概念</h1><h2 id="1-1定义-amp-概念"><a href="#1-1定义-amp-概念" class="headerlink" title="1.1定义&概念"></a>1.1定义&概念</h2><p>mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写</p>
 <a id="more"></a>
-<p><code>需求</code><br>需要从log中抽取两列数据到excel中。</p>
-<p>本西芙没了解过bat语法，所以查了一下，通过结合这两篇解答完成bat命令。<br>1、实现了按照空格批处理分割txt数据，存储excel<br><a href="https://zhidao.baidu.com/question/1770548208106936980.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/1770548208106936980.html</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem 保存为bat文件跟txt文件放一起运行</span><br><span class="line">md "结果\" 2>nul</span><br><span class="line">for /f "delims=" %%a in ('dir /a-d/b *.txt') do (</span><br><span class="line">    setlocal EnableDelayedExpansion</span><br><span class="line">    (for /f "delims=" %%b in ('type "%%a"') do (</span><br><span class="line">        set "str=%%b"</span><br><span class="line">        echo;!str: =,!</span><br><span class="line">    ))>"结果\%%~na.csv"</span><br><span class="line">    Endlocal</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>2、批处理分割字符串<br><a href="https://blog.csdn.net/zhju85126com/article/details/46649961" target="_blank" rel="noopener">https://blog.csdn.net/zhju85126com/article/details/46649961</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set str=100x200x300y400y500x600y700</span><br><span class="line">for /f "tokens=1,3-5,* delims=x|y" %%a in ("%str%") do (</span><br><span class="line">	set c1=%%a</span><br><span class="line">	set c3=%%b</span><br><span class="line">	set c4=%%c</span><br><span class="line">	set c5=%%d</span><br><span class="line">	set c6=%%e</span><br><span class="line">)</span><br><span class="line">echo %c1%, %c3%, %c4%, %c5%, %c6%</span><br><span class="line">pause</span><br><span class="line">rem 输出结果为输出结果为：100, 300, 400, 500, 600y700。其中tokens=1,3-5,*表示提取第1、3至5列，同时把第5列后所有剩余字符串作为第6列，一个输出了5个变量，也可以写作tokens=1,3,4,5,*。</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>最终我所加工的代码，其中代码中<code>tokens=1,2</code>是按照<code>_</code>或<code>空格</code>分割的位置，相当于数组的某一元素、把它赋值给str1<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">md "结果\" 2>nul</span><br><span class="line">rem 循环数据</span><br><span class="line">for /f "delims=" %%a in ('dir /a-d/b *.log') do (</span><br><span class="line">    setlocal EnableDelayedExpansion</span><br><span class="line">    rem 切割方式    </span><br><span class="line">    (for /f "tokens=1,2 delims=_| " %%b in ('type "%%a"') do (</span><br><span class="line">        set "str1=%%b %%c"</span><br><span class="line">        echo;!str1: =,!</span><br><span class="line">    ))>"结果\%%~na.csv"</span><br><span class="line">    Endlocal</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>首先根据第一篇解答套入转excel模板，其次根据第二篇解答对bat for循环中分割和选取的描述，修改第五行代码。可以实现。</p>
-<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><ul>
-<li>文件内容<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png" alt="文件内容" title>
-                </div>
-                <div class="image-caption">文件内容</div>
-            </figure></li>
-<li>目录下的文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/01.png" alt="目录下的文件" title>
-                </div>
-                <div class="image-caption">目录下的文件</div>
-            </figure>
-2、点击<code>aa.bat</code>,生成csv文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/csv列表展示.png" alt="生成csv文件" title>
-                </div>
-                <div class="image-caption">生成csv文件</div>
-            </figure>
-3、任意打开一个csv文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/csv文件.png" alt="csv文件内容" title>
-                </div>
-                <div class="image-caption">csv文件内容</div>
-            </figure></li>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">SQL术语/概念</th>
+<th style="text-align:left">MongoDB术语/概念</th>
+<th style="text-align:left">解释/说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">database</td>
+<td style="text-align:left">database</td>
+<td style="text-align:left">数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">table</td>
+<td style="text-align:left">collection</td>
+<td style="text-align:left">数据库表/集合</td>
+</tr>
+<tr>
+<td style="text-align:left">row</td>
+<td style="text-align:left">document</td>
+<td style="text-align:left">数据记录行/文档</td>
+</tr>
+<tr>
+<td style="text-align:left">column</td>
+<td style="text-align:left">field</td>
+<td style="text-align:left">数据字段/域</td>
+</tr>
+<tr>
+<td style="text-align:left">index</td>
+<td style="text-align:left">index</td>
+<td style="text-align:left">索引</td>
+</tr>
+<tr>
+<td style="text-align:left">table joins</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">表连接,MongoDB不支持</td>
+</tr>
+<tr>
+<td style="text-align:left">primary key</td>
+<td style="text-align:left">primary key</td>
+<td style="text-align:left">主键,MongoDB自动将_id字段设置为主键</td>
+</tr>
+</tbody>
+</table>
+<p>保留的数据库名，可以直接访问这些有特殊作用的数据库。</p>
+<ul>
+<li><strong>admin</strong>： 从权限的角度来看，这是”root”数据库。要是将一个用户添加到这个数据库，这个用户自动继承所有数据库的权限。一些特定的服务器端命令也只能从这个数据库运行，比如列出所有的数据库或者关闭服务器。</li>
+<li><strong>local:</strong> 这个数据永远不会被复制，可以用来存储限于本地单台服务器的任意集合</li>
+<li><strong>config</strong>: 当Mongo用于分片设置时，config数据库在内部使用，用于保存分片的相关信息。</li>
+</ul>
+<h2 id="1-2命名规范"><a href="#1-2命名规范" class="headerlink" title="1.2命名规范"></a>1.2命名规范</h2><p><strong>需要注意的是</strong>：</p>
+<ol>
+<li>文档中的键/值对是有序的。</li>
+<li>文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型（甚至可以是整个嵌入的文档)。</li>
+<li>MongoDB区分类型和大小写。</li>
+<li>MongoDB的文档不能有重复的键。</li>
+<li>文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符。</li>
+</ol>
+<p><strong>文档键命名规范</strong>：</p>
+<ul>
+<li>键不能含有\0 (空字符)。这个字符用来表示键的结尾。</li>
+<li>.和$有特别的意义，只有在特定环境下才能使用。</li>
+<li>以下划线”_”开头的键是保留的(不是严格要求的)。</li>
+</ul>
+<p><strong>合法的集合名</strong></p>
+<ul>
+<li>集合名不能是空字符串””。</li>
+<li>集合名不能含有\0字符（空字符)，这个字符表示集合名的结尾。</li>
+<li>集合名不能以”system.”开头，这是为系统集合保留的前缀。</li>
+<li>用户创建的集合名字不能含有保留字符。有些驱动程序的确支持在集合名里面包含，这是因为某些系统生成的集合中包含该字符。除非你要访问这种系统创建的集合，否则千万不要在名字里出现。　</li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -292,12 +325,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2020-01-13T02:38:44.032Z" itemprop="dateUpdated">2020-01-13 10:38:44</time>
+    最后更新：<time datetime="2020-01-13T07:02:09.260Z" itemprop="dateUpdated">2020-01-13 15:02:09</time>
 </span>
 
 
         
-        原文链接：<a href="/posts/5fe19fd1/" target="_blank" rel="external">https://xifujiang.github.io/posts/5fe19fd1/</a>
+        原文链接：<a href="/posts/9d19f718/" target="_blank" rel="external">https://xifujiang.github.io/posts/9d19f718/</a>
         
     </div>
     <footer>
@@ -327,7 +360,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/9d19f718/&title=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -337,22 +370,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&source=情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下ba..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/9d19f718/&title=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&source=一、定义&概念1.1定义&概念mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/9d19f718/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/5fe19fd1/&via=https://xifujiang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/9d19f718/&via=https://xifujiang.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/9d19f718/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -375,14 +408,20 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/posts/0/" id="post-prev" class="post-nav-link">
+      <a href="/posts/d9283bc6/" id="post-prev" class="post-nav-link">
         <h4 class="title">
-          上一篇：Linux复习
+          上一篇：git笔记
         </h4>
       </a>
     </div>
   
 
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/f77bb893/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：Java笔记04——一些常用的函数">下一篇：Java笔记04——一些常用的函数</h4>
+      </a>
+    </div>
   
 </nav>
 
@@ -478,7 +517,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/9d19f718/&title=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -488,22 +527,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&source=情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下ba..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/9d19f718/&title=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&source=一、定义&概念1.1定义&概念mongoDB是文档型数据库，文档是一组键值（key-value）对（即BSON）。C++编写" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/9d19f718/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/5fe19fd1/&via=https://xifujiang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NoSQL02——MongoDB》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/9d19f718/&via=https://xifujiang.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/9d19f718/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -514,7 +553,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p class="wechatshare">扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3a0U7DQAwEwP7/TxeJ15J2Ny6V6sw9oaAkN0EyPtu3W7zuv+vxyvN1dO/Rkx/vffPCwMD4WsZ8K8mG5leO9oaBgXEdxrlt5aTnEbJ9CwYGBka+laOwONkoBgYGxjzgJi8+2kpyTMXAwMCYHGLzElv7/I+exTEwML6Q0TYGPvnzP/Y3MDAwvoRxL1fy+nnxrt4VBgbGakZS8ErKavlzzh2Ao3CMgYGxlJGX+9viV34lCdkvrmBgYFyGkZfD3pX25Z/vxW8xMDBWM9qBiUka1w5YnPwQGBgYSxnzFPC9AxZJmnj43wMDA+NijEmKNgnQ7XAGBgbGbkY7btUW0dqmZj5sEXViMTAwVjCSY2ReGmsDaPKZ2hYCBgbGPkY71NW2ISfH42IEDQMD4zKMJB1sA2hekku2HnViMTAw1jHmYxaToDkaBXteNcTAwFjESLbeFtTOFcva8Y4XfwcMDIxFjPkwRLL1SfOyznMxMDAuyZj3HOaltyhVxcDAWMqYJHb565OA3jYbikwTAwNjBaNoFsabbhO+Nhwf9jcwMDDWMdpS17liXFtua1uhGBgYuxn3cuXjF20bIP8Qf9yLgYGxmpGv5MVtwG1bDu04GgYGxiZGG2QnBbh3JZdR5oiBgbGOkYTF/Cjblv7nQR8DAwOjBeTpYzuWcYjHwMDAGJ+J27Jdm7xiYGBcgZEcYuebrsNo24nFwMBYyjhXy8qL+/nTWvaov4GBgfEdjB9lVyLgZKuL6AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3awWrEMAxF0fn/n3ZhVoWhyX1SOmDrehVSiH1moUqWXi+81nvxv65fK31/vVdryZAhY1vGulyfB/18rh2L73V9NhkyZMxhXIfRvw7KwzHZhX9ZhgwZMkjg42zyLEOGDBnfDLgkTeQlrgwZMmSkRSwpO9ObMV4kP1aLy5AhY0NG2hj45vM/9jdkyJCxCWM1VieJ5O0EdBIZMmQczSAX9zwE99/UCloZMmRMYKTbpCVoet2fDmrIkCFjGiONZnx4Ik0x48aADBkyxjD4OCm/jOukg3HyKkOGjOMY/REKfqHWaX+iHqwMGTLGMNJCND00D/HBzyRDhoyjGemWPPnjX07DsQwZMmYyak3HZ5PFWkAvtjBlyJCxOaM2ycCHwNKLvLjBKUOGjEMZadOxNkaWDpbxEQ0ZMmRMY5Dkj386HpXAIxc3/zFkyJBxKKOTtKUNSPIzxfvKkCHjUMZj1/Glr6Xp6U0nVoYMGYcyeEuSh0teBpP0kV/eyZAhYwKDX8q3wiIuceM0UYYMGcMYaXitXeX3U0wZMmTMYaSfJofmz+l1Xms4TIYMGRsyVrhqVB7cecC9uTWUIUPGQYy0Ddl5k4508C/IkCFjAqMTZMm4Bk9A05RRhgwZ0xhp1Zs2A4oXZ5wnQ4YMGWDjtPjko2MooMuQIUMGCKbpxRkBt+psGTJkHMcgRSxh8EKUD3DEMyMyZMg4jlEbcegPSdR6F7XdZciQsS3jB4t5S6n1uGgZAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 

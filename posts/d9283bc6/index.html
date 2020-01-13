@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>git笔记 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content>
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="一、git init搭建仓库通过git init命令把这个目录变成Git可以管理的仓库 这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。">
+<meta name="keywords" content="xifujiang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git笔记">
+<meta property="og:url" content="https://xifujiang.github.io/posts/d9283bc6/index.html">
+<meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
+<meta property="og:description" content="一、git init搭建仓库通过git init命令把这个目录变成Git可以管理的仓库 这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/git/1">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/git/0">
+<meta property="og:image" content="d:/blog/myblog/source/_posts/git/2">
+<meta property="og:updated_time" content="2020-01-13T06:56:48.871Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git笔记">
+<meta name="twitter:description" content="一、git init搭建仓库通过git init命令把这个目录变成Git可以管理的仓库 这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。">
+<meta name="twitter:image" content="d:/blog/myblog/source/_posts/git/1">
+    
+        <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/timg.png" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">xifujiang</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/">
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives">
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories">
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags">
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about">
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="/229694302@qq.com" target="_parent" title="Email">
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/xifujiang" target="_blank" title="Github">
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="https://www.weibo.com/xifujiang/home?wvr=5&lf=reg" target="_blank" title="微博">
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">git笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、git-init搭建仓库"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、git init搭建仓库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、git-add添加"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、git add添加</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、git-commit提交"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、git commit提交</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、git-status查看状态"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、git status查看状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、git-diff查看文件具体修改内容"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、git diff查看文件具体修改内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、git-log查看日志，历史版本"><span class="post-toc-number">6.</span> <span class="post-toc-text">六、git log查看日志，历史版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七、git-reset-回退版本"><span class="post-toc-number">7.</span> <span class="post-toc-text">七、git reset 回退版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#八、git-reflog记录每次命令"><span class="post-toc-number">8.</span> <span class="post-toc-text">八、git reflog记录每次命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#九、工作区与暂存区"><span class="post-toc-number">9.</span> <span class="post-toc-text">九、工作区与暂存区</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十、git-checkout丢弃工作区的修改"><span class="post-toc-number">10.</span> <span class="post-toc-text">十、git checkout丢弃工作区的修改</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十一、git-reset-HEAD-lt-file-gt-撤销暂存区的内容，重新放回到工作区"><span class="post-toc-number">11.</span> <span class="post-toc-text">十一、git reset HEAD  撤销暂存区的内容，重新放回到工作区</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十二、删除文件的解决办法。"><span class="post-toc-number">12.</span> <span class="post-toc-text">十二、删除文件的解决办法。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结-1"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十三、设置SSH-Key"><span class="post-toc-number">13.</span> <span class="post-toc-text">十三、设置SSH Key</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十四、添加远程库"><span class="post-toc-number">14.</span> <span class="post-toc-text">十四、添加远程库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结-2"><span class="post-toc-number">14.1.</span> <span class="post-toc-text">小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十五、克隆地址"><span class="post-toc-number">15.</span> <span class="post-toc-text">十五、克隆地址</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结-3"><span class="post-toc-number">15.1.</span> <span class="post-toc-text">小结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分支管理"><span class="post-toc-number">16.</span> <span class="post-toc-text">分支管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决冲突"><span class="post-toc-number">16.1.</span> <span class="post-toc-text">解决冲突</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#推送分支"><span class="post-toc-number">16.2.</span> <span class="post-toc-text">推送分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#抓取分支"><span class="post-toc-number">16.3.</span> <span class="post-toc-text">抓取分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结-4"><span class="post-toc-number">16.4.</span> <span class="post-toc-text">小结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-git笔记" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">git笔记</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2019-12-19 09:05:31" datetime="2019-12-19T01:05:31.891Z" itemprop="datePublished">2019-12-19</time>
+
+            <br id="mybreak">
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">14</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、git-init搭建仓库"><a href="#一、git-init搭建仓库" class="headerlink" title="一、git init搭建仓库"></a>一、<code>git init</code>搭建仓库</h2><p>通过<code>git init</code>命令把这个目录变成Git可以管理的仓库</p>
+<p>这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<a id="more"></a>
+<h2 id="二、git-add添加"><a href="#二、git-add添加" class="headerlink" title="二、git add添加"></a>二、<code>git add</code>添加</h2><p>所有的版本控制系统，其实只能跟踪文本文件的改动，比如<strong>TXT文件，网页，所有的程序代码</strong>等等。</p>
+<p>把一个文件放到Git仓库只需要两步。</p>
+<p>第一步，用命令<code>git add</code>告诉Git，把文件添加到仓库：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="三、git-commit提交"><a href="#三、git-commit提交" class="headerlink" title="三、git commit提交"></a>三、<code>git commit</code>提交</h2><p>第二步，用命令<code>git commit</code>告诉Git，把文件提交到仓库：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m "wrote a readme file"</span><br></pre></td></tr></tbody></table></figure>
+<p><code>git commit</code>命令执行成功后会告诉你：</p>
+<p><code>1 file changed</code>：1个文件被改动（我们新添加的readme.txt文件）；</p>
+<p><code>2 insertions</code>：插入了两行内容（readme.txt有两行内容）。</p>
+<p>添加文件到Git仓库，分两步：</p>
+<ol>
+<li>使用命令<code>git add <file></file></code>，注意，可反复多次使用，添加多个文件；</li>
+<li>使用命令<code>git commit -m <message></message></code>，完成。</li>
+</ol>
+<h2 id="四、git-status查看状态"><a href="#四、git-status查看状态" class="headerlink" title="四、git status查看状态"></a>四、<code>git status</code>查看状态</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add <file>..." to update what will be committed)</file></span><br><span class="line">  (use "git checkout -- <file>..." to discard changes in working directory)</file></span><br><span class="line"></span><br><span class="line">	modified:   readme.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></tbody></table></figure>
+<p><code>git status</code>命令可以让我们时刻掌握仓库当前的状态，上面的命令输出告诉我们，<code>readme.txt</code>被修改过了，但还没有准备提交的修改。</p>
+<h2 id="五、git-diff查看文件具体修改内容"><a href="#五、git-diff查看文件具体修改内容" class="headerlink" title="五、git diff查看文件具体修改内容"></a>五、<code>git diff</code>查看文件具体修改内容</h2><p>查看某文件修改的具体内容</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git diff readme.txt </span><br><span class="line">diff --git a/readme.txt b/readme.txt</span><br><span class="line">index 46d49bf..9247db6 100644</span><br><span class="line">--- a/readme.txt</span><br><span class="line">+++ b/readme.txt</span><br><span class="line">@@ -1,2 +1,2 @@</span><br><span class="line">-Git is a version control system.</span><br><span class="line">+Git is a distributed version control system.</span><br><span class="line"> Git is free software.</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>要随时掌握工作区的状态，使用<code>git status</code>命令。</li>
+<li>如果<code>git status</code>告诉你有文件被修改过，用<code>git diff</code>可以查看修改内容。</li>
+</ul>
+<h2 id="六、git-log查看日志，历史版本"><a href="#六、git-log查看日志，历史版本" class="headerlink" title="六、git log查看日志，历史版本"></a>六、<code>git log</code>查看日志，历史版本</h2><p>查看修改历史</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git log</span><br><span class="line">commit 1094adb7b9b3807259d8cb349e7df1d4d6477073 (HEAD -> master)</span><br><span class="line">Author: Michael Liao <askxuefeng@gmail.com></askxuefeng@gmail.com></span><br><span class="line">Date:   Fri May 18 21:06:15 2018 +0800</span><br><span class="line"></span><br><span class="line">    append GPL  //修改名</span><br><span class="line"></span><br><span class="line">commit e475afc93c209a690c39c13a46716e8fa000c366</span><br><span class="line">Author: Michael Liao <askxuefeng@gmail.com></askxuefeng@gmail.com></span><br><span class="line">Date:   Fri May 18 21:03:36 2018 +0800</span><br><span class="line"></span><br><span class="line">    add distributed //修改名</span><br><span class="line"></span><br><span class="line">commit eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0</span><br><span class="line">Author: Michael Liao <askxuefeng@gmail.com></askxuefeng@gmail.com></span><br><span class="line">Date:   Fri May 18 20:59:18 2018 +0800</span><br><span class="line"></span><br><span class="line">    wrote a readme file //修改名</span><br></pre></td></tr></tbody></table></figure>
+<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git log --pretty=oneline</span><br><span class="line">1094adb7b9b3807259d8cb349e7df1d4d6477073 (HEAD -> master) append GPL</span><br><span class="line">e475afc93c209a690c39c13a46716e8fa000c366 add distributed</span><br><span class="line">eaadf4e385e865d25c48e7ca9c8395c3f7dfaef0 wrote a readme file</span><br></pre></td></tr></tbody></table></figure>
+<p><code>1094adb7b9b3807259d8cb349e7df1d4d6477073</code>是<code>commit id()</code>版本号，通过SHA1计算。</p>
+<h2 id="七、git-reset-回退版本"><a href="#七、git-reset-回退版本" class="headerlink" title="七、git reset 回退版本"></a>七、<code>git reset</code> 回退版本</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git reset --hard HEAD^</span><br><span class="line">HEAD is now at e475afc add distributed</span><br></pre></td></tr></tbody></table></figure>
+<p>git log 查看版本库的现在状态，发现最新版已经看不到了，已经回退</p>
+<p>如果想回到原来的最新版，办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个<code>append GPL</code>的<code>commit id</code>是<code>1094adb...</code>，于是就可以指定回到未来的某个版本：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git reset --hard 1094a</span><br><span class="line">HEAD is now at 83b0afe append GPL</span><br></pre></td></tr></tbody></table></figure>
+<p>Git的版本回退速度非常快，因为Git在内部有个指向当前版本的<code>HEAD</code><strong>指针</strong>，当你回退版本的时候，Git仅仅是把HEAD从指向<code>append GPL</code>：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌────┐</span><br><span class="line">│HEAD│</span><br><span class="line">└────┘</span><br><span class="line">   │</span><br><span class="line">   └──> ○ append GPL</span><br><span class="line">        │</span><br><span class="line">        ○ add distributed</span><br><span class="line">        │</span><br><span class="line">        ○ wrote a readme file</span><br></pre></td></tr></tbody></table></figure>
+<p>改为指向<code>add distributed</code>：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌────┐</span><br><span class="line">│HEAD│</span><br><span class="line">└────┘</span><br><span class="line">   │</span><br><span class="line">   │    ○ append GPL</span><br><span class="line">   │    │</span><br><span class="line">   └──> ○ add distributed</span><br><span class="line">        │</span><br><span class="line">        ○ wrote a readme file</span><br></pre></td></tr></tbody></table></figure>
+<p>然后顺便把工作区的文件更新了。所以你让<code>HEAD</code>指向哪个版本号，你就把当前版本定位在哪。</p>
+<h2 id="八、git-reflog记录每次命令"><a href="#八、git-reflog记录每次命令" class="headerlink" title="八、git reflog记录每次命令"></a>八、<code>git reflog</code>记录每次命令</h2><p>可以通过这个命令查看历史操作，可以查看<code>commit id</code>，方便</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">e475afc HEAD@{1}: reset: moving to HEAD^</span><br><span class="line">1094adb (HEAD -> master) HEAD@{2}: commit: append GPL</span><br><span class="line">e475afc HEAD@{3}: commit: add distributed</span><br><span class="line">eaadf4e HEAD@{4}: commit (initial): wrote a readme file</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="九、工作区与暂存区"><a href="#九、工作区与暂存区" class="headerlink" title="九、工作区与暂存区"></a>九、工作区与暂存区</h2><p>工作区（Working Directory）：当前电脑创建的git管理的仓库。</p>
+<p>版本区（Repository）：</p>
+<p>Git的版本库里存了很多东西，其中最重要的就是称为<strong>stage</strong>（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支<code>master</code>，以及指向<code>master</code>的一个指针叫<code>HEAD</code>。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\git\1" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>分支和<code>HEAD</code>的概念我们以后再讲。</p>
+<p>前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：</p>
+<p>第一步是用<code>git add</code>把文件添加进去，实际上就是把文件修改添加到<strong>暂存区</strong>；</p>
+<p>第二步是用<code>git commit</code>提交更改，实际上就是把暂存区的所有内容<strong>提交到当前分支</strong>。</p>
+<p>因为我们创建Git版本库时，Git自动为我们创建了唯一一个<code>master</code>分支，所以，现在，<code>git commit</code>就是往<code>master</code>分支上提交更改。</p>
+<p>简单理解为，<strong>需要提交的文件修改通通放到暂存区</strong>，然后，<strong>一次性提交暂存区的所有修改</strong>。</p>
+<p>修改文件，并<strong>add添加</strong>到暂存区后，状态变为</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\git\0" alt="git-stage" title>
+                </div>
+                <div class="image-caption">git-stage</div>
+            </figure>
+<p>commit后，版本库变为下面图，暂存区没有任何内容。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="D:\blog\myblog\source\_posts\git\2" alt="git-stage-after-commit" title>
+                </div>
+                <div class="image-caption">git-stage-after-commit</div>
+            </figure>
+<h2 id="十、git-checkout丢弃工作区的修改"><a href="#十、git-checkout丢弃工作区的修改" class="headerlink" title="十、git checkout丢弃工作区的修改"></a>十、<code>git checkout</code>丢弃工作区的修改</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- readme.txt</span><br></pre></td></tr></tbody></table></figure>
+<p>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在<strong>工作区</strong>的修改全部撤销，这里有两种情况：</p>
+<ul>
+<li><p>一种是<code>readme.txt</code>自修改后还<strong>没有被放到暂存区</strong>，现在，撤销修改就回到和版本库一模一样的状态；</p>
+</li>
+<li><p>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就<strong>回到添加到暂存区后的状态</strong>。</p>
+</li>
+</ul>
+<p>总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+<p><strong><code>git checkout -- file</code>命令中的<code>--</code>很重要，没有<code>--</code>，就变成了“切换到另一个分支”的命令</strong></p>
+<h2 id="十一、git-reset-HEAD-lt-file-gt-撤销暂存区的内容，重新放回到工作区"><a href="#十一、git-reset-HEAD-lt-file-gt-撤销暂存区的内容，重新放回到工作区" class="headerlink" title="十一、git reset HEAD <file> 撤销暂存区的内容，重新放回到工作区"></a>十一、<code>git reset HEAD <file></file></code> 撤销暂存区的内容，重新放回到工作区</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git reset HEAD readme.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	readme.txt</span><br></pre></td></tr></tbody></table></figure>
+<p><code>git reset</code>命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用<code>HEAD</code>时，表示最新的版本。</p>
+<p>再用<code>git status</code>查看一下，现在暂存区是干净的，工作区有修改：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add <file>..." to update what will be committed)</file></span><br><span class="line">  (use "git checkout -- <file>..." to discard changes in working directory)</file></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD <file></file></code>，就回到了场景1，第二步按场景1操作。</p>
+<p>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，<code>git reset xxxx</code>，不过前提是没有推送到远程库。</p>
+<h2 id="十二、删除文件的解决办法。"><a href="#十二、删除文件的解决办法。" class="headerlink" title="十二、删除文件的解决办法。"></a>十二、删除文件的解决办法。</h2><p>如果先添加一个文件，并提交，然后把该文件给删了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add test.txt</span><br><span class="line">$ git commit -m "add test.txt"</span><br><span class="line">$ rm test.txt</span><br></pre></td></tr></tbody></table></figure>
+<p>这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add/rm <file>..." to update what will be committed)</file></span><br><span class="line">  (use "git checkout -- <file>..." to discard changes in working directory)</file></span><br><span class="line"></span><br><span class="line">	deleted:    test.txt</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></tbody></table></figure>
+<p>现在你有两个选择，1、一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且<code>git commit</code>：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">$ git commit -m "remove test.txt"</span><br></pre></td></tr></tbody></table></figure>
+<p>现在，文件就从版本库中被删除了。</p>
+<p>2、另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- test.txt</span><br></pre></td></tr></tbody></table></figure>
+<p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>命令<code>git rm</code>用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失<strong>最近一次提交后你修改的内容</strong>。</p>
+<h2 id="十三、设置SSH-Key"><a href="#十三、设置SSH-Key" class="headerlink" title="十三、设置SSH Key"></a>十三、设置SSH Key</h2><p>第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有<code>id_rsa</code>和<code>id_rsa.pub</code>这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C "youremail@example.com"</span><br></pre></td></tr></tbody></table></figure>
+<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可</p>
+<p>如果一切顺利的话，可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。</p>
+<p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
+<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴<code>id_rsa.pub</code>文件的内容：</p>
+<p>点“Add Key”，你就应该看到已经添加的Key：</p>
+<h2 id="十四、添加远程库"><a href="#十四、添加远程库" class="headerlink" title="十四、添加远程库"></a>十四、添加远程库</h2><p>现在的情景是，你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作，真是一举多得。</p>
+<p>首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：在Repository name填入<code>learngit</code>，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库：</p>
+<p>目前，在GitHub上的这个<code>learngit</code>仓库还是空的，GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。</p>
+<p>现在，我们根据GitHub的提示，在本地的<code>learngit</code>仓库下运行命令：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:xifujiang/learngit.git</span><br></pre></td></tr></tbody></table></figure>
+<p>请千万注意，把上面的<code>michaelliao</code>替换成你自己的GitHub账户名，否则，你在本地关联的就是我的远程库，关联没有问题，但是你以后推送是推不上去的，因为你的SSH Key公钥不在我的账户列表中。</p>
+<p>添加后，远程库的名字就是<code>origin</code>，这是Git默认的叫法，也可以改成别的，但是<code>origin</code>这个名字一看就知道是远程库。</p>
+<p>下一步，就可以把本地库的所有内容推送到远程库上：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push -u origin master</span><br></pre></td></tr></tbody></table></figure>
+<p>把本地库的内容推送到远程，用<code>git push</code>命令，实际上是把当前分支<code>master</code>推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送<code>master</code>分支时，加上了<code>-u</code>参数，Git不但会把本地的<code>master</code>分支内容推送的远程新的<code>master</code>分支，还会把本地的<code>master</code>分支和远程的<code>master</code>分支关联起来，<strong>在以后的推送或者拉取时就可以简化命令</strong>。</p>
+<p>从现在起，只要本地作了提交，就可以通过命令：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></tbody></table></figure>
+<p>把本地<code>master</code>分支的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库！</p>
+<h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><p>要关联一个远程库，使用命令<code>git remote add origin git@server-name:path/repo-name.git</code>；</p>
+<p>关联后，使用命令<code>git push -u origin master</code>第一次推送master分支的所有内容；</p>
+<p>此后，每次本地提交后，只要有必要，就可以使用命令<code>git push origin master</code>推送最新修改。</p>
+<h2 id="十五、克隆地址"><a href="#十五、克隆地址" class="headerlink" title="十五、克隆地址"></a>十五、克隆地址</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 地址</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h3><p>要克隆一个仓库，首先必须知道仓库的地址，然后使用<code>git clone</code>命令克隆。</p>
+<p>Git支持多种协议，包括<code>https</code>，但通过<code>ssh</code>支持的原生<code>git</code>协议速度最快。</p>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>Git鼓励大量使用分支：</p>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch <name></name></code></p>
+<p>切换分支：<code>git checkout <name></name></code>或者<code>git switch <name></name></code></p>
+<p>创建+切换分支：<code>git checkout -b <name></name></code>或者<code>git switch -c <name></name></code></p>
+<p>合并某分支到当前分支：<code>git merge <name></name></code></p>
+<p>删除分支：<code>git branch -d <name></name></code></p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。</p>
+<p>解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。</p>
+<p>用<code>git log --graph</code>命令可以看到分支合并图。</p>
+<h3 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h3><p>推送分支，就是把该分支上的所有本地提交推送到远程库。推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin master</span><br></pre></td></tr></tbody></table></figure>
+<p>如果要推送其他分支，比如<code>dev</code>，就改成：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push origin dev</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h3><p>多人协作的工作模式通常是这样：</p>
+<ol>
+<li>首先，可以试图用<code>git push origin <branch-name></branch-name></code>推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
+<li>如果合并有冲突，则解决冲突，并在本地提交；</li>
+<li>没有冲突或者解决掉冲突后，再用<code>git push origin <branch-name></branch-name></code>推送就能成功！</li>
+</ol>
+<p>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to <branch-name> origin/<branch-name></branch-name></branch-name></code>。</p>
+<p>这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
+<h3 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>查看远程库信息，使用<code>git remote -v</code>；</li>
+<li>本地新建的分支如果不推送到远程，对其他人就是不可见的；</li>
+<li>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交；</li>
+<li>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；</li>
+<li>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>；</li>
+<li>从远程抓取分支，使用<code>git pull</code>，如果有冲突，要先处理冲突。</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2020-01-13T06:56:48.871Z" itemprop="dateUpdated">2020-01-13 14:56:48</time>
+</span>
+
+
+        
+        原文链接：<a href="/posts/d9283bc6/" target="_blank" rel="external">https://xifujiang.github.io/posts/d9283bc6/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://xifujiang.github.io'">
+            <img src="/img/timg.png" alt="xifujiang">
+            <a>xifujiang</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/d9283bc6/&title=《git笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/d9283bc6/&title=《git笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、git init搭建仓库通过git init命令把这个目录变成Git可以管理的仓库
+这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/d9283bc6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/d9283bc6/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/d9283bc6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/7d9cd029/" id="post-prev" class="post-nav-link">
+        <h4 class="title">
+          上一篇：shiro笔记
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/9d19f718/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：NoSQL02——MongoDB">下一篇：NoSQL02——MongoDB</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://xifujiang.github.io">xifuxili.com.cn</a>
+            <br>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style="display:none">
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style="display:none">
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br>
+
+        <span class="license"><a target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/dog.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/d9283bc6/&title=《git笔记》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/d9283bc6/&title=《git笔记》 — 小西芙-沿着回忆我走过旧时光&source=一、git init搭建仓库通过git init命令把这个目录变成Git可以管理的仓库
+这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/d9283bc6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git笔记》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/d9283bc6/&via=https://xifujiang.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/d9283bc6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aW26EMAwF0Nn/pqcLoNBrGyqRHL5GTBtyqOTGj88nvr6H6/jt2c9X7x+/ve3CwMB4LeN7eR03+m1dTzwLAwNjN8ZZBLv+XA2jSTC9ftbpfQwMDIyTIHh9p/o6MDAwMOaMSZZcPQJiYGBg9JLY/DGT4trjuTgGBsYLGXm4/P/Pj/Q3MDAwXsWYFPdHCWdQtivsCgMDY2lGr62YH/6qd/L1f1kBAwNjUcYkXXzi8Fd9OgYGxj6M3pGuWvaaj3+dNiowMDA2YOSl/ydaBY+U+zEwMBZlVAcveq8jYSeBGAMDYzdGofg+6CfecATsDYRhYGC8nNErxCdbrA6BzUt7GBgYOzDuHX2oHhbz34r+DhgYGIsybojWxXJekr7OGxIYGBhvZ+TL9QJfYWAi2Ho5ZcXAwFiCkZS38kZCXhrrlfD+WAEDA2NRRnXwaz5GlqfNhTUxMDCWZjQPYTeNXOTthDzRxcDAWJUxGX1INpevX21qYmBg7MbopZq9kbLkZd2cymJgYCzBuGGsIa/wjcN09EYxMDAWYkxKZtXhjLx412t5YmBgrMfoDadWo1xvc+V3j4GBsShj8rDJCnkrNCnMYWBg7MDIy/d3vad87LWwDgYGxgaMJPD1BrbKGyoGbgwMDIx8c8nhr3dAjAIxBgYGxmCEoldQK2feGBgYGzDyJHYSdqvhOP8HgIGBsTYjTx3zAJ2E7F5ZbdTUxMDAeB/jB3bmtz1N9ymYAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0"></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0"></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/04/29");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "xifujiang");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 倔强小西芙 %c  © Xifu Mua~  https://weibo.com/xifujiang \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

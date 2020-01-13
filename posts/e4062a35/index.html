@@ -39,18 +39,18 @@
 
 
     
-    <meta name="description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+    <meta name="description" content="![Git][git] 上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
 <meta name="keywords" content="xifujiang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDFS上传和读取流程">
 <meta property="og:url" content="https://xifujiang.github.io/posts/e4062a35/index.html">
 <meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
-<meta property="og:description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+<meta property="og:description" content="![Git][git] 上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-05T06:13:34.064Z">
+<meta property="og:updated_time" content="2020-01-13T02:45:22.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS上传和读取流程">
-<meta name="twitter:description" content="![Git][git]  上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
+<meta name="twitter:description" content="![Git][git] 上传流程 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。 2.namenode返回是否可以上传 3.client请求第一个 block该传输到哪些datanode服务器上">
     
         <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
     
@@ -225,13 +225,12 @@
             阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <center>![Git][git]</center>
-
+            <p></p><center>![Git][git]</center><p></p>
 <h3 id="上传流程"><a href="#上传流程" class="headerlink" title="上传流程"></a>上传流程</h3><ul>
 <li>1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。</li>
 <li>2.namenode返回是否可以上传</li>
-<li>3.client请求第一个 block该传输到哪些datanode服务器上</li>
-<li><a id="more"></a></li>
+<li><p>3.client请求第一个 block该传输到哪些datanode服务器上</p>
+<a id="more"></a></li>
 <li>4.namenode返回3个datanode服务器ABC</li>
 <li>5.client请求3台dn中的一台A上传数据（本质上是一个RPC调用，建立pipeline），A收到请求会继续调用B，然后B调用C，将这个pipeline建立完成，逐级返回客户端</li>
 <li>6.client开始往A上传第一个block（先从磁盘读取数据放到一个本地内存缓存），以packet为单位，A收到一个packet就会传给B，B传给C；A每传一个packet会放入一个应答队列等待应答</li>
@@ -276,7 +275,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2019-08-05T06:13:34.064Z" itemprop="dateUpdated">2019-08-05 14:13:34</time>
+    最后更新：<time datetime="2020-01-13T02:45:22.343Z" itemprop="dateUpdated">2020-01-13 10:45:22</time>
 </span>
 
 
@@ -322,10 +321,9 @@
       </li>
       <li>
         <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&source=![Git][git]
-
 上传流程
 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。
-2.namenode..." data-title=" QQ">
+2.namenode返..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -363,9 +361,9 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/posts/c00b24b1/" id="post-prev" class="post-nav-link">
+      <a href="/posts/346bfea7/" id="post-prev" class="post-nav-link">
         <h4 class="title">
-          上一篇：python笔记
+          上一篇：hbase笔记
         </h4>
       </a>
     </div>
@@ -373,8 +371,8 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/0/" id="post-next" class="post-nav-link">
-        <h4 class="title" data-hover="下一篇：Linux复习">下一篇：Linux复习</h4>
+      <a href="/posts/65abd992/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：python爬虫笔记">下一篇：python爬虫笔记</h4>
       </a>
     </div>
   
@@ -483,10 +481,9 @@
       </li>
       <li>
         <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/e4062a35/&title=《HDFS上传和读取流程》 — 小西芙-沿着回忆我走过旧时光&source=![Git][git]
-
 上传流程
 1.根namenode通信请求上传文件，namenode检查目标文件是否已存在，父目录是否存在。
-2.namenode..." data-title=" QQ">
+2.namenode返..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

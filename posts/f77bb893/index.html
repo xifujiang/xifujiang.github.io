@@ -6,7 +6,7 @@
     
     
     
-    <title>bat批量存放信息到excel | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
+    <title>Java笔记04——一些常用的函数 | 小西芙-沿着回忆我走过旧时光 | 小西芙-沿着回忆我走过旧时光</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#77AAFF">
@@ -39,23 +39,18 @@
 
 
     
-    <meta name="description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
+    <meta name="description" content="StringUtils   函数 用途     isBlank(CharSequence cs) 字符串是否只有 “”,\n\n\t,null   isNotBlank(CharSequence cs) 字符串是否不只有 “”,\n\n\t,null       MultiValueMapMap之一个Key存多个Value 1234567891011121314MultiValueMap stri">
 <meta name="keywords" content="xifujiang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bat批量存放信息到excel">
-<meta property="og:url" content="https://xifujiang.github.io/posts/5fe19fd1/index.html">
+<meta property="og:title" content="Java笔记04——一些常用的函数">
+<meta property="og:url" content="https://xifujiang.github.io/posts/f77bb893/index.html">
 <meta property="og:site_name" content="小西芙-沿着回忆我走过旧时光">
-<meta property="og:description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
+<meta property="og:description" content="StringUtils   函数 用途     isBlank(CharSequence cs) 字符串是否只有 “”,\n\n\t,null   isNotBlank(CharSequence cs) 字符串是否不只有 “”,\n\n\t,null       MultiValueMapMap之一个Key存多个Value 1234567891011121314MultiValueMap stri">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png">
-<meta property="og:image" content="http://47.103.115.69/pic/01.png">
-<meta property="og:image" content="http://47.103.115.69/pic/csv列表展示.png">
-<meta property="og:image" content="http://47.103.115.69/pic/csv文件.png">
-<meta property="og:updated_time" content="2020-01-13T02:38:44.032Z">
+<meta property="og:updated_time" content="2019-12-05T09:52:07.713Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bat批量存放信息到excel">
-<meta name="twitter:description" content="情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。">
-<meta name="twitter:image" content="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png">
+<meta name="twitter:title" content="Java笔记04——一些常用的函数">
+<meta name="twitter:description" content="StringUtils   函数 用途     isBlank(CharSequence cs) 字符串是否只有 “”,\n\n\t,null   isNotBlank(CharSequence cs) 字符串是否不只有 “”,\n\n\t,null       MultiValueMapMap之一个Key存多个Value 1234567891011121314MultiValueMap stri">
     
         <link rel="alternate" type="application/atom+xml" title="小西芙-沿着回忆我走过旧时光" href="/atom.xml">
     
@@ -157,7 +152,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">bat批量存放信息到excel</div>
+        <div class="flex-col header-title ellipsis">Java笔记04——一些常用的函数</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -197,18 +192,18 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#演示"><span class="post-toc-number">1.</span> <span class="post-toc-text">演示</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#StringUtils"><span class="post-toc-number">1.</span> <span class="post-toc-text">StringUtils</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#MultiValueMap"><span class="post-toc-number">2.</span> <span class="post-toc-text">MultiValueMap</span></a></li></ol>
         </nav>
     </aside>
    
-<article id="post-01 .bat批量把txt中想要的信息存放到excel" class="post-article article-type-post fade" itemprop="blogPost">
+<article id="post-loading/Java笔记04——一些常用的函数" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">bat批量存放信息到excel</h1>
+        <h1 class="post-card-title">Java笔记04——一些常用的函数</h1>
         <div class="post-meta">
             <i class="icon icon-lg icon-calendar-o"></i>
             发表于
-            <time class="post-time" title="2019-03-28 14:34:00" datetime="2019-03-28T06:34:00.000Z" itemprop="datePublished">2019-03-28</time>
+            <time class="post-time" title="2019-12-05 15:26:00" datetime="2019-12-05T07:26:00.000Z" itemprop="datePublished">2019-12-05</time>
 
             <br id="mybreak">
             
@@ -227,46 +222,33 @@
         </div>
         <div class="post-count-custom">
             <i class="icon icon-lg icon-comment-o"></i>
-            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
+            阅读本文可能花费您&nbsp;<span class="post-count">1</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下bat，终于给他整了个好方法，请看下文。</p>
-<a id="more"></a>
-<p><code>需求</code><br>需要从log中抽取两列数据到excel中。</p>
-<p>本西芙没了解过bat语法，所以查了一下，通过结合这两篇解答完成bat命令。<br>1、实现了按照空格批处理分割txt数据，存储excel<br><a href="https://zhidao.baidu.com/question/1770548208106936980.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/1770548208106936980.html</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem 保存为bat文件跟txt文件放一起运行</span><br><span class="line">md "结果\" 2>nul</span><br><span class="line">for /f "delims=" %%a in ('dir /a-d/b *.txt') do (</span><br><span class="line">    setlocal EnableDelayedExpansion</span><br><span class="line">    (for /f "delims=" %%b in ('type "%%a"') do (</span><br><span class="line">        set "str=%%b"</span><br><span class="line">        echo;!str: =,!</span><br><span class="line">    ))>"结果\%%~na.csv"</span><br><span class="line">    Endlocal</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>2、批处理分割字符串<br><a href="https://blog.csdn.net/zhju85126com/article/details/46649961" target="_blank" rel="noopener">https://blog.csdn.net/zhju85126com/article/details/46649961</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set str=100x200x300y400y500x600y700</span><br><span class="line">for /f "tokens=1,3-5,* delims=x|y" %%a in ("%str%") do (</span><br><span class="line">	set c1=%%a</span><br><span class="line">	set c3=%%b</span><br><span class="line">	set c4=%%c</span><br><span class="line">	set c5=%%d</span><br><span class="line">	set c6=%%e</span><br><span class="line">)</span><br><span class="line">echo %c1%, %c3%, %c4%, %c5%, %c6%</span><br><span class="line">pause</span><br><span class="line">rem 输出结果为输出结果为：100, 300, 400, 500, 600y700。其中tokens=1,3-5,*表示提取第1、3至5列，同时把第5列后所有剩余字符串作为第6列，一个输出了5个变量，也可以写作tokens=1,3,4,5,*。</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>最终我所加工的代码，其中代码中<code>tokens=1,2</code>是按照<code>_</code>或<code>空格</code>分割的位置，相当于数组的某一元素、把它赋值给str1<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">md "结果\" 2>nul</span><br><span class="line">rem 循环数据</span><br><span class="line">for /f "delims=" %%a in ('dir /a-d/b *.log') do (</span><br><span class="line">    setlocal EnableDelayedExpansion</span><br><span class="line">    rem 切割方式    </span><br><span class="line">    (for /f "tokens=1,2 delims=_| " %%b in ('type "%%a"') do (</span><br><span class="line">        set "str1=%%b %%c"</span><br><span class="line">        echo;!str1: =,!</span><br><span class="line">    ))>"结果\%%~na.csv"</span><br><span class="line">    Endlocal</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>首先根据第一篇解答套入转excel模板，其次根据第二篇解答对bat for循环中分割和选取的描述，修改第五行代码。可以实现。</p>
-<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><ul>
-<li>文件内容<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/log%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png" alt="文件内容" title>
-                </div>
-                <div class="image-caption">文件内容</div>
-            </figure></li>
-<li>目录下的文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/01.png" alt="目录下的文件" title>
-                </div>
-                <div class="image-caption">目录下的文件</div>
-            </figure>
-2、点击<code>aa.bat</code>,生成csv文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/csv列表展示.png" alt="生成csv文件" title>
-                </div>
-                <div class="image-caption">生成csv文件</div>
-            </figure>
-3、任意打开一个csv文件<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://47.103.115.69/pic/csv文件.png" alt="csv文件内容" title>
-                </div>
-                <div class="image-caption">csv文件内容</div>
-            </figure></li>
-</ul>
+            <h1 id="StringUtils"><a href="#StringUtils" class="headerlink" title="StringUtils"></a>StringUtils</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isBlank(CharSequence cs)</td>
+<td>字符串是否只有 “”,\n\n\t,null</td>
+</tr>
+<tr>
+<td>isNotBlank(CharSequence cs)</td>
+<td>字符串是否不只有 “”,\n\n\t,null</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="MultiValueMap"><a href="#MultiValueMap" class="headerlink" title="MultiValueMap"></a>MultiValueMap</h1><p>Map之一个Key存多个Value</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MultiValueMap<string, string> stringMultiValueMap = <span class="keyword">new</span> LinkedMultiValueMap<>();</string,></span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周一"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周二"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"中班 13:00-16:00"</span>, <span class="string">"周三"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"早班 9:00-11:00"</span>, <span class="string">"周四"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"测试1天2次 09:00 - 12:00"</span>, <span class="string">"周五"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"测试1天2次 09:00 - 12:00"</span>, <span class="string">"周六"</span>);</span><br><span class="line">stringMultiValueMap.add(<span class="string">"中班 13:00-16:00"</span>, <span class="string">"周日"</span>);</span><br><span class="line"><span class="comment">//打印所有值</span></span><br><span class="line">Set<string> keySet = stringMultiValueMap.keySet();</string></span><br><span class="line"><span class="keyword">for</span> (String key : keySet) {</span><br><span class="line">	List<string> values = stringMultiValueMap.get(key);</string></span><br><span class="line">    System.out.println(StringUtils.join(values.toArray(),<span class="string">" "</span>)+<span class="string">":"</span>+key);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">周一 周二 周四:早班 <span class="number">9</span>:<span class="number">00</span>-<span class="number">11</span>:<span class="number">00</span></span><br><span class="line">周三 周日:中班 <span class="number">13</span>:<span class="number">00</span>-<span class="number">16</span>:<span class="number">00</span></span><br><span class="line">周五 周六:测试<span class="number">1</span>天<span class="number">2</span>次 <span class="number">09</span>:<span class="number">00</span> - <span class="number">12</span>:<span class="number">00</span></span><br></pre></td></tr></tbody></table></figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -292,12 +274,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2020-01-13T02:38:44.032Z" itemprop="dateUpdated">2020-01-13 10:38:44</time>
+    最后更新：<time datetime="2019-12-05T09:52:07.713Z" itemprop="dateUpdated">2019-12-05 17:52:07</time>
 </span>
 
 
         
-        原文链接：<a href="/posts/5fe19fd1/" target="_blank" rel="external">https://xifujiang.github.io/posts/5fe19fd1/</a>
+        原文链接：<a href="/posts/f77bb893/" target="_blank" rel="external">https://xifujiang.github.io/posts/f77bb893/</a>
         
     </div>
     <footer>
@@ -327,7 +309,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/f77bb893/&title=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -337,22 +319,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&source=情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下ba..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/f77bb893/&title=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&source=呢嚎哟，介里是小西芙的小小博客，请多多关照。顺便说一句夕立立永远是我儿贼！！~" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/f77bb893/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/5fe19fd1/&via=https://xifujiang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/f77bb893/&via=https://xifujiang.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/f77bb893/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -375,14 +357,20 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/posts/0/" id="post-prev" class="post-nav-link">
+      <a href="/posts/9d19f718/" id="post-prev" class="post-nav-link">
         <h4 class="title">
-          上一篇：Linux复习
+          上一篇：NoSQL02——MongoDB
         </h4>
       </a>
     </div>
   
 
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/c38d43d9/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：Java包名">下一篇：Java包名</h4>
+      </a>
+    </div>
   
 </nav>
 
@@ -478,7 +466,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xifujiang.github.io/posts/f77bb893/&title=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&pic=https://xifujiang.github.io/img/timg.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -488,22 +476,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/5fe19fd1/&title=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&source=情景：最近喵仙子有个需求，需要抽取日志文件中的有效信息到excel，刚开始我用MapReduce给他做了一份，不过他有点蠢配不了环境，于是乎我研究了下ba..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xifujiang.github.io/posts/f77bb893/&title=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&source=呢嚎哟，介里是小西芙的小小博客，请多多关照。顺便说一句夕立立永远是我儿贼！！~" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xifujiang.github.io/posts/f77bb893/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《bat批量存放信息到excel》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/5fe19fd1/&via=https://xifujiang.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java笔记04——一些常用的函数》 — 小西芙-沿着回忆我走过旧时光&url=https://xifujiang.github.io/posts/f77bb893/&via=https://xifujiang.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/5fe19fd1/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xifujiang.github.io/posts/f77bb893/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -514,7 +502,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p class="wechatshare">扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3a0U7DQAwEwP7/TxeJ15J2Ny6V6sw9oaAkN0EyPtu3W7zuv+vxyvN1dO/Rkx/vffPCwMD4WsZ8K8mG5leO9oaBgXEdxrlt5aTnEbJ9CwYGBka+laOwONkoBgYGxjzgJi8+2kpyTMXAwMCYHGLzElv7/I+exTEwML6Q0TYGPvnzP/Y3MDAwvoRxL1fy+nnxrt4VBgbGakZS8ErKavlzzh2Ao3CMgYGxlJGX+9viV34lCdkvrmBgYFyGkZfD3pX25Z/vxW8xMDBWM9qBiUka1w5YnPwQGBgYSxnzFPC9AxZJmnj43wMDA+NijEmKNgnQ7XAGBgbGbkY7btUW0dqmZj5sEXViMTAwVjCSY2ReGmsDaPKZ2hYCBgbGPkY71NW2ISfH42IEDQMD4zKMJB1sA2hekku2HnViMTAw1jHmYxaToDkaBXteNcTAwFjESLbeFtTOFcva8Y4XfwcMDIxFjPkwRLL1SfOyznMxMDAuyZj3HOaltyhVxcDAWMqYJHb565OA3jYbikwTAwNjBaNoFsabbhO+Nhwf9jcwMDDWMdpS17liXFtua1uhGBgYuxn3cuXjF20bIP8Qf9yLgYGxmpGv5MVtwG1bDu04GgYGxiZGG2QnBbh3JZdR5oiBgbGOkYTF/Cjblv7nQR8DAwOjBeTpYzuWcYjHwMDAGJ+J27Jdm7xiYGBcgZEcYuebrsNo24nFwMBYyjhXy8qL+/nTWvaov4GBgfEdjB9lVyLgZKuL6AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aQW7CQAwFUO5/abrpAgkRvu20Upw3K4QgMy8Lyx778YjX82W9f/Npvf7y+Mmfdjl5YWBgXJaRH+V9g+q/8m/ys2FgYNyHkYTC/CgJMg/Bx7/BwMDAyNO7eXjFwMDAOJdRLTWrKSAGBgZGr4hNDnd8rOoL+pNaHAMD44KMPFz+/+c/6W9gYGBcivEsrjn13PP8PhkDA2M1I9/mGJOUuHkZ3DwPBgbGakbvguwsRt4KbV72YWBgrGZUU8BzGwP57zEwMHYzkiGJ3mZJI2HSkHgkXQgMDIwVjEkMPjfGT14EBgbGbkY1UUu27A2w5sMcX+baMDAw1jGS8Jc/ejIiNm+UYmBg3JNRHbnoFb29pmbExsDAWMc4bhP2Rr7ydDN5cvRCMTAwljLyIjMpWasJX2+Yo3xjh4GBcVlGtRDtpWt5GO0liBgYGLsZk4v+s1qSvau3j51YDAyM1YxqaTppf86bmh8DLgYGxlLGpHzNr/t7YxN5qoqBgbGbUb0+qzY+J+MaedqKgYFxB0Y+tpVcqPXanJNRDwwMjLsxkqNUE8FeMyBPFjEwMLYynsVVLT57bYDyvhgYGKsZ+eo1Lyclbj6ogYGBcQfGPDXshci8bG6+aQwMjHWM6ljDZMCil0p+QWJgYGAUPyeX/nkqGbExMDAwWgNhOaDXIj0h4GJgYFyKMUnvqoNcvdbml+dgYGCsZlTvsnqpYd4ineyIgYGxjvEDGCC8KmhffgYAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
